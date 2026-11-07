@@ -1,0 +1,59 @@
+# ═══════════════════════════════════════════════════════════════
+#  Postgres สำหรับพัฒนาในเครื่อง
+#  ---------------------------------------------------------------
+#  ใช้ตอน dev เท่านั้น · ของจริงบน production ใช้ Supabase
+#  ประโยชน์ที่ได้จากการมี Postgres ในเครื่อง
+#    · ทดลอง migration พังๆ ได้โดยไม่กระทบฐานข้อมูลกลาง
+#    · ทำงานได้ตอนเน็ตล่ม
+#    · เร็วกว่ามาก เพราะไม่ต้องวิ่งออกเน็ต
+# ═══════════════════════════════════════════════════════════════
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: sriborisud-db
+    restart: unless-stopped
+
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-sriborisud}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-localdev}
+      POSTGRES_DB: ${POSTGRES_DB:-sriborisud}
+      # ให้เรียงลำดับและเทียบตัวอักษรไทยได้ถูกต้อง
+      # ถ้าไม่ตั้ง การ ORDER BY ชื่อลูกค้าภาษาไทยจะเรียงมั่ว
+      LANG: th_TH.utf8
+      POSTGRES_INITDB_ARGS: "--encoding=UTF8"
+
+    ports:
+      # ใช้ 5433 เป็นค่าเริ่มต้นโดยตั้งใจ ไม่ใช่ 5432
+      # เพราะเครื่องนี้มี postgres container ของโปรเจกต์อื่นจอง 5432 อยู่แล้ว
+      # ตั้ง POSTGRES_PORT ใน shell ถ้าอยากเปลี่ยน · อย่าลืมแก้ DATABASE_URL ให้ตรง
+      - "${POSTGRES_PORT:-5433}:5432"
+
+    volumes:
+      # ───────────────────────────────────────────────────────
+      #  ❗ จุดที่ทำให้ข้อมูลไม่หายตอน docker compose down
+      #
+      #  named volume ถูกจัดการโดย Docker และอยู่ต่อแม้ container ถูกลบ
+      #
+      #     docker compose down       ลบ container · ข้อมูล "ยังอยู่"
+      #     docker compose down -v    ลบ volume ด้วย · ข้อมูล "หายหมด"
+      #
+      #  ถ้าอยากเห็นไฟล์จริงในโฟลเดอร์โปรเจกต์ ให้เปลี่ยนเป็น bind mount
+      #     - ./.docker/postgres:/var/lib/postgresql/data
+      #  แต่ named volume เร็วกว่าบน macOS และไม่มีปัญหาสิทธิ์ไฟล์
+      # ───────────────────────────────────────────────────────
+      - pgdata:/var/lib/postgresql/data
+
+    healthcheck:
+      # สคริปต์ dev.sh รอ healthcheck นี้ก่อนจะรัน migrate
+      # ถ้าไม่รอ จะเจอ "connection refused" เพราะ Postgres ยังบูตไม่เสร็จ
+      test:
+        ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-sriborisud} -d ${POSTGRES_DB:-sriborisud}"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+      start_period: 5s
+
+volumes:
+  pgdata:
+    name: sriborisud-pgdata
