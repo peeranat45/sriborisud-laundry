@@ -17,6 +17,7 @@
  * ══════════════════════════════════════════════════════════════════
  */
 import { revalidatePath } from "next/cache";
+import { ZodError } from "zod";
 import {
   createCustomerSchema,
   searchCustomerSchema,
@@ -26,14 +27,17 @@ import {
 } from "./schema";
 import * as service from "./service";
 
-/** แปลง error ของ zod ให้เป็นรูปเดียวกับ Result ของ service */
+/**
+ * แปลง error ของ zod ให้เป็นรูปเดียวกับ Result ของ service
+ * ใช้ instanceof ZodError แทนการเดาโครงสร้าง จึงไม่ต้องมี ts-expect-error
+ * แสดงเฉพาะ issue แรก · ผู้ใช้แก้ทีละอย่างอยู่แล้ว
+ */
 function invalid(e: unknown) {
-  const msg =
-    e instanceof Error && "issues" in e
-      ? // @ts-expect-error zod error shape
-        (e.issues?.[0]?.message as string) ?? "ข้อมูลไม่ถูกต้อง"
+  const message =
+    e instanceof ZodError
+      ? (e.issues[0]?.message ?? "ข้อมูลไม่ถูกต้อง")
       : "ข้อมูลไม่ถูกต้อง";
-  return { ok: false as const, code: "invalid-input", message: msg };
+  return { ok: false as const, code: "invalid-input", message };
 }
 
 export async function createCustomerAction(raw: unknown) {

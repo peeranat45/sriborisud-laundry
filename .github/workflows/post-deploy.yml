@@ -1,0 +1,97 @@
+# ═══════════════════════════════════════════════════════════════
+#  TIER 2 · ตรวจหลัง deploy
+#  ---------------------------------------------------------------
+#  สองอย่างนี้ต้องมี "เว็บที่รันอยู่จริง" ถึงจะตรวจได้
+#  ตรวจจากซอร์สโค้ดไม่ได้ จึงแยกออกมาจาก pr.yml
+#
+#    ZAP         OWASP DAST · ยิงใส่เว็บจริงเหมือนคนร้ายทำ
+#    Lighthouse  ความเร็ว · การเข้าถึง · SEO · best practice
+#
+#  ทริกเกอร์ด้วย deployment_status
+#  Vercel สร้าง GitHub Deployment ทุกครั้งที่ deploy เสร็จ
+#  เราดัก event นั้นแล้วอ่าน URL จาก payload จึงไม่ต้องฮาร์ดโค้ด URL
+#  ได้ทั้ง production (push เข้า develop) และ preview (ทุก PR)
+#
+#  ❗ สองงานนี้ "ไม่บล็อก" การ merge และ "ไม่บล็อก" การ deploy
+#     เพราะกว่าจะรันคือ deploy ไปแล้ว · มันคือรายงาน ไม่ใช่ประตู
+#     ประตูคือ branch protection บน pr.yml
+# ═══════════════════════════════════════════════════════════════
+name: Post-deploy security & quality
+
+on:
+  deployment_status:
+
+jobs:
+  # ═══════════════════════════════════════════════════════════
+  #  OWASP ZAP · DAST
+  #
+  #  สิ่งที่ควรคาดหวังจริงๆ กับแอปนี้
+  #    ส่วนใหญ่จะเจอเรื่อง security header ที่ขาด
+  #    (CSP · HSTS · X-Content-Type-Options · Referrer-Policy)
+  #    เพราะหน้าลูกค้าต้องมี LIFF token และหน้าร้านต้องล็อกอิน
+  #    ZAP แบบไม่ล็อกอินจึงคลานเข้าไปได้ไม่ลึก
+  #
+  #  ⚠️ อย่าทำตามคำแนะนำของ ZAP แบบไม่คิด
+  #     มันจะบอกให้ใส่ X-Frame-Options: DENY
+  #     แต่หน้าลูกค้ารันอยู่ในเบราว์เซอร์ในแอป LINE
+  #     ต้องทดสอบว่า LIFF ยังเปิดได้ก่อน merge เสมอ
+  # ═══════════════════════════════════════════════════════════
+  zap:
+    name: OWASP ZAP baseline
+    runs-on: ubuntu-latest
+    if: github.event.deployment_status.state == 'success'
+    permissions:
+      contents: read
+      issues: write # ZAP action อยากเขียน issue · เราปิดไว้ด้านล่าง
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: ZAP baseline scan
+        uses: zaproxy/action-baseline@v0.12.0
+        with:
+          target: ${{ github.event.deployment_status.target_url }}
+          # -a  รวม alert ระดับ informational ด้วย · อยากเห็นทั้งหมดในรายงาน
+          # -j  ใช้ ajax spider ด้วย · Next.js เป็น client-rendered บางส่วน
+          cmd_options: "-a -j"
+          # ไม่ให้สร้าง GitHub issue อัตโนมัติ · รายงานอยู่ใน artifact แล้ว
+          allow_issue_writing: false
+          # ไม่ทำให้ job แดง · deploy ไปแล้ว การขึ้นแดงไม่ช่วยอะไร
+          # และรอบแรกจะเตือนเรื่อง header เยอะแน่นอน
+          fail_action: false
+
+      # รายงาน HTML โหลดมาใส่ในรายงาน IS ได้เลย · บทความมั่นคงปลอดภัย
+      - name: Upload ZAP report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: zap-report-${{ github.event.deployment_status.id }}
+          path: |
+            report_html.html
+            report_md.md
+            report_json.json
+          if-no-files-found: ignore
+          retention-days: 30
+
+  # ═══════════════════════════════════════════════════════════
+  #  Lighthouse CI
+  #
+  #  วัด 4 หมวด · performance · accessibility · best-practices · SEO
+  #  ตัวเลขพวกนี้เอาไปใส่รายงานได้ตรงๆ และเทียบก่อน/หลังได้
+  #
+  #  วัดหน้าแรกอย่างเดียวในขั้นนี้
+  #  หน้า /link ต้องมี LIFF token ถึงจะทำงาน จึงวัดแบบนี้ไม่ได้
+  # ═══════════════════════════════════════════════════════════
+  lighthouse:
+    name: Lighthouse CI
+    runs-on: ubuntu-latest
+    if: github.event.deployment_status.state == 'success'
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run Lighthouse
+        uses: treosh/lighthouse-ci-action@v12
+        with:
+          urls: ${{ github.event.deployment_status.target_url }}
+          uploadArtifacts: true
+          temporaryPublicStorage: true
+          runs: 3 # รัน 3 รอบแล้วเอาค่ากลาง · รอบเดียวแกว่งมาก

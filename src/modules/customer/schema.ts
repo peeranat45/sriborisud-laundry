@@ -18,8 +18,10 @@ const phoneField = z
   .superRefine((v, ctx) => {
     if (v === null) return;
     if (normalizePhone(v) === null) {
+      // zod v4 · code เป็นสตริง "custom" ตรงๆ
+      // v3 ใช้ z.ZodIssueCode.custom ซึ่งถูกถอดออกแล้ว
       ctx.addIssue({
-        code: z.ZodIssueCode.custom,
+        code: "custom",
         message: "เบอร์โทรไม่ถูกต้อง · ต้องเป็นเลข 9–10 หลักขึ้นต้นด้วย 0",
       });
     }
