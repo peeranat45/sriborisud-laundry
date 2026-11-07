@@ -1,9 +1,14 @@
 # ═══════════════════════════════════════════════════════════════
 #  ตรวจก่อน merge  ·  เทียบเท่า merge request pipeline ของ GitLab
 #  ---------------------------------------------------------------
-#  ไฟล์นี้ทำให้ GitHub รันการตรวจทุกครั้งที่เปิดหรืออัปเดต pull request
-#  แต่ลำพังไฟล์นี้ "ไม่ได้" ห้าม merge ตอนตรวจไม่ผ่าน
-#  ต้องไปตั้ง branch protection ที่หน้า Settings ด้วย · ดู docs/CI.md
+#  5 job รันคู่ขนานกัน · job ไหนแดง = merge ไม่ได้ (ถ้าตั้ง branch
+#  protection แล้ว · ดู docs/CI.md · ลำพังไฟล์นี้ไม่ได้ห้าม merge)
+#
+#    verify         typecheck · lint · test · build
+#    secrets        หา secret ที่เผลอ commit ลงไป
+#    codeql         SAST · หาช่องโหว่ในโค้ดที่เราเขียนเอง
+#    migrations     migration apply ได้จริงไหม และ schema ตรงกับ migration ไหม
+#    accessibility  คู่สีทั้งหมดผ่าน WCAG AA ไหม
 # ═══════════════════════════════════════════════════════════════
 name: PR validation
 
@@ -13,20 +18,19 @@ on:
   push:
     branches: [develop]
 
-# เปิด PR แล้ว push ซ้ำติดๆ กัน · ยกเลิกรอบเก่าทิ้ง ไม่ต้องรันค้างไว้
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
-  # ───────────────────────────────────────────────────────────
-  #  งานหลัก · typecheck → lint → test → build
-  # ───────────────────────────────────────────────────────────
+  # ═══════════════════════════════════════════════════════════
+  #  1 · งานหลัก
+  # ═══════════════════════════════════════════════════════════
   verify:
     name: Typecheck · Lint · Test · Build
     runs-on: ubuntu-latest
 
-    # ค่าปลอมสำหรับ CI เท่านั้น · ไม่ได้ต่อฐานข้อมูลจริง
+    # ค่าปลอมสำหรับ CI · ไม่ได้ต่อฐานข้อมูลจริง
     # จำเป็นเพราะ PrismaClient จะ throw ถ้าไม่มี DATABASE_URL ตอนถูกสร้าง
     # และ next build ต้องอ่าน NEXT_PUBLIC_LIFF_ID ตอน build
     env:
@@ -42,11 +46,10 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "22"
-          cache: npm # cache ตาม package-lock.json · รอบถัดไปเร็วขึ้นมาก
+          cache: npm
 
-      # ci ไม่ใช่ install · ci จะลบ node_modules แล้วลงตาม lock เป๊ะๆ
-      # ถ้า package-lock.json ไม่ตรงกับ package.json มันจะ fail ทันที
-      # ซึ่งเป็นสิ่งที่เราอยากได้ใน CI
+      # ci ไม่ใช่ install · ci ลบ node_modules แล้วลงตาม lock เป๊ะๆ
+      # ถ้า package-lock.json ไม่ตรงกับ package.json จะ fail ทันที
       - run: npm ci
 
       # ต้องมาก่อน typecheck · @prisma/client ไม่มี type จนกว่าจะ generate
@@ -62,16 +65,144 @@ jobs:
       - name: Unit tests
         run: npm test
 
-      # build จับ bug ที่ typecheck จับไม่ได้
-      # เช่นตอนที่ client component เผลอ import โค้ดที่ใช้ node:crypto
+      # ─── TIER 1 · ช่องโหว่ใน dependency ───────────────────
+      # ปัจจุบันตั้งไว้ที่ high · ถ้าเจอ high หรือ critical จะแดง
+      # ถ้าวันไหนมี advisory ที่แก้ไม่ได้จริงๆ ให้ใช้
+      #     npm audit --audit-level=high --omit=dev
+      # หรือเพิ่ม override ใน package.json แทนการปิดขั้นนี้ทิ้ง
+      - name: Dependency audit
+        run: npm audit --audit-level=high
+
+      # build จับ bug ที่ typecheck จับไม่ได้ เช่นตอนที่ client component
+      # เผลอ import โค้ดที่ใช้ node:crypto · เคยเกิดขึ้นจริงในโปรเจกต์นี้
       - name: Build
         run: npm run build
 
-  # ───────────────────────────────────────────────────────────
-  #  ตรวจค่าความต่างของสี  ·  เฉพาะโปรเจกต์นี้
+  # ═══════════════════════════════════════════════════════════
+  #  2 · TIER 1 · หา secret ที่เผลอ commit
+  #
+  #  ขั้นที่คุ้มที่สุดในบรรดาขั้นความปลอดภัยทั้งหมดของโปรเจกต์นี้
+  #  เพราะ repo นี้มี BILL_TOKEN_SECRET · LINE access token
+  #  และ DATABASE_URL ที่มีรหัสผ่านอยู่ข้างใน
+  #  `git add .` พลาดครั้งเดียวคือเหตุการณ์จริงที่เกิดได้ง่ายที่สุด
+  # ═══════════════════════════════════════════════════════════
+  secrets:
+    name: Secret scan
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # ❗ ต้องดึงทั้ง history · ไม่งั้นสแกนเจอแค่ commit ล่าสุด
+          #    secret ที่หลุดไปเมื่อ 10 commit ก่อนจะไม่ถูกจับ
+          fetch-depth: 0
+
+      - name: gitleaks
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # repo สาธารณะของบุคคลไม่ต้องใช้ license
+          # ถ้าย้ายไปอยู่ใต้ organization ต้องเพิ่ม GITLEAKS_LICENSE
+
+  # ═══════════════════════════════════════════════════════════
+  #  3 · TIER 1 · SAST
+  #
+  #  ⚠️ ฟรีเฉพาะ repo สาธารณะ
+  #     ถ้า repo เป็น private จะต้องมี GitHub Advanced Security
+  #     ถ้า job นี้ fail เพราะเรื่องสิทธิ์ ให้ลบ job นี้ออก
+  #     แล้วยังเหลืออีก 4 job ที่ทำงานได้ปกติ
+  # ═══════════════════════════════════════════════════════════
+  codeql:
+    name: CodeQL
+    runs-on: ubuntu-latest
+    permissions:
+      actions: read
+      contents: read
+      security-events: write # ต้องมี ไม่งั้นส่งผลขึ้น Security tab ไม่ได้
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: github/codeql-action/init@v3
+        with:
+          languages: javascript-typescript
+          queries: security-and-quality
+
+      - uses: github/codeql-action/analyze@v3
+
+  # ═══════════════════════════════════════════════════════════
+  #  4 · TIER 1 · ฐานข้อมูล
+  #
+  #  ตรวจ 2 อย่างที่พังเงียบที่สุดเวลา deploy
+  #    ก. migration ที่เขียนไว้ apply กับฐานข้อมูลเปล่าได้จริงไหม
+  #    ข. schema.prisma ตรงกับ migration ไหม
+  #       (แก้ schema แล้วลืมสร้าง migration คือ bug คลาสสิก)
+  #
+  #  ใช้ Postgres จริงใน service container · ไม่ใช่ค่าปลอม
+  #  เพราะ migrate diff --from-migrations ต้องมี shadow database จริง
+  # ═══════════════════════════════════════════════════════════
+  migrations:
+    name: Database migrations
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: ci
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    env:
+      DATABASE_URL: "postgresql://postgres:postgres@localhost:5432/ci"
+      DIRECT_URL: "postgresql://postgres:postgres@localhost:5432/ci"
+      SHADOW_DATABASE_URL: "postgresql://postgres:postgres@localhost:5432/shadow"
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - run: npm ci
+
+      - name: Create shadow database
+        run: |
+          PGPASSWORD=postgres psql -h localhost -U postgres -c \
+            "CREATE DATABASE shadow;" || true
+
+      # ยังไม่มี migration ในขั้นนี้ · ข้ามไปเงียบๆ แทนที่จะ fail
+      # พอสร้าง migration แรกแล้ว ขั้นนี้จะเริ่มทำงานเองอัตโนมัติ
+      - name: Apply migrations
+        run: |
+          if [ -d prisma/migrations ]; then
+            npx prisma migrate deploy
+          else
+            echo "ยังไม่มีโฟลเดอร์ prisma/migrations · ข้ามขั้นนี้"
+          fi
+
+      - name: Schema drift check
+        run: |
+          if [ -d prisma/migrations ]; then
+            npx prisma migrate diff \
+              --from-migrations prisma/migrations \
+              --to-schema-datamodel prisma/schema.prisma \
+              --shadow-database-url "$SHADOW_DATABASE_URL" \
+              --exit-code \
+            && echo "schema.prisma ตรงกับ migration แล้ว"
+          else
+            echo "ยังไม่มีโฟลเดอร์ prisma/migrations · ข้ามขั้นนี้"
+          fi
+
+  # ═══════════════════════════════════════════════════════════
+  #  5 · ตรวจค่าความต่างของสี · เฉพาะโปรเจกต์นี้
   #  กันคนแก้สีใน globals.css แล้วทำให้ตัวอักษรอ่านไม่ออก
   #  สคริปต์ exit 1 เมื่อมีคู่ไหนไม่ผ่าน จึงทำให้ job แดงได้เอง
-  # ───────────────────────────────────────────────────────────
+  # ═══════════════════════════════════════════════════════════
   accessibility:
     name: WCAG contrast check
     runs-on: ubuntu-latest
