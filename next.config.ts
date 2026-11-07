@@ -1,22 +1,14 @@
 import type { NextConfig } from "next";
 
+/**
+ * next.config.ts
+ * ------------------------------------------------------------------
+ * ขั้นนี้แทบไม่ต้องตั้งค่าอะไร · ของเดิมที่เกี่ยวกับ service worker
+ * ถูกเอาออกพร้อมกับโค้ด POC แล้ว จะกลับมาตอนทำแอปสแกน
+ */
 const nextConfig: NextConfig = {
-  // standalone ทำให้ Docker image เล็กลงจาก ~1.2GB เหลือ ~150MB
-  // และไม่กระทบการ deploy บน Vercel
+  // ทำให้ build ออกมาเป็นชุดเล็กที่รันเองได้ · ไม่กระทบการ deploy บน Vercel
   output: "standalone",
-
-  async headers() {
-    return [
-      {
-        // service worker ต้องไม่ถูก cache ไม่งั้นผู้ใช้จะค้างอยู่กับเวอร์ชันเก่า
-        source: "/sw.js",
-        headers: [
-          { key: "Cache-Control", value: "no-cache, no-store, must-revalidate" },
-          { key: "Service-Worker-Allowed", value: "/" },
-        ],
-      },
-    ];
-  },
 };
 
 export default nextConfig;

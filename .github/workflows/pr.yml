@@ -1,0 +1,83 @@
+# ═══════════════════════════════════════════════════════════════
+#  ตรวจก่อน merge  ·  เทียบเท่า merge request pipeline ของ GitLab
+#  ---------------------------------------------------------------
+#  ไฟล์นี้ทำให้ GitHub รันการตรวจทุกครั้งที่เปิดหรืออัปเดต pull request
+#  แต่ลำพังไฟล์นี้ "ไม่ได้" ห้าม merge ตอนตรวจไม่ผ่าน
+#  ต้องไปตั้ง branch protection ที่หน้า Settings ด้วย · ดู docs/CI.md
+# ═══════════════════════════════════════════════════════════════
+name: PR validation
+
+on:
+  pull_request:
+    branches: [develop]
+  push:
+    branches: [develop]
+
+# เปิด PR แล้ว push ซ้ำติดๆ กัน · ยกเลิกรอบเก่าทิ้ง ไม่ต้องรันค้างไว้
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  # ───────────────────────────────────────────────────────────
+  #  งานหลัก · typecheck → lint → test → build
+  # ───────────────────────────────────────────────────────────
+  verify:
+    name: Typecheck · Lint · Test · Build
+    runs-on: ubuntu-latest
+
+    # ค่าปลอมสำหรับ CI เท่านั้น · ไม่ได้ต่อฐานข้อมูลจริง
+    # จำเป็นเพราะ PrismaClient จะ throw ถ้าไม่มี DATABASE_URL ตอนถูกสร้าง
+    # และ next build ต้องอ่าน NEXT_PUBLIC_LIFF_ID ตอน build
+    env:
+      DATABASE_URL: "postgresql://ci:ci@localhost:5432/ci?pgbouncer=true"
+      DIRECT_URL: "postgresql://ci:ci@localhost:5432/ci"
+      NEXT_PUBLIC_LIFF_ID: "0000000000-00000000"
+      LINE_LOGIN_CHANNEL_ID: "0000000000"
+      BILL_TOKEN_SECRET: "ci-only-value-not-a-real-secret-0123456789"
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm # cache ตาม package-lock.json · รอบถัดไปเร็วขึ้นมาก
+
+      # ci ไม่ใช่ install · ci จะลบ node_modules แล้วลงตาม lock เป๊ะๆ
+      # ถ้า package-lock.json ไม่ตรงกับ package.json มันจะ fail ทันที
+      # ซึ่งเป็นสิ่งที่เราอยากได้ใน CI
+      - run: npm ci
+
+      # ต้องมาก่อน typecheck · @prisma/client ไม่มี type จนกว่าจะ generate
+      - name: Generate Prisma client
+        run: npx prisma generate
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Unit tests
+        run: npm test
+
+      # build จับ bug ที่ typecheck จับไม่ได้
+      # เช่นตอนที่ client component เผลอ import โค้ดที่ใช้ node:crypto
+      - name: Build
+        run: npm run build
+
+  # ───────────────────────────────────────────────────────────
+  #  ตรวจค่าความต่างของสี  ·  เฉพาะโปรเจกต์นี้
+  #  กันคนแก้สีใน globals.css แล้วทำให้ตัวอักษรอ่านไม่ออก
+  #  สคริปต์ exit 1 เมื่อมีคู่ไหนไม่ผ่าน จึงทำให้ job แดงได้เอง
+  # ───────────────────────────────────────────────────────────
+  accessibility:
+    name: WCAG contrast check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python3 design/contrast-check.py
