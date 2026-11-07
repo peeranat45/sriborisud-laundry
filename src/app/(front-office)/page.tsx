@@ -11,7 +11,9 @@
  * ไม่ต้องมี useState ไม่ต้องมี onSubmit ไม่ต้องมี fetch
  * ══════════════════════════════════════════════════════════════════
  */
-import { searchCustomers, createCustomerAction } from "@/modules/customer";
+// เรียกผ่าน action เหมือนกันหมด ไม่ว่าจะ Server หรือ Client Component
+// เหตุผลอยู่ใน modules/customer/index.ts
+import { searchCustomersAction, createCustomerAction } from "@/modules/customer";
 import { formatPhone } from "@/lib/phone";
 import { redirect } from "next/navigation";
 
@@ -52,10 +54,8 @@ export default async function CustomersPage({
   const sp = await searchParams;
   const q = sp.q?.trim() ?? "";
 
-  // เรียก service ตรงๆ ได้เพราะไฟล์นี้รันบนเซิร์ฟเวอร์
-  const result = q
-    ? await searchCustomers({ q, limit: 8 })
-    : null;
+  // await ได้ตรงๆ เพราะไฟล์นี้รันบนเซิร์ฟเวอร์ ไม่ต้อง useEffect ไม่ต้อง fetch
+  const result = q ? await searchCustomersAction({ q, limit: 8 }) : null;
   const rows = result?.ok ? result.data.rows : [];
   const mode = result?.ok ? result.data.mode : null;
 
