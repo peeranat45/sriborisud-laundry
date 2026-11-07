@@ -66,11 +66,25 @@ jobs:
         run: npm test
 
       # ─── TIER 1 · ช่องโหว่ใน dependency ───────────────────
-      # ปัจจุบันตั้งไว้ที่ high · ถ้าเจอ high หรือ critical จะแดง
-      # ถ้าวันไหนมี advisory ที่แก้ไม่ได้จริงๆ ให้ใช้
-      #     npm audit --audit-level=high --omit=dev
-      # หรือเพิ่ม override ใน package.json แทนการปิดขั้นนี้ทิ้ง
-      - name: Dependency audit
+      #
+      # แยกเป็นสองขั้นโดยตั้งใจ · เพราะความเสี่ยงไม่เท่ากันจริงๆ
+      #
+      #   --omit=dev  ดูเฉพาะแพ็กเกจที่ "ขึ้น production จริง"
+      #               ช่องโหว่ตรงนี้ผู้ใช้โดนได้ → บล็อกการ merge
+      #
+      #   ตัวเต็ม     รวม devDependency ด้วย (vitest · eslint · esbuild)
+      #               พวกนี้รันแค่ตอน dev กับตอน CI ไม่ได้ขึ้นเว็บ
+      #               ยังต้องรู้ว่ามีอะไร แต่ไม่ควรบล็อกงานทั้งทีม
+      #
+      # ตอนนี้ --omit=dev ได้ 0 ช่องโหว่ หลังจาก
+      #   · zod 3 → 4        (GHSA-mrhx-c7xc-m3w5 ไม่มีทางแก้ใน v3)
+      #   · overrides postcss ^8.5.32  (next 15.5.29 ฝัง 8.4.31 ไว้ข้างใน
+      #     และยังไม่ปล่อย 15.x ที่แก้ · การ override เลี่ยงการกระโดดไป next 16)
+      - name: Dependency audit · production
+        run: npm audit --omit=dev --audit-level=high
+
+      - name: Dependency audit · รวม dev (ไม่บล็อก)
+        continue-on-error: true
         run: npm audit --audit-level=high
 
       # build จับ bug ที่ typecheck จับไม่ได้ เช่นตอนที่ client component
