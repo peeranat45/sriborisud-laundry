@@ -1,0 +1,126 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2898 3258" width="2898" height="3258" font-family="IBM Plex Sans Thai, sans-serif">
+<defs><marker id="a" markerWidth="9" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0, 9 3.5, 0 7" fill="#201D18"/></marker><marker id="m" markerWidth="10" markerHeight="8" refX="10" refY="4" orient="auto"><polygon points="0 0, 10 4, 0 8" fill="#fff" stroke="#201D18"/></marker></defs>
+<rect width="2898" height="3258" fill="#F7F2EB"/>
+<text x="24" y="34" font-size="17" font-weight="700" fill="#201D18">W1 · รับผ้าเข้า (Intake) — As-Is</text>
+<rect x="160" y="86" width="2678.0" height="70" fill="#fff" stroke="#9A8A69"/>
+<rect x="160" y="86" width="30" height="70" fill="#EAE2D6" stroke="#9A8A69"/>
+<text x="175" y="121.0" font-size="12" font-weight="600" fill="#201D18" text-anchor="middle" transform="rotate(-90 175 121.0)">ลูกค้า</text>
+<rect x="160" y="186" width="2678.0" height="520" fill="#fff" stroke="#9A8A69"/>
+<rect x="160" y="186" width="30" height="520" fill="#EAE2D6" stroke="#9A8A69"/>
+<text x="175" y="446.0" font-size="12" font-weight="600" fill="#201D18" text-anchor="middle" transform="rotate(-90 175 446.0)">ร้านศรีบริสุทธิ์ ซักแห้ง</text>
+<rect x="190" y="186" width="2648.0" height="520" fill="none" stroke="#D4CAB9"/>
+<rect x="190" y="186" width="26" height="520" fill="#F7F2EB" stroke="#D4CAB9"/>
+<text x="203" y="446.0" font-size="11" fill="#584F41" text-anchor="middle" transform="rotate(-90 203 446.0)">เจ้าของร้าน</text>
+<path d="M258,408 L355,408" fill="none" stroke="#201D18" stroke-width="1.4"  marker-end="url(#a)"/>
+<path d="M485,408 L535,408" fill="none" stroke="#201D18" stroke-width="1.4"  marker-end="url(#a)"/>
+<path d="M665,408 L715,408" fill="none" stroke="#201D18" stroke-width="1.4"  marker-end="url(#a)"/>
+<path d="M845,408 L895,408" fill="none" stroke="#201D18" stroke-width="1.4"  marker-end="url(#a)"/>
+<path d="M1025,408 L1115,408" fill="none" stroke="#201D18" stroke-width="1.4"  marker-end="url(#a)"/>
+<path d="M1140,383 L1140,268 L1255,268" fill="none" stroke="#201D18" stroke-width="1.4"  marker-end="url(#a)"/>
+<text x="1198" y="261" font-size="10" fill="#584F41" text-anchor="middle">ให้เบอร์</text>
+<path d="M1385,268 L1500,268 L1500,383" fill="none" stroke="#201D18" stroke-width="1.4"  marker-end="url(#a)"/>
+<path d="M1165,408 L1475,408" fill="none" stroke="#201D18" stroke-width="1.4"  marker-end="url(#a)"/>
+<text x="1320" y="401" font-size="10" fill="#584F41" text-anchor="middle">ไม่ให้เบอร์</text>
+<path d="M1525,408 L1615,408" fill="none" stroke="#201D18" stroke-width="1.4"  marker-end="url(#a)"/>
+<path d="M1745,408 L1835,408" fill="none" stroke="#201D18" stroke-width="1.4"  marker-end="url(#a)"/>
+<path d="M1860,383 L1860,268 L1975,268" fill="none" stroke="#201D18" stroke-width="1.4"  marker-end="url(#a)"/>
+<text x="1918" y="261" font-size="10" fill="#584F41" text-anchor="middle">ด่วน</text>
+<path d="M2105,268 L2220,268 L2220,383" fill="none" stroke="#201D18" stroke-width="1.4"  marker-end="url(#a)"/>
+<path d="M1885,408 L2195,408" fill="none" stroke="#201D18" stroke-width="1.4"  marker-end="url(#a)"/>
+<text x="2040" y="401" font-size="10" fill="#584F41" text-anchor="middle">ปกติ</text>
+<path d="M2245,408 L2335,408" fill="none" stroke="#201D18" stroke-width="1.4"  marker-end="url(#a)"/>
+<path d="M2465,408 L2515,408" fill="none" stroke="#201D18" stroke-width="1.4"  marker-end="url(#a)"/>
+<path d="M2645,408 L2742,408" fill="none" stroke="#201D18" stroke-width="1.4"  marker-end="url(#a)"/>
+<path d="M240,156 L240,390" fill="none" stroke="#201D18" stroke-width="1.4" stroke-dasharray="7 4" marker-end="url(#m)"/>
+<text x="240" y="149" font-size="10" fill="#584F41" text-anchor="middle">ส่งมอบเสื้อผ้า</text>
+<path d="M1680,368 L1680,156" fill="none" stroke="#201D18" stroke-width="1.4" stroke-dasharray="7 4" marker-end="url(#m)"/>
+<text x="1680" y="149" font-size="10" fill="#584F41" text-anchor="middle">ใบรับของ</text>
+<path d="M1140,523 L600,448" fill="none" stroke="#201D18" stroke-width="1.4" stroke-dasharray="3 3" marker-end="url(#a)"/>
+<path d="M1680,448 L1140,523" fill="none" stroke="#201D18" stroke-width="1.4" stroke-dasharray="3 3" marker-end="url(#a)"/>
+<path d="M1680,448 L1680,517" fill="none" stroke="#201D18" stroke-width="1.4" stroke-dasharray="3 3" marker-end="url(#a)"/>
+<path d="M2400,448 L2400,517" fill="none" stroke="#201D18" stroke-width="1.4" stroke-dasharray="3 3" marker-end="url(#a)"/>
+<path d="M780,448 L780,622" fill="none" stroke="#201D18" stroke-width="1.4" stroke-dasharray="3 3" marker-end="url(#a)"/>
+<path d="M1140,433 L1310,622" fill="none" stroke="#201D18" stroke-width="1.4" stroke-dasharray="3 3" marker-end="url(#a)"/>
+<path d="M2040,308 L2050,622" fill="none" stroke="#201D18" stroke-width="1.4" stroke-dasharray="3 3" marker-end="url(#a)"/>
+<path d="M2400,448 L2600,622" fill="none" stroke="#201D18" stroke-width="1.4" stroke-dasharray="3 3" marker-end="url(#a)"/>
+<circle cx="240" cy="408" r="18.0" fill="#fff" stroke="#54633B" stroke-width="1.6"/>
+<text x="240" y="440" font-size="10" fill="#584F41" text-anchor="middle">ลูกค้านำเสื้อผ้ามาส่</text>
+<text x="240" y="453" font-size="10" fill="#584F41" text-anchor="middle">ง</text>
+<rect x="355" y="368" width="130" height="80" rx="9" fill="#fff" stroke="#54633B" stroke-width="1.4"/>
+<text x="363" y="383" font-size="12" fill="#8A4F23">✋</text>
+<text x="420" y="409" font-size="11" fill="#201D18" text-anchor="middle">ตรวจนับและแยกชนิ</text>
+<text x="420" y="423" font-size="11" fill="#201D18" text-anchor="middle">ดเสื้อผ้า</text>
+<rect x="535" y="368" width="130" height="80" rx="9" fill="#fff" stroke="#54633B" stroke-width="1.4"/>
+<text x="543" y="383" font-size="12" fill="#8A4F23">✋</text>
+<text x="600" y="409" font-size="11" fill="#201D18" text-anchor="middle">ประเมินวันแล้วเส</text>
+<text x="600" y="423" font-size="11" fill="#201D18" text-anchor="middle">ร็จ</text>
+<rect x="715" y="368" width="130" height="80" rx="9" fill="#fff" stroke="#54633B" stroke-width="1.4"/>
+<text x="723" y="383" font-size="12" fill="#8A4F23">✋</text>
+<text x="780" y="416" font-size="11" fill="#201D18" text-anchor="middle">คำนวณราคา</text>
+<rect x="895" y="368" width="130" height="80" rx="9" fill="#fff" stroke="#54633B" stroke-width="1.4"/>
+<text x="903" y="383" font-size="12" fill="#8A4F23">✋</text>
+<text x="960" y="416" font-size="11" fill="#201D18" text-anchor="middle">รับข้อมูลลูกค้า</text>
+<polygon points="1140,383.0 1165.0,408 1140,433.0 1115.0,408" fill="#fff" stroke="#8A4F23" stroke-width="1.5"/>
+<text x="1140" y="413" font-size="15" fill="#8A4F23" text-anchor="middle">×</text>
+<text x="1140" y="447" font-size="10" fill="#584F41" text-anchor="middle">ลูกค้าให้เบอร์โทรห</text>
+<text x="1140" y="460" font-size="10" fill="#584F41" text-anchor="middle">รือไม่</text>
+<rect x="1255" y="228" width="130" height="80" rx="9" fill="#fff" stroke="#54633B" stroke-width="1.4"/>
+<text x="1263" y="243" font-size="12" fill="#8A4F23">✋</text>
+<text x="1320" y="269" font-size="11" fill="#201D18" text-anchor="middle">จดเบอร์โทรลงในบิ</text>
+<text x="1320" y="283" font-size="11" fill="#201D18" text-anchor="middle">ล</text>
+<polygon points="1500,383.0 1525.0,408 1500,433.0 1475.0,408" fill="#fff" stroke="#8A4F23" stroke-width="1.5"/>
+<text x="1500" y="413" font-size="15" fill="#8A4F23" text-anchor="middle">×</text>
+<rect x="1615" y="368" width="130" height="80" rx="9" fill="#fff" stroke="#54633B" stroke-width="1.4"/>
+<text x="1623" y="383" font-size="12" fill="#8A4F23">✋</text>
+<text x="1680" y="409" font-size="11" fill="#201D18" text-anchor="middle">ออกบิล Running</text>
+<text x="1680" y="423" font-size="11" fill="#201D18" text-anchor="middle">Number</text>
+<polygon points="1860,383.0 1885.0,408 1860,433.0 1835.0,408" fill="#fff" stroke="#8A4F23" stroke-width="1.5"/>
+<text x="1860" y="413" font-size="15" fill="#8A4F23" text-anchor="middle">×</text>
+<text x="1860" y="447" font-size="10" fill="#584F41" text-anchor="middle">งานด่วนหรือไม่</text>
+<rect x="1975" y="228" width="130" height="80" rx="9" fill="#fff" stroke="#54633B" stroke-width="1.4"/>
+<text x="1983" y="243" font-size="12" fill="#8A4F23">✋</text>
+<text x="2040" y="269" font-size="11" fill="#201D18" text-anchor="middle">แจ้งช่างรีดด้วยว</text>
+<text x="2040" y="283" font-size="11" fill="#201D18" text-anchor="middle">าจา</text>
+<polygon points="2220,383.0 2245.0,408 2220,433.0 2195.0,408" fill="#fff" stroke="#8A4F23" stroke-width="1.5"/>
+<text x="2220" y="413" font-size="15" fill="#8A4F23" text-anchor="middle">×</text>
+<rect x="2335" y="368" width="130" height="80" rx="9" fill="#fff" stroke="#54633B" stroke-width="1.4"/>
+<text x="2343" y="383" font-size="12" fill="#8A4F23">✋</text>
+<text x="2400" y="409" font-size="11" fill="#201D18" text-anchor="middle">เขียนเลขบิลบนเสื</text>
+<text x="2400" y="423" font-size="11" fill="#201D18" text-anchor="middle">้อผ้าทุกชิ้น</text>
+<rect x="2515" y="368" width="130" height="80" rx="9" fill="#fff" stroke="#54633B" stroke-width="1.4"/>
+<text x="2523" y="383" font-size="12" fill="#8A4F23">✋</text>
+<text x="2580" y="409" font-size="11" fill="#201D18" text-anchor="middle">นำเสื้อผ้าเข้าตู</text>
+<text x="2580" y="423" font-size="11" fill="#201D18" text-anchor="middle">้รอซัก</text>
+<circle cx="2760" cy="408" r="18.0" fill="#fff" stroke="#54633B" stroke-width="3.4"/>
+<text x="2760" y="440" font-size="10" fill="#584F41" text-anchor="middle">เสื้อผ้าอยู่ในตู้รอซ</text>
+<text x="2760" y="453" font-size="10" fill="#584F41" text-anchor="middle">ัก</text>
+<path d="M1115.0,531.0 a25.0,8 0 0 1 50,0 v34 a25.0,8 0 0 1 -50,0 z" fill="#fff" stroke="#2F5366"/>
+<path d="M1115.0,531.0 a25.0,8 0 0 0 50,0" fill="none" stroke="#2F5366"/>
+<text x="1140" y="586" font-size="10" fill="#2F5366" text-anchor="middle">เล่มบิล (กระดาษ)</text>
+<path d="M1655.0,517.0 h38 l12,12 v50 h-50 z" fill="#fff" stroke="#2F5366"/>
+<text x="1680" y="592" font-size="10" fill="#2F5366" text-anchor="middle">ใบรับของ</text>
+<path d="M2375.0,517.0 h38 l12,12 v50 h-50 z" fill="#fff" stroke="#2F5366"/>
+<text x="2400" y="592" font-size="10" fill="#2F5366" text-anchor="middle">ป้ายกระดาษเขียนเ</text>
+<text x="2400" y="605" font-size="10" fill="#2F5366" text-anchor="middle">ลขบิล</text>
+<path d="M700.0,622.0 h170 v56 h-170" fill="#FDFBF6" stroke="none"/>
+<path d="M700.0,622.0 h-10 v56 h10" fill="none" stroke="#9A8A69" stroke-width="1.3"/>
+<text x="706" y="638" font-size="10" fill="#584F41">ไม่มีตารางราคาเป็นลายลักษณ</text>
+<text x="706" y="651" font-size="10" fill="#584F41">์อักษร</text>
+<text x="706" y="664" font-size="10" fill="#584F41">ราคาขึ้นกับคนออกบิล</text>
+<path d="M1230.0,622.0 h170 v56 h-170" fill="#FDFBF6" stroke="none"/>
+<path d="M1230.0,622.0 h-10 v56 h10" fill="none" stroke="#9A8A69" stroke-width="1.3"/>
+<text x="1236" y="638" font-size="10" fill="#584F41">ประมาณ 20%</text>
+<text x="1236" y="651" font-size="10" fill="#584F41">ของบิลไม่มีเบอร์ติดต่อ ≈</text>
+<text x="1236" y="664" font-size="10" fill="#584F41">4,000</text>
+<text x="1236" y="677" font-size="10" fill="#584F41">บิลต่อปีที่ตามลูกค้าไม่ได้</text>
+<path d="M1970.0,622.0 h170 v56 h-170" fill="#FDFBF6" stroke="none"/>
+<path d="M1970.0,622.0 h-10 v56 h10" fill="none" stroke="#9A8A69" stroke-width="1.3"/>
+<text x="1976" y="638" font-size="10" fill="#584F41">สื่อสารด้วยวาจา</text>
+<text x="1976" y="651" font-size="10" fill="#584F41">ไม่เหลือร่องรอย</text>
+<text x="1976" y="664" font-size="10" fill="#584F41">ถ้าลืมก็ไม่มีใครรู้</text>
+<path d="M2520.0,622.0 h170 v56 h-170" fill="#FDFBF6" stroke="none"/>
+<path d="M2520.0,622.0 h-10 v56 h10" fill="none" stroke="#9A8A69" stroke-width="1.3"/>
+<text x="2526" y="638" font-size="10" fill="#584F41">ตัวตนของผ้าหนึ่งชิ้นคือหมึ</text>
+<text x="2526" y="651" font-size="10" fill="#584F41">กบนกระดาษ</text>
+<text x="2526" y="664" font-size="10" fill="#584F41">ป้ายหลุดแล้วตามไม่ได้</text>
+</svg>

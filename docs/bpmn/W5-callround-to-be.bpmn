@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions id="D_W5_ToBe" xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" targetNamespace="http://sriborisud.local/bpmn" exporter="sriborisud-laundry IS" exporterVersion="1.0">
+  <bpmn:collaboration id="Collab_1">
+    <bpmn:participant id="P_Cust" name="ลูกค้า"/>
+    <bpmn:participant id="P_Main" name="ร้านศรีบริสุทธิ์ ซักแห้ง" processRef="P_W5_ToBe"/>
+    <bpmn:messageFlow id="MF1" name="ข้อความ LINE" sourceRef="S2" targetRef="P_Cust"/>
+  </bpmn:collaboration>
+  <bpmn:process id="P_W5_ToBe" isExecutable="false">
+    <bpmn:laneSet id="LS_1">
+      <bpmn:lane id="L_Sys" name="ระบบสารสนเทศ">
+        <bpmn:flowNodeRef>S</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>S1</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>S2</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>S3</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>G1</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>E</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="L_Own" name="เจ้าของร้าน">
+        <bpmn:flowNodeRef>T1</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:startEvent id="S" name="ทุกวันเวลา 18:00">
+      <bpmn:outgoing>F1</bpmn:outgoing>
+      <bpmn:timerEventDefinition id="S_ed"/>
+    </bpmn:startEvent>
+    <bpmn:serviceTask id="S1" name="หาผ้าที่พร้อมรับและยังไม่มารับ">
+      <bpmn:incoming>F1</bpmn:incoming>
+      <bpmn:outgoing>F2</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="S2" name="ส่งแจ้งเตือน LINE อัตโนมัติ">
+      <bpmn:incoming>F2</bpmn:incoming>
+      <bpmn:outgoing>F3</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="S3" name="บันทึกว่าส่งแล้ว เมื่อไร ถึงใคร">
+      <bpmn:incoming>F3</bpmn:incoming>
+      <bpmn:outgoing>F4</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:exclusiveGateway id="G1" name="มีรายที่ติดต่อไม่ได้หรือไม่">
+      <bpmn:incoming>F4</bpmn:incoming>
+      <bpmn:outgoing>F5</bpmn:outgoing>
+      <bpmn:outgoing>F6</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:userTask id="T1" name="ตามเฉพาะรายที่ติดต่อไม่ได้">
+      <bpmn:incoming>F5</bpmn:incoming>
+      <bpmn:outgoing>F7</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:endEvent id="E" name="ลูกค้าทุกรายที่ติดต่อได้ รู้แล้ว">
+      <bpmn:incoming>F6</bpmn:incoming>
+      <bpmn:incoming>F7</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:textAnnotation id="A1">
+      <bpmn:text>เปลี่ยนจาก pull เป็น push · ลูกค้ารู้ก่อนจะคิดถาม  [แก้ PP 22–24]</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:textAnnotation id="A2">
+      <bpmn:text>ทุกครั้งที่ติดต่อถูกบันทึก เจ้าของร้านรู้ว่าใครถูกตามไปแล้ว  [แก้ PP 22–24]</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:textAnnotation id="A3">
+      <bpmn:text>เหลือเฉพาะรายที่ไม่มีช่องทางติดต่อ ไม่ใช่ทุกบิล</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:sequenceFlow id="F1" sourceRef="S" targetRef="S1"/>
+    <bpmn:sequenceFlow id="F2" sourceRef="S1" targetRef="S2"/>
+    <bpmn:sequenceFlow id="F3" sourceRef="S2" targetRef="S3"/>
+    <bpmn:sequenceFlow id="F4" sourceRef="S3" targetRef="G1"/>
+    <bpmn:sequenceFlow id="F5" name="มี" sourceRef="G1" targetRef="T1"/>
+    <bpmn:sequenceFlow id="F6" name="ไม่มี" sourceRef="G1" targetRef="E"/>
+    <bpmn:sequenceFlow id="F7" sourceRef="T1" targetRef="E"/>
+    <bpmn:association id="A1_a" sourceRef="S2" targetRef="A1"/>
+    <bpmn:association id="A2_a" sourceRef="S3" targetRef="A2"/>
+    <bpmn:association id="A3_a" sourceRef="T1" targetRef="A3"/>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="D_1">
+    <bpmndi:BPMNPlane id="PL_1" bpmnElement="Collab_1">
+      <bpmndi:BPMNShape id="P_Cust_di" bpmnElement="P_Cust" isHorizontal="true">
+        <dc:Bounds x="160" y="80" width="1246" height="70"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P_Main_di" bpmnElement="P_Main" isHorizontal="true">
+        <dc:Bounds x="160" y="200" width="1246" height="360"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="L_Sys_di" bpmnElement="L_Sys" isHorizontal="true">
+        <dc:Bounds x="190" y="200" width="1216" height="180"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="L_Own_di" bpmnElement="L_Own" isHorizontal="true">
+        <dc:Bounds x="190" y="380" width="1216" height="180"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_di" bpmnElement="S">
+        <dc:Bounds x="232" y="272" width="36" height="36"/>
+        <bpmndi:BPMNLabel><dc:Bounds x="162" y="313" width="176" height="28"/></bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S1_di" bpmnElement="S1">
+        <dc:Bounds x="330" y="250" width="180" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S2_di" bpmnElement="S2">
+        <dc:Bounds x="550" y="250" width="170" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S3_di" bpmnElement="S3">
+        <dc:Bounds x="760" y="250" width="180" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="G1_di" bpmnElement="G1">
+        <dc:Bounds x="980" y="265" width="50" height="50"/>
+        <bpmndi:BPMNLabel><dc:Bounds x="910" y="320" width="190" height="28"/></bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="T1_di" bpmnElement="T1">
+        <dc:Bounds x="1070" y="430" width="175" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="E_di" bpmnElement="E">
+        <dc:Bounds x="1290" y="272" width="36" height="36"/>
+        <bpmndi:BPMNLabel><dc:Bounds x="1220" y="313" width="176" height="28"/></bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="A1_di" bpmnElement="A1">
+        <dc:Bounds x="510" y="620" width="270" height="58"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="A2_di" bpmnElement="A2">
+        <dc:Bounds x="740" y="620" width="280" height="58"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="A3_di" bpmnElement="A3">
+        <dc:Bounds x="1040" y="620" width="250" height="58"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="F1_di" bpmnElement="F1">
+        <di:waypoint x="268" y="290"/>
+        <di:waypoint x="330" y="290"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F2_di" bpmnElement="F2">
+        <di:waypoint x="510" y="290"/>
+        <di:waypoint x="550" y="290"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F3_di" bpmnElement="F3">
+        <di:waypoint x="720" y="290"/>
+        <di:waypoint x="760" y="290"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F4_di" bpmnElement="F4">
+        <di:waypoint x="940" y="290"/>
+        <di:waypoint x="980" y="290"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F5_di" bpmnElement="F5">
+        <di:waypoint x="1030" y="290"/>
+        <di:waypoint x="1050" y="290"/>
+        <di:waypoint x="1050" y="470"/>
+        <di:waypoint x="1070" y="470"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F6_di" bpmnElement="F6">
+        <di:waypoint x="1030" y="290"/>
+        <di:waypoint x="1290" y="290"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F7_di" bpmnElement="F7">
+        <di:waypoint x="1245" y="470"/>
+        <di:waypoint x="1308" y="470"/>
+        <di:waypoint x="1308" y="308"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MF1_di" bpmnElement="MF1">
+        <di:waypoint x="635" y="250"/>
+        <di:waypoint x="635" y="150"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="A1_a_di" bpmnElement="A1_a">
+        <di:waypoint x="635" y="330"/>
+        <di:waypoint x="645" y="620"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="A2_a_di" bpmnElement="A2_a">
+        <di:waypoint x="850" y="330"/>
+        <di:waypoint x="880" y="620"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="A3_a_di" bpmnElement="A3_a">
+        <di:waypoint x="1157" y="510"/>
+        <di:waypoint x="1165" y="620"/>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

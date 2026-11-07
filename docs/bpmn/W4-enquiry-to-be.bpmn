@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions id="D_W4_ToBe" xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" targetNamespace="http://sriborisud.local/bpmn" exporter="sriborisud-laundry IS" exporterVersion="1.0">
+  <bpmn:collaboration id="Collab_1">
+    <bpmn:participant id="P_Cust" name="ลูกค้า"/>
+    <bpmn:participant id="P_Shop" name="ร้านศรีบริสุทธิ์ ซักแห้ง"/>
+    <bpmn:participant id="P_Main" name="ระบบสารสนเทศ" processRef="P_W4_ToBe"/>
+    <bpmn:messageFlow id="MF1" name="เปิด LIFF" sourceRef="P_Cust" targetRef="S"/>
+    <bpmn:messageFlow id="MF2" name="สถานะรายชิ้น" sourceRef="S2" targetRef="P_Cust"/>
+  </bpmn:collaboration>
+  <bpmn:process id="P_W4_ToBe" isExecutable="false">
+    <bpmn:laneSet id="LS_1">
+      <bpmn:lane id="L_Sys" name="ระบบ">
+        <bpmn:flowNodeRef>S</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>S1</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>S2</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>E</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:startEvent id="S" name="ลูกค้าเปิดดูสถานะเอง">
+      <bpmn:outgoing>F1</bpmn:outgoing>
+      <bpmn:messageEventDefinition id="S_ed"/>
+    </bpmn:startEvent>
+    <bpmn:serviceTask id="S1" name="ดึงสถานะล่าสุดจาก status_event">
+      <bpmn:incoming>F1</bpmn:incoming>
+      <bpmn:outgoing>F2</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="S2" name="แสดงสถานะรายชิ้นและยอดที่ต้องชำระ">
+      <bpmn:incoming>F2</bpmn:incoming>
+      <bpmn:outgoing>F3</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:endEvent id="E" name="ลูกค้าได้คำตอบเอง">
+      <bpmn:incoming>F3</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:textAnnotation id="A1">
+      <bpmn:text>เจ้าของร้านไม่มีส่วนร่วมในกระบวนการนี้อีกต่อไป · W4 ถูกตัดออกทั้งกระบวนการ  [แก้ PP 19–21]</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:textAnnotation id="A2">
+      <bpmn:text>ใช้ได้ตลอดเวลา แม้ร้านปิดแล้ว</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:sequenceFlow id="F1" sourceRef="S" targetRef="S1"/>
+    <bpmn:sequenceFlow id="F2" sourceRef="S1" targetRef="S2"/>
+    <bpmn:sequenceFlow id="F3" sourceRef="S2" targetRef="E"/>
+    <bpmn:association id="A1_a" sourceRef="S1" targetRef="A1"/>
+    <bpmn:association id="A2_a" sourceRef="S2" targetRef="A2"/>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="D_1">
+    <bpmndi:BPMNPlane id="PL_1" bpmnElement="Collab_1">
+      <bpmndi:BPMNShape id="P_Cust_di" bpmnElement="P_Cust" isHorizontal="true">
+        <dc:Bounds x="160" y="80" width="746" height="70"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P_Shop_di" bpmnElement="P_Shop" isHorizontal="true">
+        <dc:Bounds x="160" y="420" width="746" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P_Main_di" bpmnElement="P_Main" isHorizontal="true">
+        <dc:Bounds x="160" y="200" width="746" height="180"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="L_Sys_di" bpmnElement="L_Sys" isHorizontal="true">
+        <dc:Bounds x="190" y="200" width="716" height="180"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_di" bpmnElement="S">
+        <dc:Bounds x="232" y="272" width="36" height="36"/>
+        <bpmndi:BPMNLabel><dc:Bounds x="162" y="313" width="176" height="28"/></bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S1_di" bpmnElement="S1">
+        <dc:Bounds x="330" y="250" width="185" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S2_di" bpmnElement="S2">
+        <dc:Bounds x="555" y="250" width="195" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="E_di" bpmnElement="E">
+        <dc:Bounds x="790" y="272" width="36" height="36"/>
+        <bpmndi:BPMNLabel><dc:Bounds x="720" y="313" width="176" height="28"/></bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="A1_di" bpmnElement="A1">
+        <dc:Bounds x="300" y="560" width="320" height="64"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="A2_di" bpmnElement="A2">
+        <dc:Bounds x="700" y="560" width="220" height="58"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="F1_di" bpmnElement="F1">
+        <di:waypoint x="268" y="290"/>
+        <di:waypoint x="330" y="290"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F2_di" bpmnElement="F2">
+        <di:waypoint x="515" y="290"/>
+        <di:waypoint x="555" y="290"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F3_di" bpmnElement="F3">
+        <di:waypoint x="750" y="290"/>
+        <di:waypoint x="790" y="290"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MF1_di" bpmnElement="MF1">
+        <di:waypoint x="250" y="150"/>
+        <di:waypoint x="250" y="272"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MF2_di" bpmnElement="MF2">
+        <di:waypoint x="650" y="250"/>
+        <di:waypoint x="650" y="150"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="A1_a_di" bpmnElement="A1_a">
+        <di:waypoint x="422" y="330"/>
+        <di:waypoint x="460" y="560"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="A2_a_di" bpmnElement="A2_a">
+        <di:waypoint x="652" y="330"/>
+        <di:waypoint x="810" y="560"/>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

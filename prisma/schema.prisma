@@ -1,0 +1,115 @@
+// ═══════════════════════════════════════════════════════════════
+//  ศรีบริสุทธิ์ ซักแห้ง · schema
+//  ---------------------------------------------------------------
+//  ขั้นนี้ migrate เฉพาะส่วนที่ "ลงทะเบียนลูกค้า" ต้องใช้
+//  ตารางของ intake / tracking / payroll จะเพิ่มทีละ feature
+//
+//  การตัดสินใจที่ล็อกไว้แล้ว  (ดู docs/ADR)
+//    D1  บัญชี LINE อยู่ตารางแยก · ลูกค้า 1 คนผูกได้หลายบัญชี
+//    D2  เบอร์โทร unique · "ลูกค้า" คือจุดติดต่อ ไม่ใช่ตัวบุคคล
+//    D3  กุญแจคือ id ภายใน ไม่ใช่เบอร์โทร
+//    D4  บัญชี LINE 1 บัญชีผูกได้หลายลูกค้า (คนรับผ้าแทนทั้งบ้าน)
+// ═══════════════════════════════════════════════════════════════
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")       // pooler · ?pgbouncer=true
+  directUrl = env("DIRECT_URL")         // direct · ใช้ตอน migrate เท่านั้น
+}
+
+// ───────────────────────────────────────────────────────────────
+//  ลูกค้า = จุดติดต่อ
+//
+//  phone เป็น unique แต่ nullable
+//  Postgres ถือว่า NULL แต่ละค่าไม่เท่ากัน ลูกค้าที่ไม่มีเบอร์จึงมีได้ไม่จำกัด
+//  ซึ่งสำคัญมาก เพราะประมาณ 20% ของบิลไม่มีเบอร์
+//
+//  ⚠️ @unique ที่ Prisma สร้างเป็น index ธรรมดา ซึ่งทำให้ลูกค้าที่ถูก soft delete
+//     ยังจองเบอร์นั้นไว้ตลอดไป · ต้องแก้ migration เป็น partial unique index
+//     ดูวิธีใน prisma/migrations/README.md
+// ───────────────────────────────────────────────────────────────
+model Customer {
+  id        String    @id @default(cuid())
+  name      String
+  phone     String?   @unique           // เก็บรูปแบบปกติแล้วเท่านั้น · 0XXXXXXXXX
+  note      String?                      // "ร้านตัดผมหน้าปากซอย" ช่วยแยกคนชื่อซ้ำ
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+
+  lineAccounts CustomerLineAccount[]
+  bills        Bill[]
+  mergedFrom   CustomerMerge[]       @relation("MergeTarget")
+  mergedInto   CustomerMerge[]       @relation("MergeSource")
+
+  @@index([name])
+  @@index([deletedAt])
+}
+
+// ───────────────────────────────────────────────────────────────
+//  D1 + D4 · ความสัมพันธ์แบบหลายต่อหลาย
+//
+//  สามีภรรยาผูก LINE คนละบัญชีเข้ากับลูกค้ารายเดียวกันได้   (D1)
+//  และคนหนึ่งที่รับผ้าแทนทั้งบ้านผูกบัญชีเดียวกับลูกค้าหลายรายได้ (D4)
+//
+//  unlinkedAt ไม่ใช่การลบแถว เพราะต้องรู้ย้อนหลังว่าเคยผูกเมื่อไร ยกเลิกเมื่อไร
+// ───────────────────────────────────────────────────────────────
+model CustomerLineAccount {
+  id         String    @id @default(cuid())
+  customerId String
+  lineUserId String
+  linkedAt   DateTime  @default(now())
+  unlinkedAt DateTime?
+  /// ผูกผ่านบิลใบไหน · ใช้ตรวจย้อนหลังเวลามีข้อพิพาท
+  viaBillNo  String?
+
+  customer Customer @relation(fields: [customerId], references: [id])
+
+  // BR-C4 · ผูกซ้ำที่เคยยกเลิก = เปิดแถวเดิมกลับมา ไม่สร้างแถวใหม่
+  @@unique([customerId, lineUserId])
+  @@index([lineUserId, unlinkedAt])
+}
+
+// ───────────────────────────────────────────────────────────────
+//  บิล · ขั้นนี้เอาเท่าที่การผูกบัญชีต้องใช้
+//  รายการรายชิ้น ราคา ประเภทผ้า จะมาพร้อม feature รับผ้าเข้า
+// ───────────────────────────────────────────────────────────────
+model Bill {
+  id          String   @id @default(cuid())
+  billNo      String                      // "04832" · เริ่มนับใหม่ทุก 1 ม.ค.
+  year        Int
+  customerId  String
+  dueDate     DateTime
+  totalSatang Int                         // ❗ สตางค์ · ห้ามใช้ Float กับเงิน
+  createdAt   DateTime @default(now())
+
+  customer Customer @relation(fields: [customerId], references: [id])
+
+  @@unique([billNo, year])
+  @@index([customerId])
+}
+
+// ───────────────────────────────────────────────────────────────
+//  การรวมลูกค้าซ้ำ
+//  ถึงจะบังคับ unique ที่เบอร์แล้ว ลูกค้าซ้ำก็ยังเกิดได้
+//    · สองรายที่ไม่มีเบอร์ทั้งคู่
+//    · รายที่ไม่มีเบอร์ แล้วภายหลังให้เบอร์ที่ตรงกับอีกราย
+//  เก็บประวัติการรวมไว้ เพราะการรวมผิดต้องตามแก้ได้
+// ───────────────────────────────────────────────────────────────
+model CustomerMerge {
+  id         String   @id @default(cuid())
+  sourceId   String                       // รายที่ถูกยุบ
+  targetId   String                       // รายที่เหลืออยู่
+  reason     String
+  mergedAt   DateTime @default(now())
+  mergedBy   String                       // staff id · ยังไม่มีตาราง staff
+
+  source Customer @relation("MergeSource", fields: [sourceId], references: [id])
+  target Customer @relation("MergeTarget", fields: [targetId], references: [id])
+
+  @@index([targetId])
+}

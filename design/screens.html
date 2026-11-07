@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<title>ศรีบริสุทธิ์ ซักแห้ง · Screens</title>
+<style>
+:root{
+  --sage-50:#F8FAF5;--sage-100:#EEF2E9;--sage-200:#DBE2D0;--sage-300:#BEC9AC;
+  --sage-400:#A3B18C;--sage-500:#8B9A6E;--sage-600:#6F8052;--sage-700:#54633B;
+  --sage-800:#3C4729;--sage-900:#262E19;
+  --sand-50:#FCFAF8;--sand-100:#F7F2EB;--sand-200:#EAE2D6;--sand-300:#D4CAB9;
+  --sand-400:#BAAC97;--sand-500:#9C8B73;--sand-600:#6B5E4A;--sand-700:#584F41;
+  --sand-800:#3A342C;--sand-900:#201D18;
+  --wheat-100:#F5EDD9;--wheat-300:#D9C89A;--wheat-500:#7E6526;--wheat-700:#5E4B1A;
+  --danger:#9B3A2C;--danger-bg:#F7E0DB;--danger-border:#E0A79C;
+  --warn:#8A4F23;--warn-bg:#F6E6D3;--warn-border:#DDB888;
+  --info:#2F5366;--info-bg:#DDE8EE;--info-border:#A8C4D4;
+  --ok:#54633B;--ok-bg:#EEF2E9;--ok-border:#BEC9AC;
+  --st-received-fg:#584F41;--st-received-bg:#EAE2D6;
+  --st-washing-fg:#2F5366;--st-washing-bg:#DDE8EE;
+  --st-drying-fg:#28565A;--st-drying-bg:#D8E8E5;
+  --st-pressing-fg:#8A4F23;--st-pressing-bg:#F6E6D3;
+  --st-ready-fg:#54633B;--st-ready-bg:#EEF2E9;
+  --st-picked-fg:#6B5E4A;--st-picked-bg:#F7F2EB;
+  --bg:var(--sand-100);--surface:#FFFFFF;--border:var(--sand-300);
+  --border-strong:#9A8A69;--text:var(--sand-900);--text-muted:var(--sand-600);
+  --primary:var(--sage-700);--primary-soft:var(--sage-100);--focus:var(--sage-600);
+  --disabled-fg:#8A7F6D;--disabled-bg:var(--sand-200);
+  --r-sm:6px;--r-md:10px;--r-lg:14px;--r-xl:20px;--r-full:999px;
+  --sh-sm:0 1px 2px rgba(28,26,22,.06);--sh-md:0 2px 8px rgba(28,26,22,.08);
+  --sh-lg:0 8px 24px rgba(28,26,22,.12);
+  --tap-min:44px;--tap-floor:56px;
+  --font:"IBM Plex Sans Thai","IBM Plex Sans","Helvetica Neue",sans-serif;
+  --font-num:"IBM Plex Mono","SF Mono",monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font);background:var(--sand-200);color:var(--text);font-size:15px;line-height:24px;padding:48px;-webkit-font-smoothing:antialiased}
+.page{max-width:1960px;margin:0 auto}
+
+/* ---- doc chrome ---- */
+.masthead{background:var(--sage-900);color:#fff;border-radius:var(--r-xl);padding:36px 40px;margin-bottom:44px}
+.masthead h1{font-size:30px;line-height:40px;font-weight:600;letter-spacing:-.3px}
+.masthead p{color:var(--sage-200);margin-top:6px;font-size:15px;line-height:24px;max-width:860px}
+.appsec{margin-bottom:56px}
+.appsec>h2{font-size:24px;line-height:32px;font-weight:600;margin-bottom:4px}
+.appsec>p{color:var(--sand-700);font-size:14px;line-height:22px;max-width:860px;margin-bottom:24px}
+.row{display:flex;gap:28px;flex-wrap:wrap;align-items:flex-start}
+.unit{display:flex;flex-direction:column;gap:8px}
+.cap{font-size:12px;line-height:18px;color:var(--sand-700);max-width:360px}
+.cap b{display:block;font-size:13px;color:var(--sand-900)}
+.cap .uc{font-family:var(--font-num);color:var(--wheat-700);font-size:11px}
+
+/* ---- screen shells ---- */
+.screen{background:var(--bg);overflow:hidden;box-shadow:var(--sh-md);border-radius:var(--r-lg)}
+.screen.m{width:360px;height:760px;display:flex;flex-direction:column}
+.screen.t{width:860px}
+.ab{height:56px;flex:none;background:var(--sage-800);color:#fff;display:flex;align-items:center;gap:12px;padding:0 16px;font-size:17px;font-weight:600}
+.ab .back{font-size:20px;opacity:.9}
+.ab .right{margin-left:auto;font-size:13px;font-weight:500;opacity:.85}
+.body{flex:1;overflow:hidden;padding:16px;display:flex;flex-direction:column;gap:12px}
+.body.flush{padding:0}
+.foot{flex:none;padding:12px 16px calc(12px + 8px);background:var(--surface);border-top:1px solid var(--border)}
+
+/* ---- primitives (identical to design system) ---- */
+.pill{display:inline-flex;align-items:center;gap:6px;height:28px;padding:0 12px;border-radius:var(--r-full);font-size:13px;line-height:1;font-weight:600;white-space:nowrap}
+.pill::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor;flex:none}
+.pill.received{color:var(--st-received-fg);background:var(--st-received-bg)}
+.pill.washing{color:var(--st-washing-fg);background:var(--st-washing-bg)}
+.pill.drying{color:var(--st-drying-fg);background:var(--st-drying-bg)}
+.pill.pressing{color:var(--st-pressing-fg);background:var(--st-pressing-bg)}
+.pill.ready{color:var(--st-ready-fg);background:var(--st-ready-bg)}
+.pill.picked{color:var(--st-picked-fg);background:var(--st-picked-bg)}
+.pill.problem{color:var(--danger);background:var(--danger-bg)}
+.pill.sm{height:24px;padding:0 9px;font-size:12px}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:var(--tap-min);padding:0 20px;border-radius:var(--r-md);font-family:var(--font);font-size:15px;font-weight:600;line-height:1;border:1px solid transparent;cursor:pointer}
+.btn-primary{background:var(--primary);color:#fff;box-shadow:var(--sh-sm)}
+.btn-secondary{background:var(--surface);color:var(--primary);border-color:var(--border-strong)}
+.btn-ghost{background:transparent;color:var(--text-muted)}
+.btn-danger{background:var(--danger);color:#fff}
+.btn-disabled{background:var(--disabled-bg);color:var(--disabled-fg);box-shadow:none}
+.btn-floor{min-height:var(--tap-floor);font-size:18px;border-radius:var(--r-lg);width:100%}
+.btn-w{width:100%}
+
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);box-shadow:var(--sh-sm);overflow:hidden}
+.card-head{padding:13px 16px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;gap:10px}
+.card-head h3{font-size:16px;line-height:24px;font-weight:600}
+.card-body{padding:16px}
+
+.grow{display:flex;align-items:center;gap:12px;min-height:var(--tap-min);padding:11px 16px;border-bottom:1px solid var(--sand-200);background:var(--surface)}
+.grow:last-child{border-bottom:none}
+.grow .bill{font-family:var(--font-num);font-size:14px;font-weight:600;letter-spacing:.4px;flex:none}
+.grow .what{flex:1;min-width:0}
+.grow .what b{display:block;font-size:15px;font-weight:500;line-height:22px}
+.grow .what span{font-size:12px;line-height:18px;color:var(--text-muted)}
+.grow .due{font-family:var(--font-num);font-size:12px;color:var(--text-muted);text-align:right;flex:none}
+
+.stat{display:flex;justify-content:space-between;align-items:baseline;gap:10px;padding:9px 0;border-bottom:1px solid var(--sand-200)}
+.stat:last-child{border-bottom:none}
+.stat .k{font-size:14px;color:var(--text-muted)}
+.stat .v{font-family:var(--font-num);font-size:15px;font-weight:600;font-variant-numeric:tabular-nums}
+.stat .v.big{font-size:21px}
+
+.field{display:flex;flex-direction:column;gap:5px}
+.field label{font-size:13px;line-height:18px;font-weight:600}
+.ctl{min-height:var(--tap-min);padding:0 14px;border-radius:var(--r-md);border:1px solid var(--border-strong);background:var(--surface);font-size:16px;display:flex;align-items:center;gap:8px}
+.ctl .ph{color:var(--sand-500)}
+.ctl.num{font-family:var(--font-num);font-variant-numeric:tabular-nums}
+.ctl.err{border-color:var(--danger-border);background:#FDF6F4}
+.hint{font-size:12px;line-height:18px;color:var(--text-muted)}
+.hint.err{color:var(--danger)}
+
+.banner{display:flex;gap:10px;padding:12px 14px;border-radius:var(--r-md);border:1px solid;font-size:13px;line-height:20px}
+.banner b{display:block;font-weight:600}
+.banner.info{background:var(--info-bg);border-color:var(--info-border);color:#24404F}
+.banner.ok{background:var(--ok-bg);border-color:var(--ok-border);color:var(--sage-900)}
+.banner.warn{background:var(--warn-bg);border-color:var(--warn-border);color:#6E3E1B}
+.banner.danger{background:var(--danger-bg);border-color:var(--danger-border);color:#7A2C21}
+.banner .ic{font-family:var(--font-num);font-weight:700;flex:none}
+
+.bnav{display:flex;background:var(--surface);border-top:1px solid var(--border);flex:none}
+.bnav a{flex:1;min-height:var(--tap-floor);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font-size:12px;line-height:16px;color:var(--text-muted);text-decoration:none;font-weight:500}
+.bnav a.on{color:var(--primary);background:var(--primary-soft);font-weight:600}
+.bnav .gl{font-size:19px;line-height:22px}
+
+table{width:100%;border-collapse:collapse;font-size:14px}
+th{text-align:left;padding:9px 14px;background:var(--sand-100);font-size:12px;font-weight:600;letter-spacing:.3px;text-transform:uppercase;color:var(--text-muted);border-bottom:1px solid var(--border);white-space:nowrap}
+td{padding:11px 14px;border-bottom:1px solid var(--sand-200)}
+tr:last-child td{border-bottom:none}
+td.n,th.n{font-family:var(--font-num);font-variant-numeric:tabular-nums;text-align:right}
+
+.scan{position:relative;width:100%;aspect-ratio:4/3;background:var(--sand-900);border-radius:var(--r-lg);overflow:hidden;flex:none}
+.scan .win{position:absolute;inset:17% 11%}
+.scan .c{position:absolute;width:30px;height:30px;border:3px solid var(--wheat-300)}
+.scan .c1{top:0;left:0;border-right:0;border-bottom:0;border-top-left-radius:6px}
+.scan .c2{top:0;right:0;border-left:0;border-bottom:0;border-top-right-radius:6px}
+.scan .c3{bottom:0;left:0;border-right:0;border-top:0;border-bottom-left-radius:6px}
+.scan .c4{bottom:0;right:0;border-left:0;border-top:0;border-bottom-right-radius:6px}
+.scan .line{position:absolute;left:0;right:0;top:50%;height:2px;background:var(--wheat-300);opacity:.85}
+.scan .tip{position:absolute;left:0;right:0;bottom:12px;text-align:center;color:#fff;font-size:13px;opacity:.9}
+
+.readout{background:var(--sage-900);border-radius:var(--r-lg);padding:18px 20px;color:#fff;flex:none}
+.readout .lab{font-size:12px;line-height:18px;color:var(--sage-300);font-weight:600;letter-spacing:.4px}
+.readout .val{font-family:var(--font-num);font-size:30px;line-height:40px;font-weight:600;letter-spacing:1px}
+.readout .sub{font-size:14px;line-height:22px;color:var(--sage-200);margin-top:2px}
+.readout .move{display:flex;align-items:center;gap:10px;margin-top:12px;padding-top:12px;border-top:1px solid var(--sage-800)}
+.readout .move .ar{color:var(--wheat-300);font-size:16px}
+
+.q{display:flex;gap:12px;align-items:center;padding:12px 14px;background:var(--surface);border:1px solid var(--border);border-radius:var(--r-md);box-shadow:var(--sh-sm)}
+.q.rush{border-color:var(--warn-border);background:#FBF5E9}
+.q .ord{width:32px;height:32px;flex:none;border-radius:var(--r-full);background:var(--sand-100);color:var(--text-muted);display:flex;align-items:center;justify-content:center;font-family:var(--font-num);font-size:14px;font-weight:600}
+.q.rush .ord{background:var(--warn-bg);color:var(--warn)}
+.q .m{flex:1;min-width:0}
+.q .m b{display:block;font-size:15px;font-weight:500}
+.q .m span{font-size:12px;color:var(--text-muted)}
+
+.pay-qr{width:176px;height:176px;margin:0 auto;background:repeating-conic-gradient(var(--sand-900) 0 25%,#fff 0 50%) 0 0/16px 16px;border-radius:var(--r-sm);border:8px solid #fff;box-shadow:0 0 0 1px var(--border)}
+.amt{font-family:var(--font-num);font-size:30px;line-height:38px;font-weight:600;text-align:center}
+
+.empty{text-align:center;padding:40px 24px;margin:auto}
+.empty .gl{font-size:32px;opacity:.3}
+.empty b{display:block;font-size:16px;font-weight:600;margin-top:10px}
+.empty p{font-size:14px;line-height:22px;color:var(--text-muted);margin-top:4px}
+
+.sheet{position:absolute;left:0;right:0;bottom:0;background:var(--surface);border-radius:var(--r-xl) var(--r-xl) 0 0;box-shadow:var(--sh-lg);padding:22px 18px 18px}
+.scrim{position:absolute;inset:0;background:rgba(28,26,22,.45)}
+.rel{position:relative;flex:1;overflow:hidden;display:flex;flex-direction:column}
+
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{min-height:36px;padding:0 14px;border-radius:var(--r-full);border:1px solid var(--border-strong);background:var(--surface);font-size:14px;font-weight:500;display:inline-flex;align-items:center}
+.chip.on{background:var(--primary);color:#fff;border-color:var(--primary);font-weight:600}
+
+.sum{display:flex;justify-content:space-between;align-items:center;padding:14px 16px;background:var(--sage-50);border:1px solid var(--sage-200);border-radius:var(--r-md)}
+.sum .k{font-size:14px;font-weight:600;color:var(--sage-900)}
+.sum .v{font-family:var(--font-num);font-size:20px;font-weight:600;color:var(--sage-900)}
+
+.kpi{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.kpi .b{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-md);padding:14px}
+.kpi .b span{display:block;font-size:12px;line-height:18px;color:var(--text-muted)}
+.kpi .b b{display:block;font-family:var(--font-num);font-size:26px;line-height:34px;font-weight:600}
+.lbl-prev{width:151px;height:113px;background:#fff;border:1px dashed var(--border-strong);border-radius:4px;padding:8px;display:flex;flex-direction:column;justify-content:space-between;flex:none}
+.lbl-prev .bars{height:38px;background:repeating-linear-gradient(90deg,var(--sand-900) 0 2px,#fff 2px 4px,var(--sand-900) 4px 5px,#fff 5px 8px)}
+.lbl-prev .cd{font-family:var(--font-num);font-size:13px;font-weight:600;text-align:center;letter-spacing:1px}
+.lbl-prev .mt{display:flex;justify-content:space-between;font-size:9px;color:var(--text-muted)}
+.tabs{display:flex;gap:4px;border-bottom:1px solid var(--border);padding:0 16px;background:var(--surface);flex:none}
+.tabs a{padding:12px 14px;font-size:14px;font-weight:500;color:var(--text-muted);text-decoration:none;border-bottom:2px solid transparent}
+.tabs a.on{color:var(--primary);border-bottom-color:var(--primary);font-weight:600}
+.scroll{overflow:hidden}
+</style>
+</head>
+<body>
+<div class="page">
+
+<div class="masthead">
+  <h1>ศรีบริสุทธิ์ ซักแห้ง · Screens v0.1</h1>
+  <p>16 หน้าจอ ครอบคลุม use case ทั้ง 13 ข้อ สร้างจาก token และ component ชุดเดียวกับ design system ไม่มีสีหรือขนาดใดที่ไม่ได้มาจากไฟล์ globals.css</p>
+</div>
+
+<!-- =================================================================
+     D3 · SCAN APP  — ทำก่อน เพราะเป็นหัวใจของระบบ
+     ================================================================= -->
+<section class="appsec">
+  <h2>D3 · แอปสแกน <span style="font-weight:400;color:var(--sand-600);font-size:17px">— ผู้ช่วย · คนซัก · ช่างรีด</span></h2>
+  <p>ใช้ยืนทำ มือเปียก บางครั้งถือผ้าอยู่มือเดียว ทุกปุ่มสูง 56px หนึ่งหน้าจอทำงานเดียว ไม่มีตาราง ไม่มีเมนูซ้อน ถ้าหน้าจอไหนต้องอ่านมากกว่าสองบรรทัดก่อนกดได้ หน้าจอนั้นออกแบบผิด</p>
+  <div class="row">
+
+    <!-- S-01 scan idle -->
+    <div class="unit">
+      <div class="screen m" id="s01">
+        <div class="ab"><span>สแกน</span><span class="right">คนรีด · สมหญิง</span></div>
+        <div class="body">
+          <div class="scan">
+            <div class="win"><div class="c c1"></div><div class="c c2"></div><div class="c c3"></div><div class="c c4"></div><div class="line"></div></div>
+            <div class="tip">วางบาร์โค้ดให้อยู่ในกรอบ</div>
+          </div>
+          <div class="banner info"><span class="ic">i</span><span>สแกนวันนี้ <b style="display:inline">24 ชิ้น</b></span></div>
+          <div style="margin-top:auto"><button class="btn btn-secondary btn-w">ค้นหาด้วยเลขที่บิล</button></div>
+        </div>
+        <div class="bnav"><a class="on"><span class="gl">▣</span>สแกน</a><a><span class="gl">☰</span>คิวงาน</a><a><span class="gl">◔</span>ของฉัน</a></div>
+      </div>
+      <div class="cap"><b>S-01 · รอสแกน</b><span class="uc">UC10</span> กล้องเปิดทันทีที่เข้าแอป ไม่ต้องกดอะไรก่อน กรอบต้องมีขนาดจริงเสมอ ห้ามซ่อนด้วย display:none</div>
+    </div>
+
+    <!-- S-02 scan result -->
+    <div class="unit">
+      <div class="screen m" id="s02">
+        <div class="ab"><span class="back">←</span><span>ยืนยันงาน</span></div>
+        <div class="body">
+          <div class="readout">
+            <div class="lab">สแกนสำเร็จ</div>
+            <div class="val">04821-03</div>
+            <div class="sub">เสื้อเชิ้ต · ซักรีด</div>
+            <div class="move"><span class="pill drying" style="background:#28565A;color:#D8E8E5">กำลังตาก</span><span class="ar">→</span><span class="pill pressing" style="background:var(--wheat-300);color:#201D18">กำลังรีด</span></div>
+          </div>
+          <div class="card"><div class="card-body" style="padding:12px 16px">
+            <div class="stat" style="padding:7px 0"><span class="k">บิล</span><span class="v">04821 · คุณสมชาย</span></div>
+            <div class="stat" style="padding:7px 0"><span class="k">ครบกำหนด</span><span class="v">30 ต.ค. 69</span></div>
+            <div class="stat" style="padding:7px 0"><span class="k">วิธีดูแล</span><span class="v" style="font-family:var(--font);font-weight:500">รีดไอน้ำ ไม่เกิน 150°C</span></div>
+          </div></div>
+          <div style="margin-top:auto;display:flex;flex-direction:column;gap:10px">
+            <button class="btn btn-primary btn-floor">ยืนยันว่ารีดเสร็จ</button>
+            <button class="btn btn-ghost btn-w">แจ้งปัญหาชิ้นนี้</button>
+          </div>
+        </div>
+      </div>
+      <div class="cap"><b>S-02 · ยืนยันงาน</b><span class="uc">UC10 · UC11</span> ปลายทางแสดงชัดด้วยลูกศร ไม่ต้องเลือกสเตจเอง ระบบรู้จากสเตจปัจจุบัน วิธีดูแลขึ้นที่นี่เพราะคนซักและคนรีดต้องใช้</div>
+    </div>
+
+    <!-- S-03 queue -->
+    <div class="unit">
+      <div class="screen m" id="s03">
+        <div class="ab"><span>คิวงานของฉัน</span><span class="right">68 ชิ้น</span></div>
+        <div class="body">
+          <div class="chips"><span class="chip on">ด่วนก่อน</span><span class="chip">ครบกำหนด</span><span class="chip">เลขบิล</span></div>
+          <div style="display:flex;flex-direction:column;gap:9px;overflow:hidden">
+            <div class="q rush"><span class="ord">1</span><span class="m"><b>04830-02 · เสื้อสูท</b><span>ด่วน · ลูกค้ามารับบ่ายนี้</span></span></div>
+            <div class="q rush"><span class="ord">2</span><span class="m"><b>04830-03 · กางเกงสแลค</b><span>ด่วน · ลูกค้ามารับบ่ายนี้</span></span></div>
+            <div class="q"><span class="ord">3</span><span class="m"><b>04821-02 · กางเกงสแลค</b><span>ครบกำหนด 30 ต.ค.</span></span></div>
+            <div class="q"><span class="ord">4</span><span class="m"><b>04819-01 · เสื้อเชิ้ต</b><span>ครบกำหนด 31 ต.ค.</span></span></div>
+            <div class="q"><span class="ord">5</span><span class="m"><b>04819-04 · เสื้อเชิ้ต</b><span>ครบกำหนด 31 ต.ค.</span></span></div>
+            <div class="q"><span class="ord">6</span><span class="m"><b>04822-01 · ผ้าคลุมโซฟา</b><span>ครบกำหนด 1 พ.ย.</span></span></div>
+          </div>
+        </div>
+        <div class="bnav"><a><span class="gl">▣</span>สแกน</a><a class="on"><span class="gl">☰</span>คิวงาน</a><a><span class="gl">◔</span>ของฉัน</a></div>
+      </div>
+      <div class="cap"><b>S-03 · คิวงาน</b><span class="uc">UC12</span> งานด่วนขึ้นก่อนและมีขอบสีอุ่น ความเร่งด่วนอยู่ในรายการเอง ไม่ต้องอยู่ในหัวเจ้าของร้าน · หน้าจอนี้เกิดขึ้นเพราะแยก actor คนซักกับผู้ช่วยออกจากกัน</div>
+    </div>
+
+    <!-- S-04 report problem -->
+    <div class="unit">
+      <div class="screen m" id="s04">
+        <div class="ab"><span class="back">←</span><span>แจ้งปัญหา</span></div>
+        <div class="body">
+          <div class="readout" style="padding:14px 18px"><div class="lab">ชิ้นที่แจ้ง</div><div class="val" style="font-size:24px;line-height:32px">04821-04</div><div class="sub">ผ้าคลุมโซฟา · กำลังรีด</div></div>
+          <div class="field"><label>ปัญหาที่พบ</label>
+            <div class="chips"><span class="chip on">คราบไม่ออก</span><span class="chip">ผ้าขาด/รุ่ย</span><span class="chip">สีตก</span><span class="chip">กระดุมหลุด</span><span class="chip">อื่นๆ</span></div>
+          </div>
+          <div class="field"><label>รูปถ่าย</label>
+            <div style="height:104px;border:1px dashed var(--border-strong);border-radius:var(--r-md);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:4px;background:var(--surface)">
+              <span style="font-size:22px;opacity:.4">⊕</span><span class="hint">ถ่ายรูปเพื่อเป็นหลักฐาน</span>
+            </div>
+          </div>
+          <div class="banner warn"><span class="ic">!</span><span><b>จะแจ้งเจ้าของร้านทันที</b>ชิ้นนี้จะถูกพักไว้จนเจ้าของร้านตัดสินใจ</span></div>
+          <div style="margin-top:auto"><button class="btn btn-primary btn-floor">ส่งแจ้งปัญหา</button></div>
+        </div>
+      </div>
+      <div class="cap"><b>S-04 · แจ้งปัญหา</b><span class="uc">UC13</span> <span style="color:var(--danger)">ยังออกแบบปลายทางไม่ได้</span> — ต้องถามเจ้าของร้านก่อน (คำถาม N2) ว่าปัจจุบันทำอย่างไรกับผ้าที่เสียหาย ตอนนี้จึงหยุดที่ "พักไว้" เท่านั้น</div>
+    </div>
+  </div>
+</section>
+
+<!-- =================================================================
+     D1 · CUSTOMER
+     ================================================================= -->
+<section class="appsec">
+  <h2>D1 · แอปลูกค้า <span style="font-weight:400;color:var(--sand-600);font-size:17px">— LINE OA + LIFF</span></h2>
+  <p>ลูกค้าเปิดนานๆ ครั้ง จึงไม่มีอะไรให้เรียนรู้ ตัวอักษรใหญ่ ข้อมูลน้อยที่สุด ไม่มีการล็อกอินแยก เพราะ LIFF รู้ว่าเป็นใครอยู่แล้ว · หน้าจอชุดนี้คือสิ่งที่ทำให้ workflow W4 (รับโทรศัพท์ถามว่าผ้าเสร็จยัง) หายไปทั้งหมด</p>
+  <div class="row">
+
+    <!-- C-01 register -->
+    <div class="unit">
+      <div class="screen m" id="c01">
+        <div class="ab" style="background:var(--sage-700)"><span>ศรีบริสุทธิ์ ซักแห้ง</span></div>
+        <div class="body">
+          <div class="card"><div class="card-body">
+            <h3 style="font-size:19px;line-height:28px;font-weight:600">รับแจ้งเตือนเมื่อผ้าเสร็จ</h3>
+            <p style="font-size:15px;line-height:24px;color:var(--text-muted);margin-top:6px">ผูกบิลของคุณกับ LINE นี้ครั้งเดียว แล้วเราจะแจ้งให้ทราบทุกครั้งที่ผ้าพร้อมรับ ไม่ต้องโทรถาม</p>
+          </div></div>
+          <div class="field"><label>เลขที่บิลจากใบเสร็จ</label><div class="ctl num">04821</div><span class="hint">อยู่มุมขวาบนของใบเสร็จ</span></div>
+          <div class="field"><label>เบอร์โทรที่ให้ไว้กับร้าน</label><div class="ctl num"><span class="ph">081-xxx-xxxx</span></div></div>
+          <div class="banner ok"><span class="ic">✓</span><span>ร้านจะไม่ส่งข้อความโฆษณา · แจ้งเฉพาะสถานะผ้าของคุณ</span></div>
+          <div style="margin-top:auto"><button class="btn btn-primary btn-w" style="min-height:52px;font-size:17px">ผูกบัญชี</button></div>
+        </div>
+      </div>
+      <div class="cap"><b>C-01 · ผูกบัญชี</b><span class="uc">UC01</span> ไม่ใช่หน้า "ลงทะเบียน" หรือ "ล็อกอิน" เป้าหมายของลูกค้าคือการได้รับแจ้งเตือน หัวข้อจึงพูดถึงประโยชน์ ไม่ใช่ขั้นตอน</div>
+    </div>
+
+    <!-- C-02 my bills -->
+    <div class="unit">
+      <div class="screen m" id="c02">
+        <div class="ab" style="background:var(--sage-700)"><span>ผ้าของฉัน</span></div>
+        <div class="body flush scroll">
+          <div style="padding:14px 16px 0"><div class="banner ok"><span class="ic">✓</span><span><b>มี 3 ชิ้นพร้อมรับแล้ว</b>บิล 04821 · รับได้ตั้งแต่วันนี้</span></div></div>
+          <div style="padding:14px 16px 0;display:flex;flex-direction:column;gap:12px">
+            <div class="card">
+              <div class="card-head"><h3>บิล 04821</h3><span class="pill ready sm">พร้อมรับ 3 / 5</span></div>
+              <div class="grow" style="padding:10px 16px"><span class="what"><b>เสื้อสูท</b><span>×1</span></span><span class="pill ready sm">พร้อมรับ</span></div>
+              <div class="grow" style="padding:10px 16px"><span class="what"><b>กางเกงสแลค</b><span>×1</span></span><span class="pill pressing sm">กำลังรีด</span></div>
+              <div class="grow" style="padding:10px 16px"><span class="what"><b>เสื้อเชิ้ต</b><span>×2</span></span><span class="pill ready sm">พร้อมรับ</span></div>
+              <div class="grow" style="padding:10px 16px"><span class="what"><b>ผ้าคลุมโซฟา</b><span>×1</span></span><span class="pill problem sm">มีปัญหา</span></div>
+              <div class="card-body" style="padding:12px 16px;border-top:1px solid var(--border)"><button class="btn btn-primary btn-w">ดูรายละเอียด</button></div>
+            </div>
+            <div class="card">
+              <div class="card-head"><h3>บิล 04702</h3><span class="pill picked sm">รับแล้ว</span></div>
+              <div class="card-body" style="padding:12px 16px"><span class="hint">4 ชิ้น · รับเมื่อ 20 ต.ค. 69 · ฿720</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="cap"><b>C-02 · ผ้าของฉัน</b><span class="uc">UC02</span> หน้าจอที่มีค่าที่สุดในระบบ · สถานะมาจาก status_event ล่าสุดเสมอ ไม่มีช่องสถานะที่แก้ได้ที่ไหนทั้งนั้น</div>
+    </div>
+
+    <!-- C-03 bill detail -->
+    <div class="unit">
+      <div class="screen m" id="c03">
+        <div class="ab" style="background:var(--sage-700)"><span class="back">←</span><span>บิล 04821</span></div>
+        <div class="body flush scroll">
+          <div style="background:var(--surface);padding:16px;border-bottom:1px solid var(--border)">
+            <div class="stat" style="padding:6px 0"><span class="k">รับเข้า</span><span class="v">28 ต.ค. 69</span></div>
+            <div class="stat" style="padding:6px 0"><span class="k">นัดรับ</span><span class="v">30 ต.ค. 69</span></div>
+            <div class="stat" style="padding:6px 0"><span class="k">ยอดรวม</span><span class="v big">฿1,280</span></div>
+          </div>
+          <div>
+            <div class="grow"><span class="bill">01</span><span class="what"><b>เสื้อสูท</b><span>ซักแห้ง · ฿180</span></span><span class="pill ready sm">พร้อมรับ</span></div>
+            <div class="grow"><span class="bill">02</span><span class="what"><b>กางเกงสแลค</b><span>ซักแห้ง · ฿120</span></span><span class="pill pressing sm">กำลังรีด</span></div>
+            <div class="grow"><span class="bill">03</span><span class="what"><b>เสื้อเชิ้ต</b><span>ซักรีด · ฿60</span></span><span class="pill ready sm">พร้อมรับ</span></div>
+            <div class="grow"><span class="bill">04</span><span class="what"><b>ผ้าคลุมโซฟา</b><span>ซักแห้ง · ฿450</span></span><span class="pill problem sm">มีปัญหา</span></div>
+            <div class="grow"><span class="bill">05</span><span class="what"><b>เสื้อเชิ้ต</b><span>ซักรีด · ฿60</span></span><span class="pill ready sm">พร้อมรับ</span></div>
+          </div>
+          <div style="padding:14px 16px"><div class="banner warn"><span class="ic">!</span><span><b>ผ้าคลุมโซฟามีปัญหา</b>ทางร้านจะติดต่อกลับเพื่อแจ้งรายละเอียด</span></div></div>
+        </div>
+        <div class="foot"><button class="btn btn-primary btn-w" style="min-height:52px;font-size:17px">ชำระเงิน ฿1,280</button></div>
+      </div>
+      <div class="cap"><b>C-03 · รายละเอียดบิล</b><span class="uc">UC02</span> หนึ่งแถวต่อหนึ่งชิ้น ไม่ใช่ต่อหนึ่งบิล เพราะรับบางส่วนได้ สเตจจึงอยู่ที่ชิ้น</div>
+    </div>
+
+    <!-- C-04 pay -->
+    <div class="unit">
+      <div class="screen m" id="c04">
+        <div class="ab" style="background:var(--sage-700)"><span class="back">←</span><span>ชำระเงิน</span></div>
+        <div class="body">
+          <div class="card"><div class="card-body" style="text-align:center">
+            <div class="pay-qr"></div>
+            <div class="amt" style="margin-top:14px">฿1,280.00</div>
+            <div class="hint" style="margin-top:2px">พร้อมเพย์ · ศรีบริสุทธิ์ ซักแห้ง</div>
+          </div></div>
+          <div class="card"><div class="card-body" style="padding:12px 16px">
+            <div class="stat" style="padding:7px 0"><span class="k">บิล</span><span class="v">04821</span></div>
+            <div class="stat" style="padding:7px 0"><span class="k">จำนวน</span><span class="v">5 ชิ้น</span></div>
+            <div class="stat" style="padding:7px 0"><span class="k">ยอดชำระ</span><span class="v big">฿1,280</span></div>
+          </div></div>
+          <div class="banner info"><span class="ic">i</span><span><b>โอนแล้วกรุณาแจ้งที่ร้าน</b>ทางร้านจะตรวจสอบยอดในแอปธนาคารก่อนส่งมอบผ้า</span></div>
+          <div style="margin-top:auto"><button class="btn btn-secondary btn-w">บันทึก QR ลงเครื่อง</button></div>
+        </div>
+      </div>
+      <div class="cap"><b>C-04 · ชำระเงิน</b><span class="uc">UC03</span> QR สร้างตามยอดจริง แต่ banner บอกตรงๆ ว่าระบบ<b style="display:inline">ไม่ได้</b>ตรวจสอบเงินเข้าอัตโนมัติ เจ้าของร้านยังต้องเปิดแอปธนาคารเอง</div>
+    </div>
+  </div>
+</section>
+
+<!-- =================================================================
+     D2 · FRONT OFFICE
+     ================================================================= -->
+<section class="appsec">
+  <h2>D2 · หน้าร้าน <span style="font-weight:400;color:var(--sand-600);font-size:17px">— เจ้าของร้าน</span></h2>
+  <p>เจ้าของร้านแตะ 7 จาก 13 use case จึงเป็นทั้งคอขวดและผู้ได้ประโยชน์มากที่สุด หน้าจอชุดนี้ข้อมูลหนาแน่นกว่าอีกสองแอป ใช้ตารางได้ ใช้นั่งทำ · <b style="color:var(--danger)">ยังไม่รู้ว่าหน้าร้านจะใช้อุปกรณ์อะไร</b> ออกแบบไว้ที่ 860px ซึ่งใช้ได้ทั้งแท็บเล็ตและคอม ต้องถามเจ้าของร้านก่อนจะล็อกความกว้าง</p>
+  <div class="row">
+
+    <!-- F-01 dashboard -->
+    <div class="unit">
+      <div class="screen t" id="f01">
+        <div class="ab"><span>ภาพรวมร้าน</span><span class="right">2 พ.ย. 69 · 14:32</span></div>
+        <div style="padding:16px;display:flex;flex-direction:column;gap:14px">
+          <div class="kpi">
+            <div class="b"><span>ตู้รอซัก</span><b>42</b></div>
+            <div class="b"><span>กำลังซัก / ตาก</span><b>31</b></div>
+            <div class="b"><span>กำลังรีด</span><b style="color:var(--warn)">68</b></div>
+            <div class="b"><span>ค้างรับเกิน 14 วัน</span><b style="color:var(--danger)">104</b></div>
+          </div>
+          <div class="banner warn"><span class="ic">!</span><span><b>คอขวดอยู่ที่การรีด</b>งานรออยู่ 68 ชิ้น มากกว่าสเตจอื่นทั้งหมดรวมกัน</span></div>
+          <div style="display:flex;gap:14px">
+            <div class="card" style="flex:1">
+              <div class="card-head"><h3>ต้องทำวันนี้</h3></div>
+              <div class="grow"><span class="what"><b>ผ้าคลุมโซฟา 04821-04 แจ้งปัญหา</b><span>ช่างรีดแจ้งเมื่อ 14:02 · รอการตัดสินใจ</span></span><span class="pill problem sm">ด่วน</span></div>
+              <div class="grow"><span class="what"><b>งานด่วน 2 ชิ้น ลูกค้ามารับบ่ายนี้</b><span>บิล 04830 · คุณนภา</span></span><span class="pill pressing sm">รีด</span></div>
+              <div class="grow"><span class="what"><b>ค้างรับเกิน 30 วัน 12 บิล</b><span>เก่าสุด 38 วัน</span></span><span class="pill ready sm">ติดตาม</span></div>
+            </div>
+            <div class="card" style="width:300px">
+              <div class="card-head"><h3>รายได้</h3></div>
+              <div class="card-body" style="padding:14px 16px">
+                <div class="stat"><span class="k">วันนี้</span><span class="v">฿4,280</span></div>
+                <div class="stat"><span class="k">สัปดาห์นี้</span><span class="v">฿26,140</span></div>
+                <div class="stat"><span class="k">เดือนนี้</span><span class="v big">฿98,600</span></div>
+                <div class="stat"><span class="k">ค้างชำระ</span><span class="v" style="color:var(--warn)">฿18,320</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="cap" style="max-width:860px"><b>F-01 · ภาพรวมร้าน</b><span class="uc">UC08</span> ไม่มีอะไรถูกทำให้อัตโนมัติในหน้านี้ เจ้าของร้านเพียงเห็นสิ่งที่เมื่อก่อนมองไม่เห็น · ตัวเลขในหน้านี้คือหลักฐานที่จะใช้เทียบกับ baseline ในบทประเมินผล จึงต้องวัด baseline ให้เสร็จก่อนติดตั้งระบบ</div>
+    </div>
+
+    <!-- F-02 intake -->
+    <div class="unit">
+      <div class="screen t" id="f02">
+        <div class="ab"><span>รับผ้าเข้า</span><span class="right">บิลถัดไป 04832</span></div>
+        <div style="padding:16px;display:flex;gap:14px">
+          <div style="width:300px;display:flex;flex-direction:column;gap:12px">
+            <div class="field"><label>ลูกค้า</label><div class="ctl">คุณสมชาย ใจดี</div><span class="hint">พิมพ์ชื่อหรือเบอร์เพื่อค้นหา</span></div>
+            <div class="field"><label>เบอร์โทร</label><div class="ctl num">081-234-5678</div><span class="hint">ใช้ส่งแจ้งเตือน · ไม่มีเบอร์ = ติดต่อไม่ได้</span></div>
+            <div class="field"><label>นัดรับ</label><div class="ctl">30 ต.ค. 69</div></div>
+            <div class="chips"><span class="chip on">ปกติ</span><span class="chip">ด่วน</span></div>
+          </div>
+          <div style="flex:1;display:flex;flex-direction:column;gap:12px">
+            <div class="field"><label>เพิ่มรายการ</label>
+              <div class="chips"><span class="chip">เสื้อสูท ฿180</span><span class="chip">กางเกงสแลค ฿120</span><span class="chip">เสื้อเชิ้ต ฿60</span><span class="chip">ผ้าคลุมโซฟา ฿450</span><span class="chip">อื่นๆ</span></div>
+            </div>
+            <div class="card">
+              <div class="grow"><span class="bill">01</span><span class="what"><b>เสื้อสูท</b><span>ซักแห้ง</span></span><span class="due" style="font-size:14px;font-weight:600">฿180</span></div>
+              <div class="grow"><span class="bill">02</span><span class="what"><b>กางเกงสแลค</b><span>ซักแห้ง</span></span><span class="due" style="font-size:14px;font-weight:600">฿120</span></div>
+              <div class="grow"><span class="bill">03</span><span class="what"><b>เสื้อเชิ้ต</b><span>ซักรีด</span></span><span class="due" style="font-size:14px;font-weight:600">฿60</span></div>
+            </div>
+            <div class="sum"><span class="k">3 ชิ้น</span><span class="v">฿360</span></div>
+            <div style="display:flex;gap:10px"><button class="btn btn-secondary" style="flex:1">บันทึกร่าง</button><button class="btn btn-primary" style="flex:2">บันทึกและพิมพ์ป้าย</button></div>
+          </div>
+        </div>
+      </div>
+      <div class="cap" style="max-width:860px"><b>F-02 · รับผ้าเข้า</b><span class="uc">UC04</span> หน้าจอที่ยากที่สุด เพราะลูกค้ายืนรออยู่ · <b style="display:inline">ต้องเร็วกว่าเขียนในสมุดบิล</b> ไม่ใช่แค่เป็นระเบียบกว่า ถ้าช้ากว่ากระดาษ ร้านจะเลิกใช้ · ต้องจับเวลาเทียบทั้งสองวิธีตอนวัด baseline</div>
+    </div>
+
+    <!-- F-03 print labels -->
+    <div class="unit">
+      <div class="screen t" id="f03">
+        <div class="ab"><span class="back">←</span><span>พิมพ์ป้าย · บิล 04832</span></div>
+        <div style="padding:16px;display:flex;flex-direction:column;gap:14px">
+          <div class="banner ok"><span class="ic">✓</span><span><b>บันทึกบิล 04832 แล้ว</b>3 ชิ้น · ฿360 · คุณสมชาย ใจดี</span></div>
+          <div class="card"><div class="card-body">
+            <h3 style="font-size:15px;font-weight:600;margin-bottom:12px">ป้ายที่จะพิมพ์ · 40 × 30 มม.</h3>
+            <div style="display:flex;gap:14px">
+              <div class="lbl-prev"><div class="mt"><span>ศรีบริสุทธิ์</span><span>02/11/69</span></div><div class="bars"></div><div class="cd">04832-01</div></div>
+              <div class="lbl-prev"><div class="mt"><span>ศรีบริสุทธิ์</span><span>02/11/69</span></div><div class="bars"></div><div class="cd">04832-02</div></div>
+              <div class="lbl-prev"><div class="mt"><span>ศรีบริสุทธิ์</span><span>02/11/69</span></div><div class="bars"></div><div class="cd">04832-03</div></div>
+            </div>
+          </div></div>
+          <div class="banner warn"><span class="ic">!</span><span><b>ตรวจขนาดด้วยไม้บรรทัดทุกครั้งที่เปลี่ยนเครื่องพิมพ์</b>บาร์โค้ดต้องเป็น vector ที่ความละเอียดเครื่องพิมพ์ · บิตแมปความละเอียดต่ำคือสาเหตุที่ QR สแกนไม่ติดในการทดสอบ ไม่ใช่ตัว QR เอง</span></div>
+          <div style="display:flex;gap:10px"><button class="btn btn-secondary" style="flex:1">พิมพ์ซ้ำ</button><button class="btn btn-primary" style="flex:2">พิมพ์ 3 ป้าย</button></div>
+        </div>
+      </div>
+      <div class="cap" style="max-width:860px"><b>F-03 · พิมพ์ป้าย</b><span class="uc">UC04</span> แยกเป็นหน้าจอของตัวเองเพราะพิมพ์ซ้ำเกิดขึ้นจริง ป้ายหลุด ป้ายเปียก ป้ายพิมพ์ไม่ติด</div>
+    </div>
+
+    <!-- F-04 handover lookup -->
+    <div class="unit">
+      <div class="screen t" id="f04">
+        <div class="ab"><span>ส่งมอบผ้า</span></div>
+        <div style="padding:16px;display:flex;flex-direction:column;gap:14px">
+          <div style="display:flex;gap:10px;align-items:flex-end">
+            <div class="field" style="flex:1"><label>เลขที่บิล ชื่อ หรือเบอร์โทร</label><div class="ctl num">04821</div></div>
+            <button class="btn btn-secondary">สแกนป้าย</button>
+            <button class="btn btn-primary">ค้นหา</button>
+          </div>
+          <div class="card">
+            <div class="card-head"><h3>บิล 04821 · คุณสมชาย ใจดี</h3><span class="pill ready sm">พร้อมรับ 3 / 5</span></div>
+            <table>
+              <thead><tr><th style="width:40px"></th><th>ชิ้น</th><th>ประเภท</th><th>สถานะ</th><th class="n">ราคา</th></tr></thead>
+              <tbody>
+                <tr><td>☑</td><td class="n" style="text-align:left">04821-01</td><td>เสื้อสูท</td><td><span class="pill ready sm">พร้อมรับ</span></td><td class="n">180</td></tr>
+                <tr><td>☑</td><td class="n" style="text-align:left">04821-03</td><td>เสื้อเชิ้ต</td><td><span class="pill ready sm">พร้อมรับ</span></td><td class="n">60</td></tr>
+                <tr><td>☑</td><td class="n" style="text-align:left">04821-05</td><td>เสื้อเชิ้ต</td><td><span class="pill ready sm">พร้อมรับ</span></td><td class="n">60</td></tr>
+                <tr style="opacity:.55"><td>☐</td><td class="n" style="text-align:left">04821-02</td><td>กางเกงสแลค</td><td><span class="pill pressing sm">กำลังรีด</span></td><td class="n">120</td></tr>
+                <tr style="opacity:.55"><td>☐</td><td class="n" style="text-align:left">04821-04</td><td>ผ้าคลุมโซฟา</td><td><span class="pill problem sm">มีปัญหา</span></td><td class="n">450</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div style="display:flex;gap:14px;align-items:center">
+            <div class="sum" style="flex:1"><span class="k">ส่งมอบ 3 ชิ้น · ยอดชำระ</span><span class="v">฿300</span></div>
+            <div class="banner info" style="flex:1"><span class="ic">i</span><span>เหลือค้างในร้าน 2 ชิ้น · ยอดคงค้าง ฿570 บิลจะยังไม่ปิด</span></div>
+          </div>
+          <div style="display:flex;gap:10px"><button class="btn btn-secondary" style="flex:1">แสดง QR ชำระเงิน</button><button class="btn btn-primary" style="flex:2">ยืนยันส่งมอบ 3 ชิ้น</button></div>
+        </div>
+      </div>
+      <div class="cap" style="max-width:860px"><b>F-04 · ส่งมอบผ้า</b><span class="uc">UC05 · include UC02</span> <b style="display:inline">การรับบางส่วนอยู่ที่นี่</b> และเป็นเหตุผลที่หน้านี้ไม่ง่าย ติ๊กเลือกเป็นชิ้น ชิ้นที่ยังไม่พร้อมจางลงแต่ยังเห็น · บิลปิดบางส่วนและยังเปิดอยู่ได้</div>
+    </div>
+
+    <!-- F-05 uncollected -->
+    <div class="unit">
+      <div class="screen t" id="f05">
+        <div class="ab"><span>ตามของค้างรับ</span><span class="right">104 ชิ้น · 47 บิล</span></div>
+        <div class="tabs"><a class="on">เกิน 30 วัน (12)</a><a>14–30 วัน (18)</a><a>7–14 วัน (17)</a><a>ติดต่อไม่ได้ (9)</a></div>
+        <div style="padding:16px;display:flex;flex-direction:column;gap:14px">
+          <div class="card">
+            <table>
+              <thead><tr><th>บิล</th><th>ลูกค้า</th><th>ติดต่อ</th><th class="n">ชิ้น</th><th class="n">ยอด</th><th class="n">ค้างมาแล้ว</th><th>ติดต่อครั้งล่าสุด</th><th></th></tr></thead>
+              <tbody>
+                <tr><td class="n" style="text-align:left">04702</td><td>คุณวรรณา</td><td class="n" style="text-align:left">081-555-1234</td><td class="n">4</td><td class="n">720</td><td class="n" style="color:var(--danger);font-weight:600">38 วัน</td><td><span class="hint">25 ต.ค. · ไม่รับสาย</span></td><td><button class="btn btn-secondary" style="min-height:36px;padding:0 12px;font-size:13px">ส่ง LINE</button></td></tr>
+                <tr><td class="n" style="text-align:left">04711</td><td>คุณธนกร</td><td class="n" style="text-align:left">—</td><td class="n">2</td><td class="n">240</td><td class="n" style="color:var(--danger);font-weight:600">36 วัน</td><td><span class="hint" style="color:var(--danger)">ไม่มีเบอร์ติดต่อ</span></td><td><button class="btn btn-disabled" style="min-height:36px;padding:0 12px;font-size:13px">ส่ง LINE</button></td></tr>
+                <tr><td class="n" style="text-align:left">04755</td><td>คุณประสิทธิ์</td><td class="n" style="text-align:left">089-222-7788</td><td class="n">2</td><td class="n">360</td><td class="n" style="color:var(--warn);font-weight:600">21 วัน</td><td><span class="hint">—</span></td><td><button class="btn btn-secondary" style="min-height:36px;padding:0 12px;font-size:13px">ส่ง LINE</button></td></tr>
+                <tr><td class="n" style="text-align:left">04760</td><td>คุณอารีย์</td><td class="n" style="text-align:left">086-444-9900</td><td class="n">6</td><td class="n">1,140</td><td class="n" style="color:var(--warn);font-weight:600">19 วัน</td><td><span class="hint">30 ต.ค. · ส่ง LINE แล้ว</span></td><td><button class="btn btn-ghost" style="min-height:36px;padding:0 12px;font-size:13px">ติดตาม</button></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="banner danger"><span class="ic">×</span><span><b>9 บิลติดต่อไม่ได้เลย</b>ไม่มีเบอร์โทรในระบบ · ของเก่าที่สุด 38 วัน · ระบบใหม่แก้เฉพาะบิลที่รับเข้าหลังติดตั้งเท่านั้น</span></div>
+          <div style="display:flex;gap:10px"><button class="btn btn-secondary">ส่ง LINE ทุกบิลที่ติดต่อได้ (11)</button><button class="btn btn-ghost">ดาวน์โหลดรายการ</button></div>
+        </div>
+      </div>
+      <div class="cap" style="max-width:860px"><b>F-05 · ตามของค้างรับ</b><span class="uc">UC06 · include UC02</span> คอลัมน์ "ติดต่อครั้งล่าสุด" คือสิ่งที่วันนี้ไม่มีเลย · การโทรไม่เหลือร่องรอย เจ้าของร้านจึงไม่รู้ว่าใครถูกตามไปแล้ว · บันทึกความพยายามแทบไม่มีต้นทุน แต่ปิดหนึ่งในสามสาเหตุรากได้ทั้งข้อ</div>
+    </div>
+
+    <!-- F-06 staff pay -->
+    <div class="unit">
+      <div class="screen t" id="f06">
+        <div class="ab"><span>คิดค่าแรง</span><span class="right">16–31 ต.ค. 69</span></div>
+        <div style="padding:16px;display:flex;flex-direction:column;gap:14px">
+          <div class="card">
+            <table>
+              <thead><tr><th>พนักงาน</th><th>หน้าที่</th><th class="n">ซัก</th><th class="n">ตาก</th><th class="n">รีด</th><th class="n">รวมชิ้น</th><th class="n">ค่าแรง</th></tr></thead>
+              <tbody>
+                <tr><td>สมหญิง</td><td><span class="hint">ช่างรีด</span></td><td class="n">—</td><td class="n">—</td><td class="n">612</td><td class="n">612</td><td class="n" style="font-weight:600">4,284</td></tr>
+                <tr><td>มานี</td><td><span class="hint">ช่างรีด</span></td><td class="n">—</td><td class="n">—</td><td class="n">548</td><td class="n">548</td><td class="n" style="font-weight:600">3,836</td></tr>
+                <tr><td>ชูใจ</td><td><span class="hint">คนซัก</span></td><td class="n">1,204</td><td class="n">1,204</td><td class="n">—</td><td class="n">1,204</td><td class="n" style="font-weight:600">3,612</td></tr>
+                <tr><td>ปิติ</td><td><span class="hint">ผู้ช่วย</span></td><td class="n">—</td><td class="n">—</td><td class="n">—</td><td class="n">1,410</td><td class="n" style="font-weight:600">2,800</td></tr>
+                <tr><td>วีระ</td><td><span class="hint">ผู้ช่วย</span></td><td class="n">—</td><td class="n">—</td><td class="n">—</td><td class="n">1,286</td><td class="n" style="font-weight:600">2,800</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div style="display:flex;gap:14px">
+            <div class="sum" style="flex:1"><span class="k">รวมค่าแรงงวดนี้</span><span class="v">฿17,332</span></div>
+            <div class="banner ok" style="flex:1.4"><span class="ic">✓</span><span><b>คิดจากการสแกนจริงทุกชิ้น</b>นี่คือเหตุผลที่พนักงานยอมสแกน — ค่าแรงตรงกับงานที่ทำจริง ไม่ใช่การจดจำนวนด้วยมือ</span></div>
+          </div>
+          <div class="banner info"><span class="ic">i</span><span><b>ใช้อัตราที่มีผลในงวด 16–31 ต.ค. 69</b>ถ้าขึ้นราคาค่าแรงภายหลัง การคิดย้อนงวดนี้จะยังใช้อัตราเดิม เพราะอัตราทุกตัวมีวันเริ่มและวันสิ้นสุด</span></div>
+          <div style="display:flex;gap:10px"><button class="btn btn-secondary" style="flex:1">ดูรายละเอียดต่อคน</button><button class="btn btn-primary" style="flex:1">ยืนยันและปิดงวด</button></div>
+        </div>
+      </div>
+      <div class="cap" style="max-width:860px"><b>F-06 · คิดค่าแรง</b><span class="uc">UC07</span> <span style="color:var(--danger)">ตัวเลขอัตราค่าแรงในหน้านี้เป็นตัวอย่างสมมติ</span> — ต้องได้คำตอบ B1 (ตารางค่ารีดตามความยาก) และ B3 (ค่าซัก) จากเจ้าของร้านก่อน จึงจะออกแบบจริงได้</div>
+    </div>
+
+    <!-- F-07 correct record -->
+    <div class="unit">
+      <div class="screen t" id="f07">
+        <div class="ab"><span class="back">←</span><span>แก้ไขรายการ · 04821-02</span></div>
+        <div style="padding:16px;display:flex;gap:14px">
+          <div style="flex:1;display:flex;flex-direction:column;gap:12px">
+            <div class="field"><label>สิ่งที่ต้องแก้</label>
+              <div class="chips"><span class="chip on">ประเภทผ้าผิด</span><span class="chip">ราคาผิด</span><span class="chip">สเตจผิด</span><span class="chip">ยกเลิกบิล</span></div>
+            </div>
+            <div class="field"><label>จากประเภท</label><div class="ctl" style="background:var(--sand-100)">กางเกงสแลค · ฿120</div></div>
+            <div class="field"><label>เป็นประเภท</label><div class="ctl">กางเกงสูท · ฿150 ▾</div></div>
+            <div class="field"><label>เหตุผล</label><div class="ctl"><span class="ph">บันทึกผิดตอนรับเข้า</span></div><span class="hint">บังคับกรอก · จะถูกเก็บไว้ในประวัติ</span></div>
+            <div class="banner warn"><span class="ic">!</span><span><b>ระบบจะเพิ่มรายการแก้ไขใหม่</b>ประวัติเดิมจะยังอยู่และมองเห็นได้ ไม่มีการลบหรือทับของเดิม — เพื่อให้ค่าแรงที่คิดจากการสแกนยังเชื่อถือได้</span></div>
+            <div style="display:flex;gap:10px"><button class="btn btn-secondary" style="flex:1">ยกเลิก</button><button class="btn btn-primary" style="flex:1">บันทึกการแก้ไข</button></div>
+          </div>
+          <div class="card" style="width:330px">
+            <div class="card-head"><h3>ประวัติชิ้นนี้</h3></div>
+            <div class="grow" style="padding:10px 14px"><span class="what"><b>รับเข้า</b><span>28 ต.ค. 09:14 · เจ้าของร้าน</span></span><span class="pill received sm">รอซัก</span></div>
+            <div class="grow" style="padding:10px 14px"><span class="what"><b>ซักเสร็จ</b><span>28 ต.ค. 13:40 · ชูใจ</span></span><span class="pill washing sm">ซัก</span></div>
+            <div class="grow" style="padding:10px 14px"><span class="what"><b>แห้งแล้ว</b><span>29 ต.ค. 10:05 · ปิติ</span></span><span class="pill drying sm">ตาก</span></div>
+            <div class="grow" style="padding:10px 14px"><span class="what"><b>ส่งให้ช่างรีด</b><span>29 ต.ค. 10:12 · ปิติ</span></span><span class="pill pressing sm">รีด</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="cap" style="max-width:860px"><b>F-07 · แก้ไขรายการ</b><span class="uc">UC09</span> น่าเบื่อและเป็นหน้าที่คนมักข้าม · ถ้าไม่มี พิมพ์ผิดครั้งแรกในสัปดาห์แรกจะทำให้พนักงานเลิกเชื่อถือระบบไปตลอด · ต้องได้คำตอบ N1 N2 N3 ก่อนออกแบบจริง</div>
+    </div>
+
+    <!-- F-08 offline / empty -->
+    <div class="unit">
+      <div class="screen m" id="f08">
+        <div class="ab"><span>สแกน</span><span class="right">ออฟไลน์</span></div>
+        <div class="body">
+          <div class="banner warn"><span class="ic">!</span><span><b>ไม่มีสัญญาณ</b>บันทึกไว้ในเครื่อง 7 รายการ จะส่งขึ้นระบบอัตโนมัติเมื่อกลับมาออนไลน์</span></div>
+          <div class="scan" style="opacity:.92">
+            <div class="win"><div class="c c1"></div><div class="c c2"></div><div class="c c3"></div><div class="c c4"></div><div class="line"></div></div>
+            <div class="tip">สแกนต่อได้ปกติ</div>
+          </div>
+          <div class="card"><div class="card-head"><h3>รอส่งขึ้นระบบ</h3><span class="pill received sm">7</span></div>
+            <div class="grow" style="padding:9px 14px"><span class="bill">04830-02</span><span class="what"><span>14:28 · รีดเสร็จ</span></span></div>
+            <div class="grow" style="padding:9px 14px"><span class="bill">04830-03</span><span class="what"><span>14:26 · รีดเสร็จ</span></span></div>
+            <div class="grow" style="padding:9px 14px"><span class="bill">04821-02</span><span class="what"><span>14:21 · รีดเสร็จ</span></span></div>
+          </div>
+          <div style="margin-top:auto"><button class="btn btn-secondary btn-w">ลองส่งขึ้นระบบตอนนี้</button></div>
+        </div>
+        <div class="bnav"><a class="on"><span class="gl">▣</span>สแกน</a><a><span class="gl">☰</span>คิวงาน</a><a><span class="gl">◔</span>ของฉัน</a></div>
+      </div>
+      <div class="cap"><b>S-05 · ออฟไลน์</b><span class="uc">UC10</span> ไม่ใช่หน้า error · การสแกนต้องทำงานต่อได้ตอนเน็ตหลุด ไม่งั้น Wi-Fi ร้านตกแล้วงานหยุด · คิวต้องไม่ส่งซ้ำและไม่หาย</div>
+    </div>
+  </div>
+</section>
+
+<!-- =================================================================
+     OPEN QUESTIONS
+     ================================================================= -->
+<section class="appsec">
+  <h2>สิ่งที่ยังออกแบบไม่ได้</h2>
+  <p>เขียนไว้ตรงนี้เพื่อไม่ให้เข้าใจผิดว่าเสร็จแล้ว ทุกข้อต้องได้คำตอบจากเจ้าของร้านก่อน</p>
+  <div class="card" style="max-width:900px"><div class="card-body">
+    <div class="stat"><span class="k"><b>B1 · B3</b> ตารางค่ารีดตามความยาก และค่าซัก</span><span class="v" style="font-family:var(--font);font-weight:500;color:var(--danger)">F-06 ใช้ตัวเลขสมมติ</span></div>
+    <div class="stat"><span class="k"><b>B2</b> ประเภทผ้าและราคาทั้งหมด</span><span class="v" style="font-family:var(--font);font-weight:500;color:var(--warn)">F-02 มีแค่ 4 ประเภทตัวอย่าง</span></div>
+    <div class="stat"><span class="k"><b>B4</b> วิธีตากและระยะเวลาแห้ง</span><span class="v" style="font-family:var(--font);font-weight:500;color:var(--warn)">ยังไม่รู้ว่าต้องมีหน้าจอยืนยันแห้งหรือไม่</span></div>
+    <div class="stat"><span class="k"><b>B5</b> กติกาการรับบางส่วน</span><span class="v" style="font-family:var(--font);font-weight:500;color:var(--warn)">F-04 เดากติกาการคิดเงินไว้</span></div>
+    <div class="stat"><span class="k"><b>N1 · N2 · N3</b> บิลยกเลิก ผ้าเสียหาย การแก้บิล</span><span class="v" style="font-family:var(--font);font-weight:500;color:var(--danger)">S-04 และ F-07 หยุดกลางทาง</span></div>
+    <div class="stat"><span class="k"><b>อุปกรณ์หน้าร้าน</b> แท็บเล็ต มือถือ หรือคอม</span><span class="v" style="font-family:var(--font);font-weight:500;color:var(--danger)">D2 ตั้งไว้ 860px ชั่วคราว</span></div>
+  </div></div>
+</section>
+
+</div>
+</body>
+</html>

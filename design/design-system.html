@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<title>ศรีบริสุทธิ์ ซักแห้ง · Design System</title>
+<style>
+/* ===========================================================
+   SRIBORISUD LAUNDRY · DESIGN SYSTEM
+   Color Hunt palette · 8B9A6E · F7F2EB · EAE2D6 · (EEEEEE unused)
+   Muted sage + warm cream · IBM Plex Sans Thai
+   Every value here is mirrored in src/app/globals.css
+   =========================================================== */
+
+:root{
+  --brand-band:#8B9A6E;
+  /* --- Primary · muted sage, hue 82 --------------------- */
+  /* sage-500 is the Color Hunt colour verbatim. It is too light to
+     carry white text (3.02:1) so the action colour is sage-700.    */
+  --sage-50:#F8FAF5;  --sage-100:#EEF2E9; --sage-200:#DBE2D0;
+  --sage-300:#BEC9AC; --sage-400:#A3B18C; --sage-500:#8B9A6E;
+  --sage-600:#6F8052; --sage-700:#54633B; --sage-800:#3C4729;
+  --sage-900:#262E19;
+
+  /* --- Neutral · warm sand ----------------------------- */
+  --sand-50:#FCFAF8;  --sand-100:#F7F2EB; --sand-200:#EAE2D6;
+  --sand-300:#D4CAB9; --sand-400:#BAAC97; --sand-500:#9C8B73;
+  --sand-600:#6B5E4A; --sand-700:#584F41; --sand-800:#3A342C;
+  --sand-900:#201D18;
+
+  /* --- Accent · wheat ---------------------------------- */
+  /* wheat-300 is for dark backgrounds only (the scan brackets).
+     wheat-500 is the only version usable as text on white.      */
+  --wheat-100:#F5EDD9; --wheat-300:#D9C89A;
+  --wheat-500:#7E6526; --wheat-700:#5E4B1A;
+
+  /* --- Semantic ---------------------------------------- */
+  --danger:#9B3A2C;  --danger-bg:#F7E0DB;  --danger-border:#E0A79C;
+  --warn:#8A4F23;    --warn-bg:#F6E6D3;    --warn-border:#DDB888;
+  --info:#2F5366;    --info-bg:#DDE8EE;    --info-border:#A8C4D4;
+  --ok:#54633B;      --ok-bg:#EEF2E9;      --ok-border:#BEC9AC;
+
+  /* --- Stage colours · the six stages ------------------ */
+  /* every fg/bg pair below clears WCAG AA 4.5:1 — verified, not assumed */
+  --st-received-fg:#584F41; --st-received-bg:#EAE2D6;
+  --st-washing-fg:#2F5366;  --st-washing-bg:#DDE8EE;
+  --st-drying-fg:#28565A;   --st-drying-bg:#D8E8E5;
+  --st-pressing-fg:#8A4F23; --st-pressing-bg:#F6E6D3;
+  --st-ready-fg:#54633B;    --st-ready-bg:#EEF2E9;
+  --st-picked-fg:#6B5E4A;   --st-picked-bg:#F7F2EB;
+
+  /* --- Roles ------------------------------------------- */
+  --bg:var(--sand-100);
+  --surface:#FFFFFF;
+  --surface-sunken:var(--sand-200);
+  --border:var(--sand-300);        /* decorative dividers only */
+  --border-strong:#9A8A69;         /* inputs + outlined buttons — 3.08:1 on white, meets WCAG 1.4.11 */
+  --disabled-fg:#8A7F6D;
+  --disabled-bg:var(--sand-200);
+  --text:var(--sand-900);
+  --text-muted:var(--sand-600);
+  --text-inverse:#FFFFFF;
+  --primary:var(--sage-700);
+  --primary-hover:var(--sage-800);
+  --primary-soft:var(--sage-100);
+  --focus:var(--sage-600);
+
+  /* --- Spacing · 4px base ------------------------------ */
+  --sp-1:4px;  --sp-2:8px;  --sp-3:12px; --sp-4:16px;
+  --sp-5:20px; --sp-6:24px; --sp-8:32px; --sp-10:40px;
+  --sp-12:48px;--sp-16:64px;
+
+  /* --- Radius ------------------------------------------ */
+  --r-sm:6px; --r-md:10px; --r-lg:14px; --r-xl:20px; --r-full:999px;
+
+  /* --- Elevation --------------------------------------- */
+  --sh-sm:0 1px 2px rgba(28,26,22,.06);
+  --sh-md:0 2px 8px rgba(28,26,22,.08);
+  --sh-lg:0 8px 24px rgba(28,26,22,.12);
+
+  /* --- Touch targets ----------------------------------- */
+  --tap-min:44px;   /* everywhere */
+  --tap-floor:56px; /* scan app — used with wet hands, standing */
+
+  /* --- Type ------------------------------------------- */
+  --font:"IBM Plex Sans Thai","IBM Plex Sans","Helvetica Neue",sans-serif;
+  --font-num:"IBM Plex Mono","SF Mono",monospace;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:var(--font);
+  background:var(--bg); color:var(--text);
+  font-size:15px; line-height:24px;
+  -webkit-font-smoothing:antialiased;
+  padding:48px;
+}
+.page{max-width:1180px;margin:0 auto}
+
+/* ---------- documentation chrome ---------- */
+.masthead{
+  background:var(--sage-900); color:#fff;
+  border-radius:var(--r-xl); padding:40px 44px; margin-bottom:48px;
+}
+.masthead h1{font-size:34px;line-height:44px;font-weight:600;letter-spacing:-.4px}
+.masthead p{color:var(--sage-200);margin-top:8px;font-size:16px;line-height:26px}
+.masthead .meta{
+  margin-top:24px;display:flex;gap:28px;flex-wrap:wrap;
+  padding-top:24px;border-top:1px solid var(--sage-800);
+}
+.masthead .meta div{font-size:13px;line-height:20px;color:var(--sage-300)}
+.masthead .meta b{display:block;color:#fff;font-size:15px;font-weight:500}
+
+section{margin-bottom:56px}
+.sec-head{display:flex;align-items:baseline;gap:12px;margin-bottom:8px}
+.sec-num{
+  font-family:var(--font-num);font-size:13px;color:var(--wheat-500);
+  font-weight:600;letter-spacing:.5px;
+}
+.sec-head h2{font-size:24px;line-height:32px;font-weight:600;letter-spacing:-.2px}
+.sec-note{color:var(--text-muted);font-size:14px;line-height:22px;max-width:720px;margin-bottom:24px}
+
+.spec{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--r-lg);padding:24px;margin-bottom:16px;
+}
+.spec-title{
+  font-size:13px;line-height:18px;font-weight:600;letter-spacing:.3px;
+  text-transform:uppercase;color:var(--text-muted);margin-bottom:4px;
+}
+.spec-sub{font-size:13px;line-height:20px;color:var(--text-muted);margin-bottom:18px}
+.spec-row{display:flex;gap:16px;align-items:flex-end;flex-wrap:wrap}
+.spec-col{display:flex;flex-direction:column;gap:12px}
+.tok{font-family:var(--font-num);font-size:11px;color:var(--text-muted)}
+
+/* ---------- colour ---------- */
+.ramp{display:grid;grid-template-columns:repeat(10,1fr);gap:0;border-radius:var(--r-md);overflow:hidden;border:1px solid var(--border)}
+.ramp div{height:84px;padding:8px;display:flex;flex-direction:column;justify-content:flex-end}
+.ramp span{font-family:var(--font-num);font-size:10px;line-height:14px}
+.swatches{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.sw{border:1px solid var(--border);border-radius:var(--r-md);overflow:hidden}
+.sw .chip{height:64px}
+.sw .lbl{padding:10px 12px;background:var(--surface)}
+.sw .lbl b{display:block;font-size:13px;font-weight:600}
+.sw .lbl span{font-family:var(--font-num);font-size:11px;color:var(--text-muted)}
+
+/* ---------- stage pill · PROJECT CORE ---------- */
+.pill{
+  display:inline-flex;align-items:center;gap:6px;
+  height:28px;padding:0 12px;border-radius:var(--r-full);
+  font-size:13px;line-height:1;font-weight:600;white-space:nowrap;
+}
+.pill::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor;flex:none}
+.pill.received{color:var(--st-received-fg);background:var(--st-received-bg)}
+.pill.washing {color:var(--st-washing-fg); background:var(--st-washing-bg)}
+.pill.drying  {color:var(--st-drying-fg);  background:var(--st-drying-bg)}
+.pill.pressing{color:var(--st-pressing-fg);background:var(--st-pressing-bg)}
+.pill.ready   {color:var(--st-ready-fg);   background:var(--st-ready-bg)}
+.pill.picked  {color:var(--st-picked-fg);  background:var(--st-picked-bg)}
+.pill.problem {color:var(--danger);        background:var(--danger-bg)}
+.pill.lg{height:36px;padding:0 16px;font-size:15px}
+
+/* ---------- buttons ---------- */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  min-height:var(--tap-min);padding:0 20px;border-radius:var(--r-md);
+  font-family:var(--font);font-size:15px;font-weight:600;line-height:1;
+  border:1px solid transparent;cursor:pointer;
+}
+.btn-primary{background:var(--primary);color:var(--text-inverse);box-shadow:var(--sh-sm)}
+.btn-secondary{background:var(--surface);color:var(--primary);border-color:var(--border-strong)}
+.btn-ghost{background:transparent;color:var(--text-muted)}
+.btn-danger{background:var(--danger);color:#fff}
+.btn-floor{min-height:var(--tap-floor);font-size:18px;padding:0 28px;border-radius:var(--r-lg);width:100%}
+.btn-disabled{background:var(--disabled-bg);color:var(--disabled-fg);box-shadow:none}
+.btn-focus{outline:3px solid var(--focus);outline-offset:2px}
+
+/* ---------- field ---------- */
+.field{display:flex;flex-direction:column;gap:6px;max-width:340px}
+.field label{font-size:13px;line-height:18px;font-weight:600;color:var(--text)}
+.ctl{
+  min-height:var(--tap-min);padding:0 14px;border-radius:var(--r-md);
+  border:1px solid var(--border-strong);background:var(--surface);
+  font-family:var(--font);font-size:16px;color:var(--text);
+  display:flex;align-items:center;
+}
+.ctl.num{font-family:var(--font-num);font-variant-numeric:tabular-nums}
+.ctl.err{border-color:var(--danger-border);background:#FDF6F4}
+.hint{font-size:12px;line-height:18px;color:var(--text-muted)}
+.hint.err{color:var(--danger)}
+
+/* ---------- card / list ---------- */
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);box-shadow:var(--sh-sm);overflow:hidden}
+.card-head{padding:14px 18px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
+.card-head h3{font-size:16px;line-height:24px;font-weight:600}
+.card-body{padding:18px}
+
+.grow{ /* garment row */
+  display:flex;align-items:center;gap:14px;
+  min-height:var(--tap-min);padding:12px 18px;
+  border-bottom:1px solid var(--sand-200);background:var(--surface);
+}
+.grow:last-child{border-bottom:none}
+.grow .bill{font-family:var(--font-num);font-size:15px;font-weight:600;letter-spacing:.5px;min-width:76px}
+.grow .what{flex:1;min-width:0}
+.grow .what b{display:block;font-size:15px;font-weight:500;line-height:22px}
+.grow .what span{font-size:12px;line-height:18px;color:var(--text-muted)}
+.grow .due{font-family:var(--font-num);font-size:13px;color:var(--text-muted);text-align:right}
+
+.stat{display:flex;justify-content:space-between;align-items:baseline;padding:10px 0;border-bottom:1px solid var(--sand-200)}
+.stat:last-child{border-bottom:none}
+.stat .k{font-size:14px;color:var(--text-muted)}
+.stat .v{font-family:var(--font-num);font-size:16px;font-weight:600;font-variant-numeric:tabular-nums}
+.stat .v.big{font-size:22px}
+
+/* ---------- scan target · PROJECT CORE ---------- */
+.scan{
+  position:relative;width:300px;aspect-ratio:4/3;
+  background:var(--sand-900);border-radius:var(--r-lg);overflow:hidden;
+}
+.scan .win{position:absolute;inset:18% 12%;border-radius:var(--r-sm)}
+.scan .c{position:absolute;width:30px;height:30px;border:3px solid var(--wheat-300)}
+.scan .c1{top:0;left:0;border-right:0;border-bottom:0;border-top-left-radius:6px}
+.scan .c2{top:0;right:0;border-left:0;border-bottom:0;border-top-right-radius:6px}
+.scan .c3{bottom:0;left:0;border-right:0;border-top:0;border-bottom-left-radius:6px}
+.scan .c4{bottom:0;right:0;border-left:0;border-top:0;border-bottom-right-radius:6px}
+.scan .line{position:absolute;left:0;right:0;top:50%;height:2px;background:var(--wheat-300);opacity:.85}
+.scan .tip{
+  position:absolute;left:0;right:0;bottom:12px;text-align:center;
+  color:#fff;font-size:13px;line-height:20px;opacity:.9;
+}
+
+/* big scan result readout */
+.readout{
+  background:var(--sage-900);border-radius:var(--r-lg);padding:20px 22px;color:#fff;
+}
+.readout .lab{font-size:12px;line-height:18px;color:var(--sage-300);font-weight:600;letter-spacing:.4px}
+.readout .val{font-family:var(--font-num);font-size:30px;line-height:40px;font-weight:600;letter-spacing:1px}
+.readout .sub{font-size:14px;line-height:22px;color:var(--sage-200);margin-top:2px}
+
+/* ---------- banner ---------- */
+.banner{display:flex;gap:12px;padding:14px 16px;border-radius:var(--r-md);border:1px solid;font-size:14px;line-height:22px}
+.banner b{display:block;font-weight:600}
+.banner.info{background:var(--info-bg);border-color:var(--info-border);color:#24404F}
+.banner.ok{background:var(--ok-bg);border-color:var(--ok-border);color:var(--sage-900)}
+.banner.warn{background:var(--warn-bg);border-color:var(--warn-border);color:#6E3E1B}
+.banner.danger{background:var(--danger-bg);border-color:var(--danger-border);color:#7A2C21}
+.banner .ic{font-family:var(--font-num);font-weight:700;flex:none}
+
+/* ---------- nav ---------- */
+.bnav{display:flex;background:var(--surface);border-top:1px solid var(--border);border-radius:0 0 var(--r-lg) var(--r-lg);overflow:hidden}
+.bnav a{
+  flex:1;min-height:var(--tap-floor);display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:3px;
+  font-size:12px;line-height:16px;color:var(--text-muted);text-decoration:none;font-weight:500;
+}
+.bnav a.on{color:var(--primary);background:var(--primary-soft);font-weight:600}
+.bnav .gl{font-size:19px;line-height:22px}
+
+/* ---------- table ---------- */
+table{width:100%;border-collapse:collapse;font-size:14px}
+th{
+  text-align:left;padding:10px 14px;background:var(--sand-100);
+  font-size:12px;font-weight:600;letter-spacing:.3px;text-transform:uppercase;
+  color:var(--text-muted);border-bottom:1px solid var(--border);
+}
+td{padding:12px 14px;border-bottom:1px solid var(--sand-200)}
+td.n{font-family:var(--font-num);font-variant-numeric:tabular-nums;text-align:right}
+
+/* ---------- queue card ---------- */
+.q{display:flex;gap:14px;align-items:center;padding:14px 16px;background:var(--surface);border:1px solid var(--border);border-radius:var(--r-md);box-shadow:var(--sh-sm)}
+.q.rush{border-color:var(--warn-border);background:#FBF5E9}
+.q .ord{
+  width:34px;height:34px;flex:none;border-radius:var(--r-full);
+  background:var(--sand-100);color:var(--text-muted);
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--font-num);font-size:14px;font-weight:600;
+}
+.q.rush .ord{background:var(--warn-bg);color:var(--warn)}
+.q .m{flex:1}
+.q .m b{display:block;font-size:15px;font-weight:500}
+.q .m span{font-size:12px;color:var(--text-muted)}
+
+/* ---------- payment ---------- */
+.pay{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:22px;text-align:center;max-width:300px}
+.pay .qr{width:168px;height:168px;margin:0 auto 16px;background:
+  repeating-conic-gradient(var(--sand-900) 0 25%, #fff 0 50%) 0 0/16px 16px;
+  border-radius:var(--r-sm);border:8px solid #fff;box-shadow:0 0 0 1px var(--border)}
+.pay .amt{font-family:var(--font-num);font-size:30px;line-height:38px;font-weight:600}
+.pay .who{font-size:13px;color:var(--text-muted);margin-top:2px}
+
+/* ---------- printed label 40×30mm ---------- */
+.label{
+  width:151px;height:113px;background:#fff;border:1px dashed var(--border-strong);
+  border-radius:4px;padding:8px;display:flex;flex-direction:column;justify-content:space-between;
+}
+.label .bars{height:40px;background:repeating-linear-gradient(90deg,var(--sand-900) 0 2px,#fff 2px 4px,var(--sand-900) 4px 5px,#fff 5px 8px)}
+.label .cd{font-family:var(--font-num);font-size:13px;font-weight:600;text-align:center;letter-spacing:1px}
+.label .mt{display:flex;justify-content:space-between;font-size:9px;color:var(--text-muted)}
+
+/* ---------- empty state ---------- */
+.empty{text-align:center;padding:36px 20px;max-width:320px}
+.empty .gl{font-size:30px;opacity:.35}
+.empty b{display:block;font-size:16px;font-weight:600;margin-top:10px}
+.empty p{font-size:14px;line-height:22px;color:var(--text-muted);margin-top:4px}
+
+/* ---------- modal ---------- */
+.modal{width:330px;background:var(--surface);border-radius:var(--r-xl);box-shadow:var(--sh-lg);overflow:hidden}
+.modal .mb{padding:22px}
+.modal .mb h3{font-size:18px;line-height:26px;font-weight:600}
+.modal .mb p{font-size:14px;line-height:22px;color:var(--text-muted);margin-top:6px}
+.modal .mf{display:flex;gap:10px;padding:0 22px 22px}
+.modal .mf .btn{flex:1}
+
+/* ---------- type specimens ---------- */
+.ty{display:flex;align-items:baseline;gap:20px;padding:12px 0;border-bottom:1px solid var(--sand-200)}
+.ty:last-child{border-bottom:none}
+.ty .t{flex:none;width:120px;font-family:var(--font-num);font-size:11px;color:var(--text-muted);line-height:18px}
+.d-display{font-size:32px;line-height:40px;font-weight:700;letter-spacing:-.5px}
+.d-h1{font-size:24px;line-height:32px;font-weight:600;letter-spacing:-.2px}
+.d-h2{font-size:20px;line-height:28px;font-weight:600}
+.d-h3{font-size:17px;line-height:24px;font-weight:600}
+.d-lg{font-size:17px;line-height:26px}
+.d-body{font-size:15px;line-height:24px}
+.d-sm{font-size:13px;line-height:20px}
+.d-cap{font-size:12px;line-height:16px;color:var(--text-muted)}
+.d-scan{font-family:var(--font-num);font-size:30px;line-height:40px;font-weight:600;letter-spacing:1px}
+.d-money{font-family:var(--font-num);font-size:18px;font-weight:600;font-variant-numeric:tabular-nums}
+
+/* ---------- spacing / radius / shadow demos ---------- */
+.sp-demo{display:flex;align-items:flex-end;gap:10px}
+.sp-demo div{background:var(--sage-300);border-radius:3px}
+.sp-demo span{display:block;font-family:var(--font-num);font-size:10px;color:var(--text-muted);text-align:center;margin-top:5px}
+.rad-demo{display:flex;gap:14px}
+.rad-demo div{width:72px;height:72px;background:var(--sage-100);border:1px solid var(--sage-300);display:flex;align-items:flex-end;justify-content:center;padding-bottom:6px;font-family:var(--font-num);font-size:10px;color:var(--sage-800)}
+.sh-demo{display:flex;gap:18px}
+.sh-demo div{width:110px;height:72px;background:#fff;border-radius:var(--r-md);display:flex;align-items:flex-end;justify-content:center;padding-bottom:8px;font-family:var(--font-num);font-size:10px;color:var(--text-muted)}
+
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.phone{width:330px;background:var(--bg);border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--sh-md)}
+.phone .top{background:var(--sage-800);color:#fff;padding:14px 18px;font-size:16px;font-weight:600}
+.phone .inner{padding:16px}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- ================= MASTHEAD ================= -->
+<div class="masthead">
+  <h1>ศรีบริสุทธิ์ ซักแห้ง · Design System</h1>
+  <p>ระบบติดตามเสื้อผ้ารายชิ้น · Independent Study, MSMIS ธรรมศาสตร์</p>
+  <div class="meta">
+    <div><b>IBM Plex Sans Thai</b>Typeface</div>
+    <div><b>Color Hunt · sage + warm cream</b>Palette</div>
+    <div><b>4px base</b>Spacing</div>
+    <div><b>44px / 56px</b>Touch targets</div>
+    <div><b>3 applications</b>Customer · Front Office · Scan</div>
+    <div><b>v0.1 — for review</b>Status</div>
+  </div>
+</div>
+
+<!-- ================= 01 COLOUR ================= -->
+<section>
+  <div class="sec-head"><span class="sec-num">01</span><h2>Colour</h2></div>
+  <p class="sec-note">Built from a four-colour Color Hunt palette — <b>#8B9A6E</b> muted sage, <b>#F7F2EB</b> warm cream, <b>#EAE2D6</b> beige, <b>#EEEEEE</b> grey. Muted sage over warm cream reads as calm and physical rather than as software, which suits a 70-year-old Rattanakosin shop better than a saturated green would. Two adjustments were forced by contrast and are explained below.</p>
+
+  <div class="spec" style="border-color:var(--wheat-300);background:var(--wheat-100)">
+    <div class="spec-title" style="color:var(--wheat-700)">What changed from the source palette, and why</div>
+    <div class="spec-col" style="gap:9px;margin-top:10px">
+      <div class="d-sm"><b>#8B9A6E is not the primary action colour.</b> Its relative luminance is 0.297, so white text on it reaches only <b>3.02:1</b> against the 4.5:1 required. It sits at <b>sage-500</b> and does real work as the focus-adjacent brand tone and as a brand band with dark text over it (5.55:1). Buttons and links use <b>sage-700 #54633B</b>, the same hue darkened.</div>
+      <div class="d-sm"><b>#EEEEEE is not used.</b> It is a neutral grey with zero warmth in a palette whose other three colours all sit around hue 36. Given white for card surfaces and cream for the page, it has no job left — and placing it next to the creams makes both look slightly dirty. Dropping it is the right call. Say the word and I will give it the disabled-track role.</div>
+      <div class="d-sm"><b>#F7F2EB and #EAE2D6 are used exactly as given</b> — the page background and the sunken/pill background. They are the two colours covering the most pixels, so the palette's character is intact.</div>
+    </div>
+  </div>
+
+  <div class="spec">
+    <div class="spec-title">Primary · sage · hue 82</div>
+    <div class="spec-sub">sage-700 is the primary action colour. sage-800 is hover and app bars. sage-900 is for dark headers. sage-500 is the Color Hunt original.</div>
+    <div class="ramp">
+      <div style="background:var(--sage-50)"><span style="color:var(--sage-900)">50</span><span style="color:var(--sage-800)">F8FAF5</span></div>
+      <div style="background:var(--sage-100)"><span style="color:var(--sage-900)">100</span><span style="color:var(--sage-800)">EEF2E9</span></div>
+      <div style="background:var(--sage-200)"><span style="color:var(--sage-900)">200</span><span style="color:var(--sage-800)">DBE2D0</span></div>
+      <div style="background:var(--sage-300)"><span style="color:var(--sage-900)">300</span><span style="color:var(--sage-900)">BEC9AC</span></div>
+      <div style="background:var(--sage-400)"><span style="color:var(--sage-900)">400</span><span style="color:var(--sage-900)">A3B18C</span></div>
+      <div style="background:var(--sage-500)"><span style="color:var(--sand-900)">500 ★</span><span style="color:var(--sand-900)">8B9A6E</span></div>
+      <div style="background:var(--sage-600)"><span style="color:#fff">600</span><span style="color:var(--sage-100)">6F8052</span></div>
+      <div style="background:var(--sage-700)"><span style="color:#fff">700</span><span style="color:var(--sage-100)">54633B</span></div>
+      <div style="background:var(--sage-800)"><span style="color:#fff">800</span><span style="color:var(--sage-200)">3C4729</span></div>
+      <div style="background:var(--sage-900)"><span style="color:#fff">900</span><span style="color:var(--sage-300)">262E19</span></div>
+    </div>
+    <p class="tok" style="margin-top:10px">★ = the Color Hunt colour, unchanged</p>
+  </div>
+
+  <div class="spec">
+    <div class="spec-title">Neutral · warm sand · hue 36</div>
+    <div class="spec-sub">sand-100 is the app background. White is the card surface. sand-900 is body text. Both Color Hunt neutrals land here untouched.</div>
+    <div class="ramp">
+      <div style="background:var(--sand-50)"><span style="color:var(--sand-800)">50</span><span style="color:var(--sand-600)">FCFAF8</span></div>
+      <div style="background:var(--sand-100)"><span style="color:var(--sand-800)">100 ★</span><span style="color:var(--sand-700)">F7F2EB</span></div>
+      <div style="background:var(--sand-200)"><span style="color:var(--sand-800)">200 ★</span><span style="color:var(--sand-700)">EAE2D6</span></div>
+      <div style="background:var(--sand-300)"><span style="color:var(--sand-900)">300</span><span style="color:var(--sand-700)">D4CAB9</span></div>
+      <div style="background:var(--sand-400)"><span style="color:var(--sand-900)">400</span><span style="color:var(--sand-800)">BAAC97</span></div>
+      <div style="background:var(--sand-500)"><span style="color:#fff">500</span><span style="color:var(--sand-100)">9C8B73</span></div>
+      <div style="background:var(--sand-600)"><span style="color:#fff">600</span><span style="color:var(--sand-100)">6B5E4A</span></div>
+      <div style="background:var(--sand-700)"><span style="color:#fff">700</span><span style="color:var(--sand-200)">584F41</span></div>
+      <div style="background:var(--sand-800)"><span style="color:#fff">800</span><span style="color:var(--sand-300)">3A342C</span></div>
+      <div style="background:var(--sand-900)"><span style="color:#fff">900</span><span style="color:var(--sand-300)">201D18</span></div>
+    </div>
+    <p class="tok" style="margin-top:10px">sand-600 is one step darker than an even ramp would give, so muted text clears 4.5:1 on the beige sunken background as well as on cream and white</p>
+  </div>
+
+  <div class="spec">
+    <div class="spec-title">Brand band · the Color Hunt sage doing real work</div>
+    <div class="spec-sub">#8B9A6E cannot carry white text, but it carries dark text at 5.55:1. Use it for brand bands, selected fills and decorative areas — never as a button.</div>
+    <div style="background:var(--brand-band, #8B9A6E);border-radius:var(--r-md);padding:18px 20px;color:var(--sand-900)">
+      <div style="font-size:12px;font-weight:600;letter-spacing:.4px;opacity:.75">ศรีบริสุทธิ์ ซักแห้ง · ตั้งแต่ปี 2498</div>
+      <div style="font-size:20px;line-height:28px;font-weight:600;margin-top:2px">ระบบติดตามเสื้อผ้ารายชิ้น</div>
+    </div>
+    <div class="spec-row" style="margin-top:14px;gap:12px">
+      <div style="flex:1;background:#8B9A6E;color:#fff;padding:12px 14px;border-radius:var(--r-md);font-size:13px;line-height:20px">White on #8B9A6E — <b>3.02:1 · fails</b><br>never do this</div>
+      <div style="flex:1;background:#8B9A6E;color:var(--sand-900);padding:12px 14px;border-radius:var(--r-md);font-size:13px;line-height:20px">Dark on #8B9A6E — <b>5.55:1 · passes</b><br>this is the correct use</div>
+    </div>
+  </div>
+
+  <div class="spec">
+    <div class="spec-title">Semantic · desaturated to match the palette</div>
+    <div class="spec-sub">Four meanings only. Each has a text colour, a background and a border. All four were muted so they sit inside this palette instead of shouting over it.</div>
+    <div class="swatches">
+      <div class="sw"><div class="chip" style="background:var(--ok)"></div><div class="lbl"><b>Success</b><span>--ok · 54633B</span></div></div>
+      <div class="sw"><div class="chip" style="background:var(--info)"></div><div class="lbl"><b>Information</b><span>--info · 2F5366</span></div></div>
+      <div class="sw"><div class="chip" style="background:var(--warn)"></div><div class="lbl"><b>Warning</b><span>--warn · 8A4F23</span></div></div>
+      <div class="sw"><div class="chip" style="background:var(--danger)"></div><div class="lbl"><b>Danger</b><span>--danger · 9B3A2C</span></div></div>
+    </div>
+  </div>
+
+  <div class="spec">
+    <div class="spec-title">Stage colours · the most important decision on this page</div>
+    <div class="spec-sub">Six stages, read dozens of times a day by staff who are standing up and moving. The hues step forward through the process — neutral, blue, teal, amber, green, faded — so progress is visible without reading the words. Every pill also carries a dot and a label, so colour is never the only signal.</div>
+    <div class="spec-row" style="gap:10px">
+      <span class="pill received">ตู้รอซัก</span>
+      <span class="pill washing">กำลังซัก</span>
+      <span class="pill drying">กำลังตาก</span>
+      <span class="pill pressing">กำลังรีด</span>
+      <span class="pill ready">พร้อมรับ</span>
+      <span class="pill picked">รับแล้ว</span>
+      <span class="pill problem">มีปัญหา</span>
+    </div>
+    <div class="spec-row" style="margin-top:18px;gap:10px">
+      <span class="pill lg received">RECEIVED</span>
+      <span class="pill lg washing">WASHING</span>
+      <span class="pill lg drying">DRYING</span>
+      <span class="pill lg pressing">PRESSING</span>
+      <span class="pill lg ready">READY</span>
+      <span class="pill lg picked">PICKED UP</span>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 02 TYPOGRAPHY ================= -->
+<section>
+  <div class="sec-head"><span class="sec-num">02</span><h2>Typography</h2></div>
+  <p class="sec-note">IBM Plex Sans Thai for all interface text. IBM Plex Mono for anything a person reads out loud or compares digit by digit — bill numbers, prices, counts, dates. Thai needs more line height than Latin, so every step here is generous.</p>
+
+  <div class="spec">
+    <div class="spec-title">Scale</div>
+    <div class="ty"><div class="t">display<br>32 / 40 · 700</div><div class="d-display">ศรีบริสุทธิ์ ซักแห้ง</div></div>
+    <div class="ty"><div class="t">h1<br>24 / 32 · 600</div><div class="d-h1">รายการที่พร้อมรับ</div></div>
+    <div class="ty"><div class="t">h2<br>20 / 28 · 600</div><div class="d-h2">บิลเลขที่ 04821</div></div>
+    <div class="ty"><div class="t">h3<br>17 / 24 · 600</div><div class="d-h3">เสื้อสูท 2 ชิ้น</div></div>
+    <div class="ty"><div class="t">body-lg<br>17 / 26 · 400</div><div class="d-lg">สแกนบาร์โค้ดบนป้ายเพื่อบันทึกงาน</div></div>
+    <div class="ty"><div class="t">body<br>15 / 24 · 400</div><div class="d-body">เสื้อผ้าของคุณพร้อมรับแล้ว กรุณามารับภายใน 7 วัน</div></div>
+    <div class="ty"><div class="t">body-sm<br>13 / 20 · 400</div><div class="d-sm">บันทึกเมื่อ 2 พฤศจิกายน 2569 เวลา 14:32</div></div>
+    <div class="ty"><div class="t">caption<br>12 / 16 · 400</div><div class="d-cap">ข้อมูลอัปเดตอัตโนมัติเมื่อพนักงานสแกน</div></div>
+    <div class="ty"><div class="t">scan-value<br>mono 30 / 40 · 600</div><div class="d-scan">04821-03</div></div>
+    <div class="ty"><div class="t">money<br>mono 18 · 600 tabular</div><div class="d-money">฿1,280.00</div></div>
+  </div>
+
+  <div class="spec">
+    <div class="spec-title">Why mono for numbers</div>
+    <div class="spec-sub">Tabular figures keep columns aligned and make 0/O and 1/l distinguishable — which matters when a bill number is read aloud over the phone or compared against a paper tag.</div>
+    <div class="grid2">
+      <div>
+        <div class="tok">Proportional — misaligned</div>
+        <div style="font-size:16px;line-height:26px">฿180.00<br>฿1,280.00<br>฿95.50</div>
+      </div>
+      <div>
+        <div class="tok">Mono tabular — aligned ✓</div>
+        <div style="font-family:var(--font-num);font-size:16px;line-height:26px;font-variant-numeric:tabular-nums">฿180.00<br>฿1,280.00<br>฿95.50</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 03 FOUNDATIONS ================= -->
+<section>
+  <div class="sec-head"><span class="sec-num">03</span><h2>Spacing, radius, elevation</h2></div>
+  <p class="sec-note">A 4px base keeps everything on a grid Tailwind already understands. Three shadow levels only — anything more and the interface starts to look busy without communicating more.</p>
+
+  <div class="spec">
+    <div class="spec-title">Spacing · 4px base</div>
+    <div class="sp-demo">
+      <div><div style="width:28px;height:4px"></div><span>1 · 4</span></div>
+      <div><div style="width:28px;height:8px"></div><span>2 · 8</span></div>
+      <div><div style="width:28px;height:12px"></div><span>3 · 12</span></div>
+      <div><div style="width:28px;height:16px"></div><span>4 · 16</span></div>
+      <div><div style="width:28px;height:20px"></div><span>5 · 20</span></div>
+      <div><div style="width:28px;height:24px"></div><span>6 · 24</span></div>
+      <div><div style="width:28px;height:32px"></div><span>8 · 32</span></div>
+      <div><div style="width:28px;height:40px"></div><span>10 · 40</span></div>
+      <div><div style="width:28px;height:48px"></div><span>12 · 48</span></div>
+      <div><div style="width:28px;height:64px"></div><span>16 · 64</span></div>
+    </div>
+  </div>
+
+  <div class="spec">
+    <div class="spec-title">Radius</div>
+    <div class="rad-demo">
+      <div style="border-radius:6px">sm 6</div>
+      <div style="border-radius:10px">md 10</div>
+      <div style="border-radius:14px">lg 14</div>
+      <div style="border-radius:20px">xl 20</div>
+      <div style="border-radius:999px">full</div>
+    </div>
+  </div>
+
+  <div class="spec">
+    <div class="spec-title">Elevation</div>
+    <div class="sh-demo">
+      <div style="box-shadow:var(--sh-sm)">sm · resting</div>
+      <div style="box-shadow:var(--sh-md)">md · raised</div>
+      <div style="box-shadow:var(--sh-lg)">lg · overlay</div>
+    </div>
+  </div>
+
+  <div class="spec">
+    <div class="spec-title">Touch targets</div>
+    <div class="spec-sub">44px is the floor everywhere. The scan app uses 56px because it is operated standing up, often with damp hands, sometimes one-handed while holding a garment.</div>
+    <div class="spec-row">
+      <div style="width:150px;height:44px;background:var(--sage-100);border:1px dashed var(--sage-600);border-radius:var(--r-md);display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--sage-800)">44px · minimum</div>
+      <div style="width:190px;height:56px;background:var(--wheat-100);border:1px dashed var(--wheat-500);border-radius:var(--r-lg);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:600;color:var(--wheat-700)">56px · scan app floor</div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 04 COMPONENTS ================= -->
+<section>
+  <div class="sec-head"><span class="sec-num">04</span><h2>Components</h2></div>
+  <p class="sec-note">Eighteen components, chosen because the three applications actually need them. Nothing speculative. Five of them are specific to this project and do not exist in any component library — the stage pill, the scan target, the garment row, the queue card and the printed label.</p>
+
+  <!-- buttons -->
+  <div class="spec" id="c-button">
+    <div class="spec-title">01 · Button</div>
+    <div class="spec-sub">Primary for the one main action per screen. Secondary for alternatives. Ghost for cancel. Danger only for destructive confirmation.</div>
+    <div class="spec-row">
+      <button class="btn btn-primary">บันทึก</button>
+      <button class="btn btn-secondary">ยกเลิก</button>
+      <button class="btn btn-ghost">ข้าม</button>
+      <button class="btn btn-danger">ยกเลิกบิล</button>
+      <button class="btn btn-disabled">บันทึก</button>
+      <button class="btn btn-primary btn-focus">โฟกัส</button>
+    </div>
+    <div class="spec-row" style="margin-top:20px;max-width:330px">
+      <button class="btn btn-primary btn-floor">สแกนชิ้นถัดไป</button>
+    </div>
+    <div class="tok" style="margin-top:10px">min-height 44 · floor variant 56 · radius md/lg</div>
+  </div>
+
+  <!-- field -->
+  <div class="spec" id="c-field">
+    <div class="spec-title">02 · Field</div>
+    <div class="spec-sub">Label always visible, never a placeholder-only field. 16px input text so iOS does not zoom on focus.</div>
+    <div class="spec-row" style="align-items:flex-start;gap:28px">
+      <div class="field">
+        <label>เบอร์โทรลูกค้า</label>
+        <div class="ctl num">081-234-5678</div>
+        <span class="hint">ใช้ส่งแจ้งเตือนเมื่อผ้าเสร็จ</span>
+      </div>
+      <div class="field">
+        <label>เลขที่บิล</label>
+        <div class="ctl num err">0482</div>
+        <span class="hint err">เลขที่บิลต้องมี 5 หลัก</span>
+      </div>
+      <div class="field">
+        <label>ประเภทเสื้อผ้า</label>
+        <div class="ctl">เสื้อสูท — ฿180 ▾</div>
+        <span class="hint">ราคาดึงจากตารางราคาอัตโนมัติ</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- stage pill -->
+  <div class="spec" id="c-pill">
+    <div class="spec-title">03 · Stage pill <span style="color:var(--wheat-500)">· project-specific</span></div>
+    <div class="spec-sub">The single most reused element in the system. Appears in all three applications. Never shows a stage that was typed in — always the latest scan.</div>
+    <div class="spec-row" style="gap:10px">
+      <span class="pill received">ตู้รอซัก</span>
+      <span class="pill washing">กำลังซัก</span>
+      <span class="pill drying">กำลังตาก</span>
+      <span class="pill pressing">กำลังรีด</span>
+      <span class="pill ready">พร้อมรับ</span>
+      <span class="pill picked">รับแล้ว</span>
+      <span class="pill problem">มีปัญหา</span>
+    </div>
+  </div>
+
+  <!-- card -->
+  <div class="spec" id="c-card">
+    <div class="spec-title">04 · Card</div>
+    <div class="grid2">
+      <div class="card">
+        <div class="card-head"><h3>บิล 04821</h3><span class="pill ready">พร้อมรับ 3 / 5</span></div>
+        <div class="card-body">
+          <div class="stat"><span class="k">ลูกค้า</span><span class="v">คุณสมชาย</span></div>
+          <div class="stat"><span class="k">รับเข้า</span><span class="v">28 ต.ค. 69</span></div>
+          <div class="stat"><span class="k">ยอดรวม</span><span class="v big">฿1,280</span></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-head"><h3>งานค้างในร้าน</h3></div>
+        <div class="card-body">
+          <div class="stat"><span class="k">ตู้รอซัก</span><span class="v">42</span></div>
+          <div class="stat"><span class="k">กำลังรีด</span><span class="v">68</span></div>
+          <div class="stat"><span class="k">พร้อมรับ ยังไม่มารับ</span><span class="v big" style="color:var(--warn)">104</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- garment row -->
+  <div class="spec" id="c-grow">
+    <div class="spec-title">05 · Garment row <span style="color:var(--wheat-500)">· project-specific</span></div>
+    <div class="spec-sub">One row per piece, not per bill. Partial pickup means a bill can hold pieces at different stages, so the row — never the bill — carries the stage.</div>
+    <div class="card">
+      <div class="grow"><span class="bill">04821-01</span><span class="what"><b>เสื้อสูท</b><span>ซักแห้ง · ฿180</span></span><span class="pill ready">พร้อมรับ</span><span class="due">ครบ 30 ต.ค.</span></div>
+      <div class="grow"><span class="bill">04821-02</span><span class="what"><b>กางเกงสแลค</b><span>ซักแห้ง · ฿120</span></span><span class="pill pressing">กำลังรีด</span><span class="due">ครบ 30 ต.ค.</span></div>
+      <div class="grow"><span class="bill">04821-03</span><span class="what"><b>เสื้อเชิ้ต</b><span>ซักรีด · ฿60</span></span><span class="pill drying">กำลังตาก</span><span class="due">ครบ 30 ต.ค.</span></div>
+      <div class="grow"><span class="bill">04821-04</span><span class="what"><b>ผ้าคลุมโซฟา</b><span>ซักแห้ง · ฿450</span></span><span class="pill problem">มีปัญหา</span><span class="due">รอเจ้าของร้าน</span></div>
+      <div class="grow"><span class="bill">04821-05</span><span class="what"><b>เสื้อสูท</b><span>ซักแห้ง · ฿180</span></span><span class="pill picked">รับแล้ว</span><span class="due">รับ 29 ต.ค.</span></div>
+    </div>
+  </div>
+
+  <!-- scan target -->
+  <div class="spec" id="c-scan">
+    <div class="spec-title">06 · Scan target <span style="color:var(--wheat-500)">· project-specific</span></div>
+    <div class="spec-sub">Wheat brackets on near-black. The frame must keep its real size at all times — a hidden container makes the scanner measure zero and render black. Use visibility, never display:none.</div>
+    <div class="spec-row" style="align-items:flex-start;gap:24px">
+      <div class="scan">
+        <div class="win">
+          <div class="c c1"></div><div class="c c2"></div><div class="c c3"></div><div class="c c4"></div>
+          <div class="line"></div>
+        </div>
+        <div class="tip">วางบาร์โค้ดให้อยู่ในกรอบ</div>
+      </div>
+      <div style="width:300px" class="spec-col">
+        <div class="readout">
+          <div class="lab">สแกนสำเร็จ</div>
+          <div class="val">04821-03</div>
+          <div class="sub">เสื้อเชิ้ต · กำลังตาก → กำลังรีด</div>
+        </div>
+        <button class="btn btn-primary btn-floor">ยืนยันว่ารีดเสร็จ</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- queue card -->
+  <div class="spec" id="c-queue">
+    <div class="spec-title">07 · Queue card <span style="color:var(--wheat-500)">· project-specific</span></div>
+    <div class="spec-sub">The presser's list, ordered by due date. Rush jobs are warm-bordered so urgency lives in the work itself instead of in the owner's head.</div>
+    <div class="spec-col" style="max-width:420px">
+      <div class="q rush"><span class="ord">1</span><span class="m"><b>04830-02 · เสื้อสูท</b><span>ด่วน · ลูกค้ามารับบ่ายนี้</span></span><span class="pill pressing">รีด</span></div>
+      <div class="q"><span class="ord">2</span><span class="m"><b>04821-02 · กางเกงสแลค</b><span>ครบกำหนด 30 ต.ค.</span></span><span class="pill pressing">รีด</span></div>
+      <div class="q"><span class="ord">3</span><span class="m"><b>04819-01 · เสื้อเชิ้ต</b><span>ครบกำหนด 31 ต.ค.</span></span><span class="pill pressing">รีด</span></div>
+    </div>
+  </div>
+
+  <!-- banner -->
+  <div class="spec" id="c-banner">
+    <div class="spec-title">08 · Banner</div>
+    <div class="spec-col">
+      <div class="banner ok"><span class="ic">✓</span><span><b>บันทึกเรียบร้อย</b>สแกน 12 ชิ้นในรอบนี้</span></div>
+      <div class="banner info"><span class="ic">i</span><span><b>ส่งแจ้งเตือนแล้ว</b>ลูกค้าได้รับข้อความทาง LINE เมื่อ 14:32</span></div>
+      <div class="banner warn"><span class="ic">!</span><span><b>ออฟไลน์</b>บันทึกไว้ในเครื่อง 3 รายการ จะส่งขึ้นระบบเมื่อกลับมาออนไลน์</span></div>
+      <div class="banner danger"><span class="ic">×</span><span><b>สแกนไม่ได้</b>ป้ายนี้ไม่มีอยู่ในระบบ กรุณาตรวจสอบกับเจ้าของร้าน</span></div>
+    </div>
+  </div>
+
+  <!-- table -->
+  <div class="spec" id="c-table">
+    <div class="spec-title">09 · Table row</div>
+    <div class="spec-sub">Front office only — never in the scan app. Numeric columns right-aligned and tabular.</div>
+    <div class="card">
+      <table>
+        <thead><tr><th>บิล</th><th>ลูกค้า</th><th>สถานะ</th><th style="text-align:right">ชิ้น</th><th style="text-align:right">ยอด</th><th style="text-align:right">ค้างมาแล้ว</th></tr></thead>
+        <tbody>
+          <tr><td class="n" style="text-align:left">04702</td><td>คุณวรรณา</td><td><span class="pill ready">พร้อมรับ</span></td><td class="n">4</td><td class="n">฿720</td><td class="n" style="color:var(--danger);font-weight:600">38 วัน</td></tr>
+          <tr><td class="n" style="text-align:left">04755</td><td>คุณประสิทธิ์</td><td><span class="pill ready">พร้อมรับ</span></td><td class="n">2</td><td class="n">฿360</td><td class="n" style="color:var(--warn);font-weight:600">21 วัน</td></tr>
+          <tr><td class="n" style="text-align:left">04821</td><td>คุณสมชาย</td><td><span class="pill pressing">กำลังรีด</span></td><td class="n">5</td><td class="n">฿1,280</td><td class="n">—</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- payment -->
+  <div class="spec" id="c-pay">
+    <div class="spec-title">10 · Payment block</div>
+    <div class="spec-sub">QR is generated for the exact amount. The owner still confirms the transfer in their banking app — the system does not verify the money.</div>
+    <div class="spec-row" style="align-items:flex-start;gap:20px">
+      <div class="pay">
+        <div class="qr"></div>
+        <div class="amt">฿1,280.00</div>
+        <div class="who">พร้อมเพย์ · ศรีบริสุทธิ์ ซักแห้ง</div>
+      </div>
+      <div class="banner warn" style="max-width:330px"><span class="ic">!</span><span><b>ยังไม่ตรวจสอบอัตโนมัติ</b>เจ้าของร้านต้องเปิดแอปธนาคารเพื่อยืนยันว่าเงินเข้าแล้ว</span></div>
+    </div>
+  </div>
+
+  <!-- label -->
+  <div class="spec" id="c-label">
+    <div class="spec-title">11 · Printed label 40 × 30 mm <span style="color:var(--wheat-500)">· project-specific</span></div>
+    <div class="spec-sub">Printed at intake, attached to each piece. Barcode must render as vector at print resolution — a low-resolution bitmap is what made the QR test fail, not the QR format.</div>
+    <div class="spec-row" style="gap:16px">
+      <div class="label">
+        <div class="mt"><span>ศรีบริสุทธิ์</span><span>28/10/69</span></div>
+        <div class="bars"></div>
+        <div class="cd">04821-03</div>
+      </div>
+      <div class="label">
+        <div class="mt"><span>ศรีบริสุทธิ์</span><span>28/10/69</span></div>
+        <div class="bars"></div>
+        <div class="cd">04821-04</div>
+      </div>
+      <div class="tok" style="align-self:center;max-width:220px;line-height:18px">Code 128 · passed on iPhone 17 / Chrome.<br>QR needs re-testing at ~600px before being recorded as a failure.</div>
+    </div>
+  </div>
+
+  <!-- nav -->
+  <div class="spec" id="c-nav">
+    <div class="spec-title">12 · Bottom navigation</div>
+    <div class="spec-sub">Scan app only, three destinations. 56px tall, thumb-reachable.</div>
+    <div style="max-width:330px;border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden">
+      <div style="height:48px;background:var(--sand-100)"></div>
+      <div class="bnav">
+        <a class="on"><span class="gl">▣</span>สแกน</a>
+        <a><span class="gl">☰</span>คิวงาน</a>
+        <a><span class="gl">◔</span>ของฉัน</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- modal -->
+  <div class="spec" id="c-modal">
+    <div class="spec-title">13 · Modal</div>
+    <div class="spec-sub">Only for decisions that cannot be undone. Correcting a record appends a new entry — it never edits history.</div>
+    <div class="modal">
+      <div class="mb">
+        <h3>แก้ไขรายการนี้?</h3>
+        <p>ระบบจะบันทึกเป็นรายการแก้ไขใหม่ ประวัติเดิมจะยังอยู่และมองเห็นได้</p>
+      </div>
+      <div class="mf"><button class="btn btn-secondary">ยกเลิก</button><button class="btn btn-primary">ยืนยัน</button></div>
+    </div>
+  </div>
+
+  <!-- empty -->
+  <div class="spec" id="c-empty">
+    <div class="spec-title">14 · Empty state</div>
+    <div class="spec-row" style="gap:24px">
+      <div class="empty"><div class="gl">☰</div><b>ไม่มีงานในคิว</b><p>เมื่อผู้ช่วยส่งผ้ามาให้ รายการจะขึ้นที่นี่</p></div>
+      <div class="empty"><div class="gl">▣</div><b>ยังไม่มีการสแกน</b><p>กดปุ่มสแกนด้านล่างเพื่อเริ่มบันทึกงาน</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 05 THE THREE APPS ================= -->
+<section>
+  <div class="sec-head"><span class="sec-num">05</span><h2>How the three applications differ</h2></div>
+  <p class="sec-note">Same tokens, same components, three different densities. This is the rule that keeps the system from drifting into three separate designs.</p>
+
+  <div class="grid3">
+    <div class="phone">
+      <div class="top">D1 · ลูกค้า</div>
+      <div class="inner">
+        <div class="card" style="margin-bottom:12px">
+          <div class="card-head"><h3>บิล 04821</h3></div>
+          <div class="grow" style="padding:10px 14px"><span class="what"><b>เสื้อสูท</b></span><span class="pill ready">พร้อมรับ</span></div>
+          <div class="grow" style="padding:10px 14px"><span class="what"><b>เสื้อเชิ้ต</b></span><span class="pill drying">กำลังตาก</span></div>
+        </div>
+        <button class="btn btn-primary" style="width:100%">ชำระเงิน ฿1,280</button>
+        <p class="d-cap" style="margin-top:10px">อ่านง่ายเป็นหลัก · ตัวอักษรใหญ่ · ข้อมูลน้อยที่สุด</p>
+      </div>
+    </div>
+
+    <div class="phone">
+      <div class="top">D2 · หน้าร้าน</div>
+      <div class="inner">
+        <div class="card" style="margin-bottom:10px"><div class="card-body" style="padding:12px 14px">
+          <div class="stat" style="padding:6px 0"><span class="k">ตู้รอซัก</span><span class="v">42</span></div>
+          <div class="stat" style="padding:6px 0"><span class="k">กำลังรีด</span><span class="v">68</span></div>
+          <div class="stat" style="padding:6px 0"><span class="k">ค้างรับ</span><span class="v" style="color:var(--warn)">104</span></div>
+        </div></div>
+        <div class="card"><div class="grow" style="padding:9px 14px"><span class="bill">04702</span><span class="what"><b>คุณวรรณา</b></span><span class="due" style="color:var(--danger)">38 ว.</span></div>
+        <div class="grow" style="padding:9px 14px"><span class="bill">04755</span><span class="what"><b>คุณประสิทธิ์</b></span><span class="due" style="color:var(--warn)">21 ว.</span></div></div>
+        <p class="d-cap" style="margin-top:10px">ข้อมูลหนาแน่น · ตาราง · ใช้นั่งทำ</p>
+      </div>
+    </div>
+
+    <div class="phone">
+      <div class="top">D3 · สแกน</div>
+      <div class="inner">
+        <div class="readout" style="margin-bottom:12px">
+          <div class="lab">สแกนสำเร็จ</div>
+          <div class="val">04821-03</div>
+          <div class="sub">กำลังตาก → กำลังรีด</div>
+        </div>
+        <button class="btn btn-primary btn-floor">ยืนยัน</button>
+        <p class="d-cap" style="margin-top:10px">ปุ่มใหญ่ 56px · หนึ่งงานต่อหนึ่งหน้าจอ · ใช้ยืนทำ มือเปียก</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 06 RULES ================= -->
+<section>
+  <div class="sec-head"><span class="sec-num">06</span><h2>Rules</h2></div>
+  <p class="sec-note">Six rules. If a screen breaks one of them, the screen is wrong, not the rule.</p>
+  <div class="spec">
+    <div class="spec-col" style="gap:14px">
+      <div><b style="color:var(--wheat-700)">1 · Stage is never typed.</b> <span class="d-sm">A stage pill always shows the latest scan. There is no editable status field anywhere in the system.</span></div>
+      <div><b style="color:var(--wheat-700)">2 · Colour is never the only signal.</b> <span class="d-sm">Every stage pill carries a dot and a word. Every error carries an icon and text.</span></div>
+      <div><b style="color:var(--wheat-700)">3 · The scan app gets 56px, everything else 44px.</b> <span class="d-sm">No exceptions in the scan app — it is used standing, with damp hands.</span></div>
+      <div><b style="color:var(--wheat-700)">4 · One primary action per screen.</b> <span class="d-sm">If two actions feel equally primary, the screen is doing two jobs and should be split.</span></div>
+      <div><b style="color:var(--wheat-700)">5 · Numbers people read aloud use mono tabular.</b> <span class="d-sm">Bill numbers, prices, counts, piece totals.</span></div>
+      <div><b style="color:var(--wheat-700)">6 · Corrections append, never overwrite.</b> <span class="d-sm">Any UI that changes a record shows that the original stays visible.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 07 ACCESSIBILITY ================= -->
+<section>
+  <div class="sec-head"><span class="sec-num">07</span><h2>Accessibility · measured, not assumed</h2></div>
+  <p class="sec-note">Every colour pair was calculated against WCAG 2.1 AA rather than eyeballed. Starting from the Color Hunt palette, three pairs failed on the first pass and the tokens were changed: muted text was darkened to <b>#6B5E4A</b> so it clears 4.5:1 on the beige sunken background as well as on cream, the input border was strengthened to <b>#9A8A69</b>, and the focus ring moved from the palette sage to <b>sage-600</b> because #8B9A6E reaches only 2.71:1 against the cream page background.</p>
+  <div class="spec">
+    <div class="spec-title">Result · 38 of 38 pairs pass</div>
+    <table>
+      <thead><tr><th>Pair</th><th style="text-align:right">Ratio</th><th style="text-align:right">Required</th><th>Verdict</th></tr></thead>
+      <tbody>
+        <tr><td>Body text / cream page <span class="tok">#F7F2EB</span></td><td class="n">15.08</td><td class="n">4.5</td><td style="color:var(--ok);font-weight:600">PASS</td></tr>
+        <tr><td>Muted text / white <span class="tok">(darkened)</span></td><td class="n">6.32</td><td class="n">4.5</td><td style="color:var(--ok);font-weight:600">PASS</td></tr>
+        <tr><td>Muted text / beige sunken <span class="tok">(the pair that failed)</span></td><td class="n">4.92</td><td class="n">4.5</td><td style="color:var(--ok);font-weight:600">PASS</td></tr>
+        <tr><td>White / primary button <span class="tok">sage-700</span></td><td class="n">6.51</td><td class="n">4.5</td><td style="color:var(--ok);font-weight:600">PASS</td></tr>
+        <tr><td><b>Dark text on brand band #8B9A6E</b></td><td class="n">5.55</td><td class="n">4.5</td><td style="color:var(--ok);font-weight:600">PASS</td></tr>
+        <tr style="background:var(--danger-bg)"><td><b>White text on #8B9A6E</b> <span class="tok">— why it is not the button colour</span></td><td class="n">3.02</td><td class="n">4.5</td><td style="color:var(--danger);font-weight:600">FAIL</td></tr>
+        <tr><td>Wheat accent / white</td><td class="n">5.56</td><td class="n">4.5</td><td style="color:var(--ok);font-weight:600">PASS</td></tr>
+        <tr><td>Stage RECEIVED</td><td class="n">6.26</td><td class="n">4.5</td><td style="color:var(--ok);font-weight:600">PASS</td></tr>
+        <tr><td>Stage WASHING</td><td class="n">6.61</td><td class="n">4.5</td><td style="color:var(--ok);font-weight:600">PASS</td></tr>
+        <tr><td>Stage DRYING</td><td class="n">6.46</td><td class="n">4.5</td><td style="color:var(--ok);font-weight:600">PASS</td></tr>
+        <tr><td>Stage PRESSING</td><td class="n">5.33</td><td class="n">4.5</td><td style="color:var(--ok);font-weight:600">PASS</td></tr>
+        <tr><td>Stage READY</td><td class="n">4.90</td><td class="n">4.5</td><td style="color:var(--ok);font-weight:600">PASS</td></tr>
+        <tr><td>Stage PICKED UP</td><td class="n">5.67</td><td class="n">4.5</td><td style="color:var(--ok);font-weight:600">PASS</td></tr>
+        <tr><td>Stage PROBLEM</td><td class="n">5.48</td><td class="n">4.5</td><td style="color:var(--ok);font-weight:600">PASS</td></tr>
+        <tr><td>Input border / white <span class="tok">(1.4.11, strengthened)</span></td><td class="n">3.38</td><td class="n">3.0</td><td style="color:var(--ok);font-weight:600">PASS</td></tr>
+        <tr><td>Focus ring / cream page <span class="tok">(1.4.11, moved to sage-600)</span></td><td class="n">3.86</td><td class="n">3.0</td><td style="color:var(--ok);font-weight:600">PASS</td></tr>
+        <tr><td>Scan bracket / near-black <span class="tok">(1.4.11)</span></td><td class="n">10.14</td><td class="n">3.0</td><td style="color:var(--ok);font-weight:600">PASS</td></tr>
+      </tbody>
+    </table>
+    <p class="tok" style="margin-top:14px;line-height:18px">Full 38-pair check: <b>python3 design/contrast-check.py</b> — exits non-zero on any failure, so it can go in CI. Re-run it whenever a token changes.</p>
+  </div>
+  <div class="spec">
+    <div class="spec-title">What is still untested</div>
+    <div class="spec-sub">Named here so it is not mistaken for done.</div>
+    <div class="spec-col" style="gap:8px">
+      <div class="d-sm">• Readability in <b>direct sunlight at the shop counter</b> — must be checked on a real phone at the shop, not on a desk monitor.</div>
+      <div class="d-sm">• Whether staff can hit a 56px target <b>with damp hands</b>.</div>
+      <div class="d-sm">• Whether IBM Plex Sans Thai renders correctly on the <b>oldest phone any staff member actually owns</b>.</div>
+      <div class="d-sm">• Whether the six stage colours stay distinguishable for someone with <b>deuteranopia</b> — the dot and label cover this, but worth one check.</div>
+    </div>
+  </div>
+</section>
+
+</div>
+</body>
+</html>

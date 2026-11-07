@@ -1,0 +1,374 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions id="Definitions_Process_shop_asis" xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" targetNamespace="http://sriborisud.local/bpmn">
+  <bpmn:dataStore id="DS_book_global" name="เล่มบิล (กระดาษ)" />
+  <bpmn:collaboration id="Collaboration_1">
+    <bpmn:participant id="Pool_customer" name="ลูกค้า" />
+    <bpmn:participant id="Pool_shop" name="ร้านศรีบริสุทธิ์ ซักแห้ง" processRef="Process_shop_asis" />
+    <bpmn:messageFlow id="MF1" name="ส่งมอบเสื้อผ้า" sourceRef="Pool_customer" targetRef="Start_1" />
+    <bpmn:messageFlow id="MF2" name="ใบรับของ" sourceRef="T_bill" targetRef="Pool_customer" />
+  </bpmn:collaboration>
+  <bpmn:process id="Process_shop_asis" isExecutable="false">
+    <bpmn:laneSet id="LaneSet_1">
+      <bpmn:lane id="Lane_owner" name="เจ้าของร้าน">
+        <bpmn:flowNodeRef>Start_1</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>T_inspect</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>T_due</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>T_price</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>T_cust</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>GW_phone</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>T_phone</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>GW_phone_j</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>T_bill</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>GW_rush</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>T_tell</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>GW_rush_j</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>T_write</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>T_store</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>End_1</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:dataStoreReference id="DS_book" name="เล่มบิล (กระดาษ)" dataStoreRef="DS_book_global" />
+    <bpmn:dataObject id="DO_receipt_obj" />
+    <bpmn:dataObjectReference id="DO_receipt" name="ใบรับของ" dataObjectRef="DO_receipt_obj" />
+    <bpmn:dataObject id="DO_tag_obj" />
+    <bpmn:dataObjectReference id="DO_tag" name="ป้ายกระดาษเขียนเลขบิล" dataObjectRef="DO_tag_obj" />
+    <bpmn:startEvent id="Start_1" name="ลูกค้านำเสื้อผ้ามาส่ง">
+      <bpmn:outgoing>F1</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:manualTask id="T_inspect" name="ตรวจนับและแยกชนิดเสื้อผ้า">
+      <bpmn:incoming>F1</bpmn:incoming>
+      <bpmn:outgoing>F2</bpmn:outgoing>
+    </bpmn:manualTask>
+    <bpmn:manualTask id="T_due" name="ประเมินวันแล้วเสร็จ">
+      <bpmn:incoming>F2</bpmn:incoming>
+      <bpmn:outgoing>F3</bpmn:outgoing>
+      <bpmn:dataInputAssociation id="DA1">
+        <bpmn:sourceRef>DS_book</bpmn:sourceRef>
+      </bpmn:dataInputAssociation>
+    </bpmn:manualTask>
+    <bpmn:manualTask id="T_price" name="คำนวณราคา">
+      <bpmn:incoming>F3</bpmn:incoming>
+      <bpmn:outgoing>F4</bpmn:outgoing>
+    </bpmn:manualTask>
+    <bpmn:manualTask id="T_cust" name="รับข้อมูลลูกค้า">
+      <bpmn:incoming>F4</bpmn:incoming>
+      <bpmn:outgoing>F5</bpmn:outgoing>
+    </bpmn:manualTask>
+    <bpmn:exclusiveGateway id="GW_phone" name="ลูกค้าให้เบอร์โทรหรือไม่">
+      <bpmn:incoming>F5</bpmn:incoming>
+      <bpmn:outgoing>F6</bpmn:outgoing>
+      <bpmn:outgoing>F8</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:manualTask id="T_phone" name="จดเบอร์โทรลงในบิล">
+      <bpmn:incoming>F6</bpmn:incoming>
+      <bpmn:outgoing>F7</bpmn:outgoing>
+    </bpmn:manualTask>
+    <bpmn:exclusiveGateway id="GW_phone_j" name="">
+      <bpmn:incoming>F7</bpmn:incoming>
+      <bpmn:incoming>F8</bpmn:incoming>
+      <bpmn:outgoing>F9</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:manualTask id="T_bill" name="ออกบิล Running Number">
+      <bpmn:incoming>F9</bpmn:incoming>
+      <bpmn:outgoing>F10</bpmn:outgoing>
+      <bpmn:dataOutputAssociation id="DA2">
+        <bpmn:targetRef>DS_book</bpmn:targetRef>
+      </bpmn:dataOutputAssociation>
+      <bpmn:dataOutputAssociation id="DA3">
+        <bpmn:targetRef>DO_receipt</bpmn:targetRef>
+      </bpmn:dataOutputAssociation>
+    </bpmn:manualTask>
+    <bpmn:exclusiveGateway id="GW_rush" name="งานด่วนหรือไม่">
+      <bpmn:incoming>F10</bpmn:incoming>
+      <bpmn:outgoing>F11</bpmn:outgoing>
+      <bpmn:outgoing>F13</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:manualTask id="T_tell" name="แจ้งช่างรีดด้วยวาจา">
+      <bpmn:incoming>F11</bpmn:incoming>
+      <bpmn:outgoing>F12</bpmn:outgoing>
+    </bpmn:manualTask>
+    <bpmn:exclusiveGateway id="GW_rush_j" name="">
+      <bpmn:incoming>F12</bpmn:incoming>
+      <bpmn:incoming>F13</bpmn:incoming>
+      <bpmn:outgoing>F14</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:manualTask id="T_write" name="เขียนเลขบิลบนเสื้อผ้าทุกชิ้น">
+      <bpmn:incoming>F14</bpmn:incoming>
+      <bpmn:outgoing>F15</bpmn:outgoing>
+      <bpmn:dataOutputAssociation id="DA4">
+        <bpmn:targetRef>DO_tag</bpmn:targetRef>
+      </bpmn:dataOutputAssociation>
+    </bpmn:manualTask>
+    <bpmn:manualTask id="T_store" name="นำเสื้อผ้าเข้าตู้รอซัก">
+      <bpmn:incoming>F15</bpmn:incoming>
+      <bpmn:outgoing>F16</bpmn:outgoing>
+    </bpmn:manualTask>
+    <bpmn:endEvent id="End_1" name="เสื้อผ้าอยู่ในตู้รอซัก">
+      <bpmn:incoming>F16</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:textAnnotation id="N_price">
+      <bpmn:text>ไม่มีตารางราคาเป็นลายลักษณ์อักษร ราคาขึ้นกับคนออกบิล</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:textAnnotation id="N_phone">
+      <bpmn:text>ประมาณ 20% ของบิลไม่มีเบอร์ติดต่อ ≈ 4,000 บิลต่อปีที่ตามลูกค้าไม่ได้</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:textAnnotation id="N_tell">
+      <bpmn:text>สื่อสารด้วยวาจา ไม่เหลือร่องรอย ถ้าลืมก็ไม่มีใครรู้</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:textAnnotation id="N_tag">
+      <bpmn:text>ตัวตนของผ้าหนึ่งชิ้นคือหมึกบนกระดาษ ป้ายหลุดแล้วตามไม่ได้</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:sequenceFlow id="F1" sourceRef="Start_1" targetRef="T_inspect" />
+    <bpmn:sequenceFlow id="F2" sourceRef="T_inspect" targetRef="T_due" />
+    <bpmn:sequenceFlow id="F3" sourceRef="T_due" targetRef="T_price" />
+    <bpmn:sequenceFlow id="F4" sourceRef="T_price" targetRef="T_cust" />
+    <bpmn:sequenceFlow id="F5" sourceRef="T_cust" targetRef="GW_phone" />
+    <bpmn:sequenceFlow id="F6" name="ให้เบอร์" sourceRef="GW_phone" targetRef="T_phone" />
+    <bpmn:sequenceFlow id="F7" sourceRef="T_phone" targetRef="GW_phone_j" />
+    <bpmn:sequenceFlow id="F8" name="ไม่ให้เบอร์" sourceRef="GW_phone" targetRef="GW_phone_j" />
+    <bpmn:sequenceFlow id="F9" sourceRef="GW_phone_j" targetRef="T_bill" />
+    <bpmn:sequenceFlow id="F10" sourceRef="T_bill" targetRef="GW_rush" />
+    <bpmn:sequenceFlow id="F11" name="ด่วน" sourceRef="GW_rush" targetRef="T_tell" />
+    <bpmn:sequenceFlow id="F12" sourceRef="T_tell" targetRef="GW_rush_j" />
+    <bpmn:sequenceFlow id="F13" name="ปกติ" sourceRef="GW_rush" targetRef="GW_rush_j" />
+    <bpmn:sequenceFlow id="F14" sourceRef="GW_rush_j" targetRef="T_write" />
+    <bpmn:sequenceFlow id="F15" sourceRef="T_write" targetRef="T_store" />
+    <bpmn:sequenceFlow id="F16" sourceRef="T_store" targetRef="End_1" />
+    <bpmn:association id="AS1" sourceRef="T_price" targetRef="N_price" />
+    <bpmn:association id="AS2" sourceRef="GW_phone" targetRef="N_phone" />
+    <bpmn:association id="AS3" sourceRef="T_tell" targetRef="N_tell" />
+    <bpmn:association id="AS4" sourceRef="T_write" targetRef="N_tag" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="Diagram_1">
+    <bpmndi:BPMNPlane id="Plane_1" bpmnElement="Collaboration_1">
+      <bpmndi:BPMNShape id="Pool_customer_di" bpmnElement="Pool_customer" isHorizontal="true">
+        <dc:Bounds x="160" y="86" width="2678.0" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Pool_shop_di" bpmnElement="Pool_shop" isHorizontal="true">
+        <dc:Bounds x="160" y="186" width="2678.0" height="520" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_owner_di" bpmnElement="Lane_owner" isHorizontal="true">
+        <dc:Bounds x="190" y="186" width="2648.0" height="520" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Start_1_di" bpmnElement="Start_1">
+        <dc:Bounds x="222" y="390" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="177" y="432" width="126" height="28" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="T_inspect_di" bpmnElement="T_inspect">
+        <dc:Bounds x="355" y="368" width="130" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="T_due_di" bpmnElement="T_due">
+        <dc:Bounds x="535" y="368" width="130" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="T_price_di" bpmnElement="T_price">
+        <dc:Bounds x="715" y="368" width="130" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="T_cust_di" bpmnElement="T_cust">
+        <dc:Bounds x="895" y="368" width="130" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="GW_phone_di" bpmnElement="GW_phone" isMarkerVisible="true">
+        <dc:Bounds x="1115" y="383" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1068" y="439" width="144" height="28" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="T_phone_di" bpmnElement="T_phone">
+        <dc:Bounds x="1255" y="228" width="130" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="GW_phone_j_di" bpmnElement="GW_phone_j" isMarkerVisible="true">
+        <dc:Bounds x="1475" y="383" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1455" y="439" width="90" height="28" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="T_bill_di" bpmnElement="T_bill">
+        <dc:Bounds x="1615" y="368" width="130" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="GW_rush_di" bpmnElement="GW_rush" isMarkerVisible="true">
+        <dc:Bounds x="1835" y="383" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1815" y="439" width="90" height="28" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="T_tell_di" bpmnElement="T_tell">
+        <dc:Bounds x="1975" y="228" width="130" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="GW_rush_j_di" bpmnElement="GW_rush_j" isMarkerVisible="true">
+        <dc:Bounds x="2195" y="383" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2175" y="439" width="90" height="28" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="T_write_di" bpmnElement="T_write">
+        <dc:Bounds x="2335" y="368" width="130" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="T_store_di" bpmnElement="T_store">
+        <dc:Bounds x="2515" y="368" width="130" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="End_1_di" bpmnElement="End_1">
+        <dc:Bounds x="2742" y="390" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2694" y="432" width="132" height="28" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="DS_book_di" bpmnElement="DS_book">
+        <dc:Bounds x="1115" y="523" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1092" y="579" width="96" height="28" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="DO_receipt_di" bpmnElement="DO_receipt">
+        <dc:Bounds x="1655" y="517" width="50" height="62" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1635" y="585" width="90" height="28" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="DO_tag_di" bpmnElement="DO_tag">
+        <dc:Bounds x="2375" y="517" width="50" height="62" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2337" y="585" width="126" height="28" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="N_price_di" bpmnElement="N_price">
+        <dc:Bounds x="690" y="622" width="180" height="56" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="N_phone_di" bpmnElement="N_phone">
+        <dc:Bounds x="1220" y="622" width="180" height="56" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="N_tell_di" bpmnElement="N_tell">
+        <dc:Bounds x="1960" y="622" width="180" height="56" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="N_tag_di" bpmnElement="N_tag">
+        <dc:Bounds x="2510" y="622" width="180" height="56" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="F1_di" bpmnElement="F1">
+        <di:waypoint x="258" y="408" />
+        <di:waypoint x="355" y="408" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F2_di" bpmnElement="F2">
+        <di:waypoint x="485" y="408" />
+        <di:waypoint x="535" y="408" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F3_di" bpmnElement="F3">
+        <di:waypoint x="665" y="408" />
+        <di:waypoint x="715" y="408" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F4_di" bpmnElement="F4">
+        <di:waypoint x="845" y="408" />
+        <di:waypoint x="895" y="408" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F5_di" bpmnElement="F5">
+        <di:waypoint x="1025" y="408" />
+        <di:waypoint x="1115" y="408" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F6_di" bpmnElement="F6">
+        <di:waypoint x="1140" y="383" />
+        <di:waypoint x="1140" y="268" />
+        <di:waypoint x="1255" y="268" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1158" y="244" width="80" height="18" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F7_di" bpmnElement="F7">
+        <di:waypoint x="1385" y="268" />
+        <di:waypoint x="1500" y="268" />
+        <di:waypoint x="1500" y="383" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F8_di" bpmnElement="F8">
+        <di:waypoint x="1165" y="408" />
+        <di:waypoint x="1475" y="408" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1280" y="384" width="80" height="18" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F9_di" bpmnElement="F9">
+        <di:waypoint x="1525" y="408" />
+        <di:waypoint x="1615" y="408" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F10_di" bpmnElement="F10">
+        <di:waypoint x="1745" y="408" />
+        <di:waypoint x="1835" y="408" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F11_di" bpmnElement="F11">
+        <di:waypoint x="1860" y="383" />
+        <di:waypoint x="1860" y="268" />
+        <di:waypoint x="1975" y="268" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1878" y="244" width="80" height="18" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F12_di" bpmnElement="F12">
+        <di:waypoint x="2105" y="268" />
+        <di:waypoint x="2220" y="268" />
+        <di:waypoint x="2220" y="383" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F13_di" bpmnElement="F13">
+        <di:waypoint x="1885" y="408" />
+        <di:waypoint x="2195" y="408" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2000" y="384" width="80" height="18" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F14_di" bpmnElement="F14">
+        <di:waypoint x="2245" y="408" />
+        <di:waypoint x="2335" y="408" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F15_di" bpmnElement="F15">
+        <di:waypoint x="2465" y="408" />
+        <di:waypoint x="2515" y="408" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F16_di" bpmnElement="F16">
+        <di:waypoint x="2645" y="408" />
+        <di:waypoint x="2742" y="408" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MF1_di" bpmnElement="MF1">
+        <di:waypoint x="240" y="156" />
+        <di:waypoint x="240" y="390" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="200" y="132" width="80" height="18" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MF2_di" bpmnElement="MF2">
+        <di:waypoint x="1680" y="368" />
+        <di:waypoint x="1680" y="156" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1640" y="132" width="80" height="18" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="DA1_di" bpmnElement="DA1">
+        <di:waypoint x="1140" y="523" />
+        <di:waypoint x="600" y="448" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="DA2_di" bpmnElement="DA2">
+        <di:waypoint x="1680" y="448" />
+        <di:waypoint x="1140" y="523" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="DA3_di" bpmnElement="DA3">
+        <di:waypoint x="1680" y="448" />
+        <di:waypoint x="1680" y="517" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="DA4_di" bpmnElement="DA4">
+        <di:waypoint x="2400" y="448" />
+        <di:waypoint x="2400" y="517" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="AS1_di" bpmnElement="AS1">
+        <di:waypoint x="780" y="448" />
+        <di:waypoint x="780" y="622" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="AS2_di" bpmnElement="AS2">
+        <di:waypoint x="1140" y="433" />
+        <di:waypoint x="1310" y="622" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="AS3_di" bpmnElement="AS3">
+        <di:waypoint x="2040" y="308" />
+        <di:waypoint x="2050" y="622" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="AS4_di" bpmnElement="AS4">
+        <di:waypoint x="2400" y="448" />
+        <di:waypoint x="2600" y="622" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

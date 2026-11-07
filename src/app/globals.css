@@ -1,0 +1,215 @@
+@import "tailwindcss";
+
+/* ============================================================
+   ศรีบริสุทธิ์ ซักแห้ง · DESIGN TOKENS
+   ------------------------------------------------------------
+   ไฟล์นี้เป็น "แหล่งความจริงเดียว" ของสีและขนาดทั้งระบบ
+   ถ้าเปลี่ยนค่าในนี้ ต้องแก้ design/*.html ให้ตรงกัน
+   แล้วรัน  python3 design/contrast-check.py  ใหม่ทุกครั้ง
+
+   พาเลตต์ตั้งต้น · Color Hunt
+     #8B9A6E  sage   → เป็น sage-500 แกนของตระกูลสีหลัก
+     #F7F2EB  cream  → เป็น sand-100 พื้นหลังของทุกหน้าจอ
+     #EAE2D6  beige  → เป็น sand-200 พื้นจมและพื้น pill
+     #EEEEEE  grey   → ไม่ได้ใช้ · เป็นเทากลางในพาเลตต์โทนอุ่น
+                        ไม่มีงานให้ทำ ถ้าใส่เข้ามาจะดูเพี้ยน
+
+   ค่าสีทุกคู่ผ่าน WCAG 2.1 AA แล้ว 38/38 คู่ (ตรวจด้วยสคริปต์ ไม่ใช่กะด้วยตา)
+   ห้ามเปลี่ยนค่าสีโดยไม่รันสคริปต์ตรวจซ้ำ
+   ============================================================ */
+
+@theme {
+  /* ── Primary · เซจ hue 82 ─────────────────────────────── */
+  /* sage-500 คือ #8B9A6E จากพาเลตต์ตรงๆ แต่สว่างเกินกว่าจะเป็นสีปุ่ม
+     (ตัวอักษรขาวบนสีนี้ได้แค่ 3.02:1 ต้องการ 4.5:1)
+     จึงใช้ sage-700 เป็นสี action และให้ sage-500 ทำหน้าที่
+     เป็นแถบแบรนด์และพื้นตกแต่งที่มีตัวอักษรเข้มทับ */
+  --color-sage-50: #f8faf5;
+  --color-sage-100: #eef2e9;
+  --color-sage-200: #dbe2d0;
+  --color-sage-300: #bec9ac;
+  --color-sage-400: #a3b18c;
+  --color-sage-500: #8b9a6e; /* ← Color Hunt */
+  --color-sage-600: #6f8052;
+  --color-sage-700: #54633b;
+  --color-sage-800: #3c4729;
+  --color-sage-900: #262e19;
+
+  /* ── Neutral · ครีมอุ่น hue 36 ────────────────────────── */
+  --color-sand-50: #fcfaf8;
+  --color-sand-100: #f7f2eb; /* ← Color Hunt */
+  --color-sand-200: #eae2d6; /* ← Color Hunt */
+  --color-sand-300: #d4cab9;
+  --color-sand-400: #baac97;
+  --color-sand-500: #9c8b73;
+  --color-sand-600: #6b5e4a; /* เข้มกว่าเส้นแรมป์ปกติ เพื่อให้อ่านได้บน sand-200 */
+  --color-sand-700: #584f41;
+  --color-sand-800: #3a342c;
+  --color-sand-900: #201d18;
+
+  /* ── Accent · ข้าวสาลี ────────────────────────────────── */
+  /* ใช้น้อยมาก · wheat-300 สำหรับพื้นเข้มเท่านั้น (กรอบสแกน) */
+  --color-wheat-100: #f5edd9;
+  --color-wheat-300: #d9c89a;
+  --color-wheat-500: #7e6526;
+  --color-wheat-700: #5e4b1a;
+
+  /* ── Semantic · ลดความสดให้เข้ากับโทนพาเลตต์ ──────────── */
+  --color-danger: #9b3a2c;
+  --color-danger-bg: #f7e0db;
+  --color-danger-border: #e0a79c;
+  --color-danger-text: #7a2c21;
+  --color-warn: #8a4f23;
+  --color-warn-bg: #f6e6d3;
+  --color-warn-border: #ddb888;
+  --color-warn-text: #6e3e1b;
+  --color-info: #2f5366;
+  --color-info-bg: #dde8ee;
+  --color-info-border: #a8c4d4;
+  --color-info-text: #24404f;
+  --color-ok: #54633b;
+  --color-ok-bg: #eef2e9;
+  --color-ok-border: #bec9ac;
+  --color-ok-text: #3c4729;
+
+  /* ── สีประจำ 6 สเตจ ───────────────────────────────────── */
+  /* ไล่โทนไปข้างหน้าตามกระบวนการ: หินอุ่น → น้ำเงินหม่น → เขียวอมฟ้า
+     → ดินเผา → เซจ → จาง  เพื่อให้เห็นความคืบหน้าโดยไม่ต้องอ่านตัวอักษร
+     แต่ทุก pill ต้องมีจุดและคำกำกับด้วย สีจะไม่ใช่สัญญาณเดียวเด็ดขาด */
+  --color-stage-received: #584f41;
+  --color-stage-received-bg: #eae2d6;
+  --color-stage-washing: #2f5366;
+  --color-stage-washing-bg: #dde8ee;
+  --color-stage-drying: #28565a;
+  --color-stage-drying-bg: #d8e8e5;
+  --color-stage-pressing: #8a4f23;
+  --color-stage-pressing-bg: #f6e6d3;
+  --color-stage-ready: #54633b;
+  --color-stage-ready-bg: #dbe2d0;
+  --color-stage-picked: #6b5e4a;
+  --color-stage-picked-bg: #f7f2eb;
+
+  /* ── Roles · ใช้ชื่อพวกนี้ในโค้ด ไม่ใช่เลขสเกล ────────── */
+  --color-bg: var(--color-sand-100);
+  --color-surface: #ffffff;
+  --color-surface-sunken: var(--color-sand-200);
+  --color-border: var(--color-sand-300);
+  --color-border-strong: #9a8a69; /* input + ปุ่มขอบ — 3.38:1 ผ่าน WCAG 1.4.11 */
+  --color-text: var(--color-sand-900);
+  --color-text-muted: var(--color-sand-600);
+  --color-text-inverse: #ffffff;
+  --color-primary: var(--color-sage-700);
+  --color-primary-hover: var(--color-sage-800);
+  --color-primary-soft: var(--color-sage-100);
+  /* #8B9A6E จากพาเลตต์ · ใช้เป็นแถบแบรนด์และพื้นตกแต่งเท่านั้น
+     ต้องมีตัวอักษร sand-900 ทับ (5.55:1) ห้ามใช้ตัวอักษรขาว (ได้แค่ 3.02:1) */
+  --color-brand-band: var(--color-sage-500);
+  --color-focus: var(--color-sage-600);
+  --color-disabled-fg: #8a7f6d;
+  --color-disabled-bg: var(--color-sand-200);
+
+  /* ── Typography ──────────────────────────────────────── */
+  --font-sans: "IBM Plex Sans Thai", "IBM Plex Sans", ui-sans-serif, system-ui,
+    sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", monospace;
+
+  /* ไทยต้องการ line-height มากกว่าละติน ทุกขั้นจึงเผื่อไว้ */
+  --text-display: 2rem; /* 32 */
+  --text-display--line-height: 2.5rem; /* 40 */
+  --text-display--font-weight: 700;
+  --text-h1: 1.5rem; /* 24 */
+  --text-h1--line-height: 2rem; /* 32 */
+  --text-h1--font-weight: 600;
+  --text-h2: 1.25rem; /* 20 */
+  --text-h2--line-height: 1.75rem; /* 28 */
+  --text-h2--font-weight: 600;
+  --text-h3: 1.0625rem; /* 17 */
+  --text-h3--line-height: 1.5rem; /* 24 */
+  --text-h3--font-weight: 600;
+  --text-body-lg: 1.0625rem; /* 17 */
+  --text-body-lg--line-height: 1.625rem; /* 26 */
+  --text-body: 0.9375rem; /* 15 */
+  --text-body--line-height: 1.5rem; /* 24 */
+  --text-body-sm: 0.8125rem; /* 13 */
+  --text-body-sm--line-height: 1.25rem; /* 20 */
+  --text-caption: 0.75rem; /* 12 */
+  --text-caption--line-height: 1rem; /* 16 */
+  --text-scan: 1.875rem; /* 30 — เลขบิลบนจอสแกน */
+  --text-scan--line-height: 2.5rem; /* 40 */
+  --text-scan--font-weight: 600;
+
+  /* ── Radius ──────────────────────────────────────────── */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 20px;
+
+  /* ── Elevation · สามระดับเท่านั้น ─────────────────────── */
+  --shadow-sm: 0 1px 2px rgba(28, 26, 22, 0.06);
+  --shadow-md: 0 2px 8px rgba(28, 26, 22, 0.08);
+  --shadow-lg: 0 8px 24px rgba(28, 26, 22, 0.12);
+
+  /* ── Touch targets ───────────────────────────────────── */
+  /* 44px คือขั้นต่ำทุกที่ · 56px สำหรับแอปสแกน
+     เพราะใช้ยืนทำ มือเปียก และบางครั้งถือผ้าอยู่มือเดียว */
+  --spacing-tap: 44px;
+  --spacing-tap-floor: 56px;
+
+  /* ── ชื่อเดิมจากตอน POC · เก็บไว้ไม่ให้หน้า /poc พัง ───── */
+  /* หน้า POC ใช้ชื่อพวกนี้อยู่ 50 จุด ไม่คุ้มจะไปแก้ทั้งหมด
+     แต่ของใหม่ให้ใช้ชื่อใน Roles ข้างบนเท่านั้น
+     พอ POC เสร็จและลบทิ้งแล้ว ให้ลบบล็อกนี้ด้วย */
+  --color-ink: var(--color-sand-900);
+  --color-muted: var(--color-sand-600);
+  --color-line: var(--color-sand-300);
+  --color-brand: var(--color-sage-700); /* หน้า POC ใช้เป็นสีปุ่ม จึงต้องเป็นตัวเข้ม */
+}
+
+/* ============================================================
+   BASE
+   ============================================================ */
+
+html,
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  font-size: 0.9375rem;
+  line-height: 1.5rem;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* กันไม่ให้ iOS ซูมเข้าเองเวลาแตะ input ที่ตัวอักษรเล็กกว่า 16px */
+input,
+select,
+textarea {
+  font-size: 16px;
+}
+
+/* โฟกัสต้องมองเห็นชัดเสมอ — ห้ามเขียน outline:none ที่ไหนทั้งนั้น */
+:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+/* เลขที่คนอ่านออกเสียงหรือเทียบทีละหลัก ต้องเป็น mono + tabular */
+.num {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+/* เผื่อพื้นที่ให้ notch และแถบล่างของมือถือ */
+.safe-bottom {
+  padding-bottom: calc(env(safe-area-inset-bottom) + 1rem);
+}
+
+/* ============================================================
+   กฎ 6 ข้อของ design system  (ดู design/design-system.html)
+   1. สเตจไม่เคยถูกพิมพ์ — แสดงจาก status_event ล่าสุดเท่านั้น
+   2. สีไม่ใช่สัญญาณเดียว — ทุก pill มีจุดและคำ ทุก error มีไอคอนและข้อความ
+   3. แอปสแกนใช้ 56px ที่อื่นใช้ 44px — ไม่มีข้อยกเว้นในแอปสแกน
+   4. หนึ่งหน้าจอ หนึ่ง primary action
+   5. เลขที่คนอ่านออกเสียงใช้ mono tabular
+   6. การแก้ไขคือการเพิ่มรายการใหม่ ไม่ใช่การทับของเดิม
+   ============================================================ */

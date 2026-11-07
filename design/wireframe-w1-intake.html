@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<title>Wireframe · W1 รับผ้าเข้า</title>
+<style>
+/* ───────────────────────────────────────────────────────────
+   WIREFRAME · ไม่มีสีแบรนด์ ไม่มีฟอนต์จริง ไม่มีเงา
+   จงใจให้ดูไม่เสร็จ เพื่อให้คุยกันเรื่องโครงสร้าง ไม่ใช่เรื่องสวย
+   ─────────────────────────────────────────────────────────── */
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:-apple-system,"Helvetica Neue",Arial,sans-serif;
+  background:#fafafa;color:#222;font-size:14px;line-height:21px;padding:40px;
+}
+.page{max-width:1500px;margin:0 auto}
+h1{font-size:26px;line-height:34px;font-weight:600;letter-spacing:-.2px}
+.sub{color:#777;font-size:14px;line-height:22px;max-width:820px;margin-top:6px}
+h2{font-size:18px;line-height:26px;font-weight:600;margin-bottom:4px}
+.h2sub{color:#777;font-size:13px;line-height:20px;margin-bottom:18px;max-width:820px}
+section{margin-top:44px}
+.hr{height:1px;background:#ddd;margin:34px 0}
+
+/* ── wireframe primitives ── */
+.wf{background:#fff;border:1.5px solid #333;border-radius:3px}
+.bar{background:#ddd;border-bottom:1.5px solid #333;padding:10px 14px;font-weight:600;font-size:14px;display:flex;justify-content:space-between;align-items:center}
+.bar .r{font-weight:400;color:#555;font-size:12px}
+.pad{padding:14px}
+.lbl{font-size:11px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;color:#666;margin-bottom:5px}
+.fld{height:38px;border:1.5px solid #777;border-radius:3px;background:#fff;display:flex;align-items:center;padding:0 10px;color:#999;font-size:13px}
+.fld.v{color:#222}
+.btn{height:40px;border:1.5px solid #333;border-radius:3px;background:#eee;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:13px}
+.btn.pri{background:#333;color:#fff}
+.btn.sm{height:32px;font-size:12px;padding:0 10px}
+.tile{border:1.5px solid #777;border-radius:3px;height:52px;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#fff;font-size:12px;line-height:16px}
+.tile b{font-weight:600}
+.tile span{color:#777;font-size:11px}
+.tile.on{background:#333;color:#fff;border-color:#333}
+.tile.on span{color:#ccc}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:7px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}
+.row{display:flex;align-items:center;gap:10px;border-bottom:1px dashed #bbb;padding:9px 0;font-size:13px}
+.row:last-child{border-bottom:none}
+.row .n{width:26px;color:#777;font-size:11px}
+.row .g{flex:1}
+.row .q{width:68px;display:flex;gap:4px;align-items:center;justify-content:center}
+.row .q i{width:22px;height:22px;border:1.5px solid #777;border-radius:3px;display:flex;align-items:center;justify-content:center;font-style:normal;font-size:12px}
+.row .p{width:58px;text-align:right}
+.chip{height:30px;border:1.5px solid #777;border-radius:15px;display:inline-flex;align-items:center;padding:0 12px;font-size:12px;background:#fff}
+.chip.on{background:#333;color:#fff;border-color:#333;font-weight:600}
+.tot{border:1.5px solid #333;border-radius:3px;background:#eee;padding:11px 14px;display:flex;justify-content:space-between;align-items:center;font-weight:600}
+.dash{border:1.5px dashed #999;border-radius:3px;display:flex;align-items:center;justify-content:center;color:#888;font-size:12px;background:#fff}
+.note{background:#f0f0f0;border-left:3px solid #666;padding:8px 10px;font-size:12px;line-height:18px;color:#444}
+
+/* ── markers ── */
+.mk{display:inline-flex;width:19px;height:19px;border-radius:50%;background:#333;color:#fff;
+    align-items:center;justify-content:center;font-size:11px;font-weight:700;flex:none}
+.mkf{position:absolute;margin:-9px 0 0 -9px}
+
+/* ── frames ── */
+.frames{display:flex;gap:26px;align-items:flex-start;flex-wrap:wrap}
+.unit{display:flex;flex-direction:column;gap:7px}
+.cap{font-size:12px;line-height:17px;color:#555;max-width:340px}
+.cap b{display:block;color:#111;font-size:13px}
+.w-desk{width:880px;position:relative}
+.w-ph{width:300px;position:relative}
+.step{display:flex;gap:5px;padding:9px 14px;border-bottom:1.5px solid #333;background:#f4f4f4}
+.step i{flex:1;height:5px;background:#ccc;border-radius:3px;font-style:normal}
+.step i.on{background:#333}
+.legend{display:grid;grid-template-columns:1fr 1fr;gap:12px 28px;max-width:1180px}
+.lg{display:flex;gap:10px;align-items:flex-start;font-size:13px;line-height:20px}
+table{width:100%;border-collapse:collapse;font-size:13px;background:#fff;border:1.5px solid #333}
+th{background:#eee;text-align:left;padding:8px 11px;font-size:11px;text-transform:uppercase;letter-spacing:.3px;border-bottom:1.5px solid #333}
+td{padding:9px 11px;border-bottom:1px solid #ddd;vertical-align:top}
+tr:last-child td{border-bottom:none}
+</style>
+</head>
+<body>
+<div class="page">
+
+<h1>Wireframe · W1 รับผ้าเข้า</h1>
+<p class="sub">ขาวดำ ไม่มีสีแบรนด์ ไม่มีฟอนต์จริง จงใจให้ดูไม่เสร็จ เพื่อให้คุยกันเรื่อง<b>โครงสร้างและลำดับ</b> ไม่ใช่เรื่องสวย ·
+ตรงกับ <code>W1-intake-to-be.bpmn</code> ทุกขั้นตอน · ข้อจำกัดเดียวที่ตัดสินทุกอย่างในหน้านี้คือ <b>ต้องเร็วกว่าเขียนในสมุดบิล</b> — 65 บิลต่อวัน ช้าขึ้น 30 วินาที = เสียวันละครึ่งชั่วโมง</p>
+
+<div class="hr"></div>
+
+<!-- ══════════════ A · DESKTOP / TABLET ══════════════ -->
+<section>
+  <h2>แบบ A · จอกว้าง ≥ 1024px — หน้าเดียวจบ</h2>
+  <p class="h2sub">ทุกอย่างอยู่ในหน้าจอเดียว ไม่ต้องกดไปหน้าถัดไป เร็วที่สุด แต่ต้องมีจอกว้างที่เคาน์เตอร์</p>
+
+  <div class="frames">
+    <div class="unit">
+      <div class="wf frame w-desk">
+        <div class="bar"><span>รับผ้าเข้า</span><span class="r">บิลถัดไป 04832 · 3 พ.ย. 69</span></div>
+        <div class="pad" style="display:flex;gap:14px">
+
+          <!-- left · customer -->
+          <div style="width:250px;display:flex;flex-direction:column;gap:11px">
+            <div>
+              <div class="lbl">ลูกค้า <span class="mk" style="width:16px;height:16px;font-size:10px">3</span></div>
+              <div class="fld">ค้นหาด้วยเบอร์โทร…</div>
+            </div>
+            <div class="wf" style="border-width:1.5px;padding:9px">
+              <div style="font-weight:600;font-size:13px">คุณสมชาย ใจดี</div>
+              <div style="color:#777;font-size:12px">081-234-5678 · เคยใช้ 12 ครั้ง</div>
+              <div style="margin-top:5px"><span class="chip" style="height:22px;font-size:11px">ผูก LINE แล้ว</span></div>
+            </div>
+            <div class="btn sm" style="width:100%">+ ลูกค้าใหม่</div>
+            <div class="dash" style="height:34px">☐ ไม่มีเบอร์โทร</div>
+            <div class="note">ไม่มีเบอร์ = ติดต่อกลับไม่ได้<br>ต้องกดได้ แต่ต้องรู้สึกว่าเสีย</div>
+          </div>
+
+          <!-- right · items -->
+          <div style="flex:1;display:flex;flex-direction:column;gap:11px">
+            <div>
+              <div class="lbl">แตะเพื่อเพิ่ม · แตะซ้ำเพื่อเพิ่มจำนวน <span class="mk" style="width:16px;height:16px;font-size:10px">1</span></div>
+              <div class="grid4">
+                <div class="tile on"><b>เสื้อเชิ้ต</b><span>฿60</span></div>
+                <div class="tile"><b>กางเกงสแลค</b><span>฿120</span></div>
+                <div class="tile"><b>เสื้อสูท</b><span>฿180</span></div>
+                <div class="tile"><b>กระโปรง</b><span>฿90</span></div>
+                <div class="tile"><b>ชุดเดรส</b><span>฿150</span></div>
+                <div class="tile"><b>ผ้าคลุมโซฟา</b><span>฿450</span></div>
+                <div class="tile"><b>ผ้าม่าน</b><span>฿380</span></div>
+                <div class="tile" style="border-style:dashed"><b>อื่นๆ</b><span>ตั้งราคาเอง</span></div>
+              </div>
+            </div>
+            <div class="wf" style="padding:0 12px">
+              <div class="row"><span class="n">01</span><span class="g">เสื้อเชิ้ต · ซักรีด</span><span class="q"><i>−</i>2<i>+</i></span><span class="p">฿120</span></div>
+              <div class="row"><span class="n">03</span><span class="g">เสื้อสูท · ซักแห้ง</span><span class="q"><i>−</i>1<i>+</i></span><span class="p">฿180</span></div>
+              <div class="row"><span class="n">04</span><span class="g">ผ้าคลุมโซฟา · ซักแห้ง</span><span class="q"><i>−</i>1<i>+</i></span><span class="p">฿450</span></div>
+            </div>
+            <div class="note">จำนวน 2 = ป้าย 2 ใบ = ผ้า 2 ชิ้นในระบบ แยกสถานะกันได้ <span class="mk" style="width:16px;height:16px;font-size:10px">2</span></div>
+          </div>
+        </div>
+
+        <!-- bottom bar -->
+        <div style="border-top:1.5px solid #333;padding:11px 14px;display:flex;gap:14px;align-items:center;background:#f4f4f4">
+          <div>
+            <div class="lbl" style="margin-bottom:3px">นัดรับ <span class="mk" style="width:16px;height:16px;font-size:10px">4</span></div>
+            <div style="display:flex;gap:5px">
+              <span class="chip">พรุ่งนี้</span><span class="chip on">+2 วัน · 5 พ.ย.</span><span class="chip">+3 วัน</span><span class="chip">เลือกเอง</span>
+            </div>
+          </div>
+          <div style="margin-left:6px">
+            <div class="lbl" style="margin-bottom:3px">ความเร่งด่วน</div>
+            <div style="display:flex;gap:5px"><span class="chip on">ปกติ</span><span class="chip">ด่วน</span></div>
+          </div>
+          <div class="tot" style="margin-left:auto;min-width:168px"><span>4 ชิ้น</span><span>฿750</span></div>
+          <div class="btn pri" style="width:210px">บันทึกและพิมพ์ป้าย</div>
+        </div>
+      </div>
+      <div class="cap" style="max-width:880px"><b>A-1 · หน้ารับผ้าเข้า</b>ซ้ายคือลูกค้า ขวาคือผ้า ล่างคือสรุปและปุ่มเดียวที่สำคัญ · ไม่มีการกดไปหน้าถัดไปเลยจนกว่าจะบันทึก</div>
+    </div>
+  </div>
+
+  <div class="frames" style="margin-top:26px">
+    <div class="unit">
+      <div class="wf frame" style="width:420px">
+        <div class="bar"><span>บิล 04832 · บันทึกแล้ว</span></div>
+        <div class="pad" style="display:flex;flex-direction:column;gap:11px">
+          <div class="note">บันทึกสำเร็จ · คุณสมชาย ใจดี · 4 ชิ้น · ฿750 · นัดรับ 5 พ.ย. 69</div>
+          <div class="lbl">ป้ายที่จะพิมพ์ · 40 × 30 มม. <span class="mk" style="width:16px;height:16px;font-size:10px">5</span></div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <div class="dash" style="width:88px;height:66px;flex-direction:column;gap:3px"><span style="font-size:10px">▌▌▐▌▌▐▌</span><b style="font-size:11px;color:#333">04832-01</b></div>
+            <div class="dash" style="width:88px;height:66px;flex-direction:column;gap:3px"><span style="font-size:10px">▌▌▐▌▌▐▌</span><b style="font-size:11px;color:#333">04832-02</b></div>
+            <div class="dash" style="width:88px;height:66px;flex-direction:column;gap:3px"><span style="font-size:10px">▌▌▐▌▌▐▌</span><b style="font-size:11px;color:#333">04832-03</b></div>
+            <div class="dash" style="width:88px;height:66px;flex-direction:column;gap:3px"><span style="font-size:10px">▌▌▐▌▌▐▌</span><b style="font-size:11px;color:#333">04832-04</b></div>
+          </div>
+          <div style="display:flex;gap:8px"><div class="btn" style="flex:1">พิมพ์ซ้ำบางใบ</div><div class="btn pri" style="flex:2">พิมพ์ 4 ใบ</div></div>
+        </div>
+      </div>
+      <div class="cap"><b>A-2 · พิมพ์ป้าย</b>แยกเป็นหน้าของตัวเอง เพราะพิมพ์ซ้ำเกิดขึ้นจริง — ป้ายหลุด ป้ายเปียก ป้ายพิมพ์ไม่ติด</div>
+    </div>
+
+    <div class="unit">
+      <div class="wf frame" style="width:420px">
+        <div class="bar"><span>เสร็จแล้ว</span></div>
+        <div class="pad" style="display:flex;flex-direction:column;gap:11px">
+          <div style="text-align:center;padding:14px 0">
+            <div style="font-size:12px;color:#777">บิลเลขที่</div>
+            <div style="font-size:34px;line-height:44px;font-weight:700;letter-spacing:1px">04832</div>
+            <div style="font-size:13px;color:#555">อ่านให้ลูกค้าฟัง และเขียนบนถุง</div>
+          </div>
+          <div class="lbl">ใบรับของ <span class="mk" style="width:16px;height:16px;font-size:10px">6</span></div>
+          <div style="display:flex;gap:8px">
+            <div class="btn" style="flex:1">พิมพ์ใบรับของ</div>
+            <div class="btn" style="flex:1">ส่งทาง LINE</div>
+            <div class="btn" style="flex:1">ข้าม</div>
+          </div>
+          <div class="note">ใบรับของมี QR สำหรับผูก LINE · นี่คือทางเดียวที่ลูกค้าไม่มีเบอร์จะกลับมาติดต่อได้</div>
+          <div class="btn pri" style="margin-top:4px">รับผ้าเข้าใหม่</div>
+        </div>
+      </div>
+      <div class="cap"><b>A-3 · เสร็จและเริ่มใหม่</b>เลขบิลตัวใหญ่ที่สุดในหน้า เพราะเจ้าของร้านต้องอ่านออกเสียง · ปุ่มสุดท้ายพากลับไปหน้าว่างทันที ลูกค้าคนถัดไปรออยู่</div>
+    </div>
+  </div>
+</section>
+
+<div class="hr"></div>
+
+<!-- ══════════════ B · PHONE ══════════════ -->
+<section>
+  <h2>แบบ B · มือถือ — 4 ขั้นตอน</h2>
+  <p class="h2sub">ถ้าหน้าร้านใช้มือถือ ต้องแบ่งเป็นขั้น เพราะจอไม่พอ · <b>ช้ากว่าแบบ A อย่างหลีกเลี่ยงไม่ได้</b> เพราะต้องกดเปลี่ยนหน้า 3 ครั้งต่อบิล</p>
+
+  <div class="frames">
+
+    <div class="unit">
+      <div class="wf frame w-ph">
+        <div class="bar"><span>รับผ้าเข้า</span><span class="r">04832</span></div>
+        <div class="step"><i class="on"></i><i></i><i></i><i></i></div>
+        <div class="pad" style="display:flex;flex-direction:column;gap:10px">
+          <div class="lbl">แตะเพื่อเพิ่ม</div>
+          <div class="grid3">
+            <div class="tile on"><b>เสื้อเชิ้ต</b><span>฿60</span></div>
+            <div class="tile"><b>สแลค</b><span>฿120</span></div>
+            <div class="tile"><b>สูท</b><span>฿180</span></div>
+            <div class="tile"><b>กระโปรง</b><span>฿90</span></div>
+            <div class="tile"><b>เดรส</b><span>฿150</span></div>
+            <div class="tile" style="border-style:dashed"><b>อื่นๆ</b><span>—</span></div>
+          </div>
+          <div class="wf" style="padding:0 10px">
+            <div class="row"><span class="g">เสื้อเชิ้ต</span><span class="q"><i>−</i>2<i>+</i></span><span class="p">฿120</span></div>
+            <div class="row"><span class="g">เสื้อสูท</span><span class="q"><i>−</i>1<i>+</i></span><span class="p">฿180</span></div>
+          </div>
+          <div class="tot"><span>3 ชิ้น</span><span>฿300</span></div>
+          <div class="btn pri">ถัดไป · นัดรับ</div>
+        </div>
+      </div>
+      <div class="cap" style="max-width:300px"><b>B-1 · รายการผ้า</b>ไทล์เหลือ 3 คอลัมน์ · รายการย่อลง ตัดคำอธิบายออก</div>
+    </div>
+
+    <div class="unit">
+      <div class="wf frame w-ph">
+        <div class="bar"><span>นัดรับ</span><span class="r">04832</span></div>
+        <div class="step"><i class="on"></i><i class="on"></i><i></i><i></i></div>
+        <div class="pad" style="display:flex;flex-direction:column;gap:11px">
+          <div class="lbl">วันนัดรับ</div>
+          <div style="display:flex;flex-direction:column;gap:7px">
+            <div class="chip" style="height:40px;border-radius:3px;justify-content:space-between">พรุ่งนี้ · 4 พ.ย.</div>
+            <div class="chip on" style="height:40px;border-radius:3px;justify-content:space-between">+2 วัน · 5 พ.ย. <span style="font-size:11px">ระบบแนะนำ</span></div>
+            <div class="chip" style="height:40px;border-radius:3px;justify-content:space-between">+3 วัน · 6 พ.ย.</div>
+            <div class="chip" style="height:40px;border-radius:3px;justify-content:space-between">เลือกวันเอง</div>
+          </div>
+          <div class="note">ระบบเสนอจากประเภทผ้าและคิวงาน · เจ้าของร้านแก้ได้เสมอ</div>
+          <div class="lbl" style="margin-top:2px">ความเร่งด่วน</div>
+          <div style="display:flex;gap:7px"><span class="chip on" style="flex:1;justify-content:center;height:38px">ปกติ</span><span class="chip" style="flex:1;justify-content:center;height:38px">ด่วน</span></div>
+          <div class="btn pri" style="margin-top:4px">ถัดไป · ลูกค้า</div>
+        </div>
+      </div>
+      <div class="cap" style="max-width:300px"><b>B-2 · นัดรับและความด่วน</b>ตรงกับ <code>S_Due</code> + <code>T_Due</code> ใน BPMN</div>
+    </div>
+
+    <div class="unit">
+      <div class="wf frame w-ph">
+        <div class="bar"><span>ลูกค้า</span><span class="r">04832</span></div>
+        <div class="step"><i class="on"></i><i class="on"></i><i class="on"></i><i></i></div>
+        <div class="pad" style="display:flex;flex-direction:column;gap:10px">
+          <div class="fld">ค้นหาด้วยเบอร์โทร…</div>
+          <div class="wf" style="padding:9px">
+            <div style="font-weight:600;font-size:13px">คุณสมชาย ใจดี</div>
+            <div style="color:#777;font-size:12px">081-234-5678 · เคยใช้ 12 ครั้ง</div>
+          </div>
+          <div class="wf" style="padding:9px;opacity:.55">
+            <div style="font-weight:600;font-size:13px">คุณสมชาย พานิช</div>
+            <div style="color:#777;font-size:12px">089-777-1122 · เคยใช้ 2 ครั้ง</div>
+          </div>
+          <div class="btn sm">+ ลูกค้าใหม่</div>
+          <div class="dash" style="height:36px">☐ ไม่มีเบอร์โทร</div>
+          <div class="btn pri" style="margin-top:4px">ถัดไป · ตรวจทาน</div>
+        </div>
+      </div>
+      <div class="cap" style="max-width:300px"><b>B-3 · ลูกค้า</b>ชื่อซ้ำกันได้ จึงต้องแสดงเบอร์และจำนวนครั้งที่เคยใช้</div>
+    </div>
+
+    <div class="unit">
+      <div class="wf frame w-ph">
+        <div class="bar"><span>ตรวจทาน</span><span class="r">04832</span></div>
+        <div class="step"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></div>
+        <div class="pad" style="display:flex;flex-direction:column;gap:10px">
+          <div class="wf" style="padding:0 10px">
+            <div class="row"><span class="g">ลูกค้า</span><span class="p" style="width:auto">คุณสมชาย</span></div>
+            <div class="row"><span class="g">นัดรับ</span><span class="p" style="width:auto">5 พ.ย. 69</span></div>
+            <div class="row"><span class="g">ความด่วน</span><span class="p" style="width:auto">ปกติ</span></div>
+            <div class="row"><span class="g">เสื้อเชิ้ต ×2</span><span class="p">฿120</span></div>
+            <div class="row"><span class="g">เสื้อสูท ×1</span><span class="p">฿180</span></div>
+          </div>
+          <div class="tot"><span>3 ชิ้น · 3 ป้าย</span><span>฿300</span></div>
+          <div class="btn pri">บันทึกและพิมพ์ป้าย</div>
+          <div class="btn">ย้อนกลับไปแก้</div>
+        </div>
+      </div>
+      <div class="cap" style="max-width:300px"><b>B-4 · ตรวจทานก่อนบันทึก</b>แบบ A ไม่ต้องมีหน้านี้ เพราะเห็นทุกอย่างอยู่แล้ว · <b>นี่คือราคาของการใช้มือถือ</b></div>
+    </div>
+  </div>
+</section>
+
+<div class="hr"></div>
+
+<!-- ══════════════ MARKERS ══════════════ -->
+<section>
+  <h2>เหตุผลของแต่ละจุด</h2>
+  <p class="h2sub">ทุกข้อด้านล่างมาจากข้อจำกัดเรื่องความเร็ว หรือจาก pain point ที่เก็บมาจากหน้างาน</p>
+  <div class="legend">
+    <div class="lg"><span class="mk">1</span><div><b>ไทล์ ไม่ใช่ dropdown</b> — dropdown เสีย 1 แตะ 1 เลื่อน 1 แตะ ต่อหนึ่งรายการ · ไทล์เสีย 1 แตะ · เรียงตามความถี่จริงหลังใช้ไป 1 เดือน</div></div>
+    <div class="lg"><span class="mk">2</span><div><b>จำนวน 2 = ผ้า 2 ชิ้นในระบบ</b> ไม่ใช่ 1 แถวที่มีจำนวน 2 · แต่ละชิ้นมีป้าย มีบาร์โค้ด มีสถานะของตัวเอง เพราะรับบางส่วนได้ · ถ้าหน้าจอไม่สื่อข้อนี้ คนจะงงตอนส่งมอบ</div></div>
+    <div class="lg"><span class="mk">3</span><div><b>ค้นด้วยเบอร์ก่อนชื่อ</b> — พิมพ์ชื่อไทยช้ากว่าแป้นตัวเลข และเบอร์ซ้ำกันน้อยกว่าชื่อ · พิมพ์ 4 หลักก็ควรแคบลงพอ</div></div>
+    <div class="lg"><span class="mk">4</span><div><b>วันนัดรับเป็นชิป ไม่ใช่ปฏิทิน</b> — เปิดปฏิทินแล้วเลือกวัน ช้าเกินไปสำหรับ 65 บิลต่อวัน · ระบบเสนอค่าตั้งต้น คนยืนยัน</div></div>
+    <div class="lg"><span class="mk">5</span><div><b>พิมพ์ซ้ำต้องมีตั้งแต่วันแรก</b> — ป้ายหลุด ป้ายเปียก เครื่องพิมพ์ไม่ติด เกิดขึ้นจริงในสัปดาห์แรก</div></div>
+    <div class="lg"><span class="mk">6</span><div><b>ใบรับของคือทางเข้า ไม่ใช่หลักฐาน</b> — QR บนใบคือทางเดียวที่ลูกค้าซึ่งไม่ให้เบอร์จะกลับมาติดต่อได้ · ของจริงอยู่ในฐานข้อมูล ใบหายไม่เป็นไร</div></div>
+  </div>
+</section>
+
+<div class="hr"></div>
+
+<!-- ══════════════ COMPARE ══════════════ -->
+<section>
+  <h2>A หรือ B · ต้องตัดสินใจก่อนลงมือเขียน</h2>
+  <p class="h2sub">นี่คือคำถามข้อ 1 ที่ยังไม่ได้ตอบ — หน้าร้านจะใช้อุปกรณ์อะไร · ตอบข้อนี้แล้วหน้าที่เหลือทั้งหมดตามมาเอง</p>
+  <table>
+    <thead><tr><th style="width:150px"></th><th>แบบ A · จอกว้าง</th><th>แบบ B · มือถือ</th></tr></thead>
+    <tbody>
+      <tr><td><b>จำนวนหน้าจอต่อบิล</b></td><td>1</td><td>4</td></tr>
+      <tr><td><b>การกดเปลี่ยนหน้า</b></td><td>ไม่มี</td><td>3 ครั้งต่อบิล</td></tr>
+      <tr><td><b>แก้ของที่พิมพ์ผิด</b></td><td>แก้ตรงนั้นได้ทันที</td><td>ต้องย้อนกลับไปหน้าก่อน</td></tr>
+      <tr><td><b>ความเสี่ยงหลัก</b></td><td>ต้องซื้อหรือหาจอมาวางที่เคาน์เตอร์</td><td><b>อาจช้ากว่าสมุดบิล ซึ่งแปลว่าร้านจะเลิกใช้</b></td></tr>
+      <tr><td><b>เหมาะเมื่อ</b></td><td>มีโต๊ะและที่วางจอที่เคาน์เตอร์</td><td>เจ้าของร้านเดินไปมา ไม่มีที่วางจอ</td></tr>
+    </tbody>
+  </table>
+  <p class="h2sub" style="margin-top:16px"><b>ข้อเสนอ</b> — ไปจับเวลาที่ร้านก่อน · จับเวลาการเขียนสมุดบิล 10 ครั้ง ได้ค่ากลางมาเป็นเกณฑ์
+  แล้วค่อยเลือกแบบ · ถ้าสมุดบิลใช้ 60 วินาที แบบ B ที่ต้องกด 3 ครั้งน่าจะไม่รอด · <b>การวัดนี้ต้องทำก่อนติดตั้งระบบอยู่แล้ว เพราะเป็นส่วนหนึ่งของ baseline</b></p>
+</section>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>S1 · ตัวสร้างฉลากทดสอบ</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jsbarcode/3.11.6/JsBarcode.all.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, "Segoe UI", "Noto Sans Thai", sans-serif;
+    margin: 0; padding: 24px; background: #F7F7F5; color: #2C2C2A;
+  }
+  h1 { font-size: 20px; margin: 0 0 4px; }
+  .sub { font-size: 13px; color: #6B6A66; margin-bottom: 20px; }
+
+  .panel {
+    background: #fff; border: 1px solid #E5E4DF; border-radius: 8px;
+    padding: 16px; margin-bottom: 16px; max-width: 760px;
+  }
+  .row { display: flex; gap: 16px; flex-wrap: wrap; align-items: flex-end; }
+  label { display: block; font-size: 12px; color: #6B6A66; margin-bottom: 4px; }
+  select, input {
+    font: inherit; padding: 8px 10px; border: 1px solid #C4C3BE;
+    border-radius: 6px; background: #fff;
+  }
+  button {
+    font: inherit; font-weight: 600; padding: 10px 18px; border: none;
+    border-radius: 6px; background: #2F6B3C; color: #fff; cursor: pointer;
+  }
+  button.secondary { background: #fff; color: #2C2C2A; border: 1px solid #C4C3BE; }
+  .hint { font-size: 12px; color: #6B6A66; margin-top: 12px; line-height: 1.6; }
+
+  /* ---------- พื้นที่ฉลาก ---------- */
+  #sheet { display: flex; flex-wrap: wrap; gap: 4mm; }
+
+  .label {
+    border: 1px dashed #C4C3BE;          /* เส้นประนี้จะไม่ถูกพิมพ์ */
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    background: #fff; overflow: hidden; padding: 1mm;
+  }
+  .label .code { font-size: 7pt; font-family: monospace; margin-top: 0.5mm; }
+  .label svg, .label canvas { max-width: 100%; height: auto; }
+
+  @media print {
+    body { background: #fff; padding: 0; margin: 0; }
+    .panel, h1, .sub, .noprint { display: none !important; }
+    #sheet { gap: 0; }
+    .label { border: none; page-break-inside: avoid; }
+    @page { margin: 4mm; }
+  }
+</style>
+</head>
+<body>
+
+<h1>S1 · ตัวสร้างฉลากทดสอบ</h1>
+<div class="sub">สร้างฉลากบาร์โค้ดสำหรับพิมพ์ แล้วนำไปใช้กับหน้าทดสอบการสแกน</div>
+
+<div class="panel noprint">
+  <div class="row">
+    <div>
+      <label>รูปแบบรหัส</label>
+      <select id="format">
+        <option value="code128">Code 128 (บาร์โค้ดแท่ง)</option>
+        <option value="qr">QR Code</option>
+        <option value="both">ทั้งสองแบบ อย่างละชุด</option>
+      </select>
+    </div>
+    <div>
+      <label>ขนาดฉลาก</label>
+      <select id="size">
+        <option value="32x25">32 × 25 มม.</option>
+        <option value="40x30" selected>40 × 30 มม.</option>
+        <option value="50x30">50 × 30 มม.</option>
+        <option value="60x40">60 × 40 มม.</option>
+      </select>
+    </div>
+    <div>
+      <label>จำนวน</label>
+      <input id="count" type="number" value="20" min="1" max="200" style="width:90px">
+    </div>
+    <div>
+      <label>ขึ้นต้นด้วย</label>
+      <input id="prefix" value="SBL" style="width:90px">
+    </div>
+    <div>
+      <label>เริ่มที่เลข</label>
+      <input id="start" type="number" value="1" min="1" style="width:90px">
+    </div>
+    <button onclick="render()">สร้างฉลาก</button>
+    <button class="secondary" onclick="window.print()">พิมพ์</button>
+  </div>
+
+  <div class="hint">
+    <b>ก่อนพิมพ์</b> — ตั้งค่าในหน้าต่างพิมพ์ให้ <b>Scale = 100%</b> และปิด <b>Fit to page</b>
+    ไม่อย่างนั้นขนาดฉลากจะเพี้ยนและผลการทดสอบจะใช้ไม่ได้<br>
+    <b>หลังพิมพ์</b> — วัดด้วยไม้บรรทัดว่าได้ขนาดตามที่เลือกจริงหรือไม่ นี่คือส่วนหนึ่งของเกณฑ์ผ่าน S2
+  </div>
+</div>
+
+<div id="sheet"></div>
+
+<script>
+const SIZES = {
+  '32x25': { w: 32, h: 25, barH: 11, qr: 48 },
+  '40x30': { w: 40, h: 30, barH: 14, qr: 62 },
+  '50x30': { w: 50, h: 30, barH: 14, qr: 62 },
+  '60x40': { w: 60, h: 40, barH: 20, qr: 86 },
+};
+
+function makeLabel(code, kind, size) {
+  const s = SIZES[size];
+  const el = document.createElement('div');
+  el.className = 'label';
+  el.style.width  = s.w + 'mm';
+  el.style.height = s.h + 'mm';
+
+  if (kind === 'code128') {
+    const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    el.appendChild(svg);
+    JsBarcode(svg, code, {
+      format: 'CODE128',
+      height: s.barH * 3.78,   // มม. → px โดยประมาณที่ 96dpi
+      width: 1.6,
+      displayValue: false,
+      margin: 0,
+    });
+  } else {
+    const box = document.createElement('div');
+    el.appendChild(box);
+    new QRCode(box, {
+      text: code,
+      width: s.qr,
+      height: s.qr,
+      correctLevel: QRCode.CorrectLevel.M,
+    });
+  }
+
+  const cap = document.createElement('div');
+  cap.className = 'code';
+  cap.textContent = code;
+  el.appendChild(cap);
+  return el;
+}
+
+function render() {
+  const sheet  = document.getElementById('sheet');
+  const format = document.getElementById('format').value;
+  const size   = document.getElementById('size').value;
+  const count  = parseInt(document.getElementById('count').value, 10);
+  const prefix = document.getElementById('prefix').value.trim() || 'SBL';
+  const start  = parseInt(document.getElementById('start').value, 10);
+
+  sheet.innerHTML = '';
+  const kinds = format === 'both' ? ['code128', 'qr'] : [format];
+
+  for (const kind of kinds) {
+    for (let i = 0; i < count; i++) {
+      const n = String(start + i).padStart(5, '0');
+      sheet.appendChild(makeLabel(`${prefix}-${n}`, kind, size));
+    }
+  }
+}
+
+render();
+</script>
+</body>
+</html>

@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<title>ศรีบริสุทธิ์ ซักแห้ง · Screen Flow</title>
+<style>
+:root{
+  --sage-900:#262E19;
+
+  --sage-100:#EEF2E9;--sage-200:#DBE2D0;--sage-300:#BEC9AC;--sage-400:#A3B18C;
+  --sage-600:#6F8052;--sage-700:#54633B;--sage-800:#3C4729;
+  --sand-100:#F7F2EB;--sand-200:#EAE2D6;--sand-300:#D4CAB9;--sand-400:#BAAC97;
+  --sand-600:#6B5E4A;--sand-700:#584F41;--sand-900:#201D18;
+  --wheat-100:#F5EDD9;--wheat-300:#D9C89A;--wheat-500:#7E6526;--wheat-700:#5E4B1A;
+  --danger:#9B3A2C;--danger-bg:#F7E0DB;--danger-border:#E0A79C;
+  --warn:#8A4F23;--warn-bg:#F6E6D3;--warn-border:#DDB888;
+  --info:#2F5366;--info-bg:#DDE8EE;--info-border:#A8C4D4;
+  --ok:#54633B;--ok-bg:#EEF2E9;--ok-border:#BEC9AC;
+  --r-sm:6px;--r-md:10px;--r-lg:14px;--r-xl:20px;--r-full:999px;
+  --sh-sm:0 1px 2px rgba(28,26,22,.06);--sh-md:0 2px 8px rgba(28,26,22,.08);
+  --font:"IBM Plex Sans Thai","IBM Plex Sans","Helvetica Neue",sans-serif;
+  --font-num:"IBM Plex Mono","SF Mono",monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font);background:var(--sand-200);color:var(--sand-900);font-size:15px;line-height:24px;padding:48px;-webkit-font-smoothing:antialiased}
+.page{max-width:1480px;margin:0 auto}
+.masthead{background:var(--sage-900);color:#fff;border-radius:var(--r-xl);padding:36px 40px;margin-bottom:40px}
+.masthead h1{font-size:30px;line-height:40px;font-weight:600;letter-spacing:-.3px}
+.masthead p{color:var(--sage-200);margin-top:6px;font-size:15px;line-height:24px;max-width:900px}
+
+h2{font-size:22px;line-height:30px;font-weight:600;margin-bottom:4px}
+.lead{color:var(--sand-700);font-size:14px;line-height:22px;max-width:900px;margin-bottom:22px}
+section{margin-bottom:48px}
+
+/* ---- legend ---- */
+.legend{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:28px}
+.lg{display:inline-flex;align-items:center;gap:8px;padding:7px 13px;border-radius:var(--r-full);background:#fff;border:1px solid var(--sand-300);font-size:12.5px;line-height:18px}
+.lg i{width:12px;height:12px;border-radius:3px;flex:none}
+
+/* ---- flow lanes ---- */
+.lanes{display:flex;gap:20px;align-items:flex-start}
+.lane{flex:1;background:#fff;border:1px solid var(--sand-300);border-radius:var(--r-lg);box-shadow:var(--sh-sm);overflow:hidden}
+.lane>header{padding:14px 18px;color:#fff}
+.lane.d1>header{background:var(--sage-700)}
+.lane.d2>header{background:#2F5366}
+.lane.d3>header{background:var(--wheat-700)}
+.lane>header b{display:block;font-size:16px;line-height:24px;font-weight:600}
+.lane>header span{font-size:12px;line-height:18px;opacity:.85}
+.lane .flow{padding:18px}
+
+/* ---- nodes ---- */
+.n{border-radius:var(--r-md);border:1px solid var(--sand-300);background:#fff;padding:11px 13px;box-shadow:var(--sh-sm)}
+.n .id{font-family:var(--font-num);font-size:11px;font-weight:600;letter-spacing:.4px;color:var(--wheat-700)}
+.n .t{font-size:14.5px;line-height:21px;font-weight:600;margin-top:1px}
+.n .u{font-family:var(--font-num);font-size:10.5px;line-height:16px;color:var(--sand-600);margin-top:2px}
+.n.entry{background:var(--sand-100);border-style:dashed;border-color:var(--sand-400);box-shadow:none}
+.n.entry .t{font-weight:500;color:var(--sand-700)}
+.n.hub{background:var(--sage-100);border-color:var(--sage-600)}
+.n.block{background:var(--danger-bg);border-color:var(--danger-border)}
+.n.block .u{color:var(--danger);font-weight:600}
+.n.exit{background:var(--ok-bg);border-color:var(--ok-border)}
+
+/* ---- arrows ---- */
+.a{display:flex;align-items:center;justify-content:center;gap:7px;padding:7px 0;color:var(--sand-600);font-size:12px;line-height:16px}
+.a::before{content:"↓";font-size:16px;color:var(--sage-600);font-weight:700}
+.a.lbl::before{content:"↓";}
+.a.up::before{content:"↑"}
+.a.loop{color:var(--wheat-700)}
+.a.loop::before{content:"↻";color:var(--wheat-500);font-size:15px}
+
+/* branch */
+.branch{display:flex;gap:10px;margin:7px 0 0 0}
+.branch .stem{flex:none;width:18px;display:flex;align-items:center;justify-content:center;color:var(--sage-600);font-weight:700}
+.branch .bn{flex:1}
+.bnote{font-size:11.5px;line-height:17px;color:var(--sand-600);padding:2px 0 0 28px}
+
+/* ---- cross app ---- */
+.cross{display:flex;flex-direction:column;gap:12px}
+.xrow{display:flex;align-items:stretch;gap:0;background:#fff;border:1px solid var(--sand-300);border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--sh-sm)}
+.xrow .from,.xrow .to{width:230px;flex:none;padding:14px 16px}
+.xrow .from{background:var(--sand-100);border-right:1px solid var(--sand-300)}
+.xrow .to{background:var(--ok-bg);border-left:1px solid var(--ok-border)}
+.xrow .mid{flex:1;padding:14px 18px;display:flex;flex-direction:column;justify-content:center}
+.xrow .from b,.xrow .to b{display:block;font-size:14px;font-weight:600}
+.xrow .from span,.xrow .to span{font-family:var(--font-num);font-size:11px;color:var(--sand-600)}
+.xrow .mid b{font-size:14px;font-weight:600;color:var(--sage-900)}
+.xrow .mid span{font-size:12.5px;line-height:19px;color:var(--sand-700)}
+.xrow .ar{font-size:18px;color:var(--wheat-500);font-weight:700;align-self:center;padding:0 4px}
+
+/* ---- coverage table ---- */
+table{width:100%;border-collapse:collapse;font-size:13.5px;background:#fff;border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--sh-sm)}
+th{text-align:left;padding:10px 14px;background:var(--sand-100);font-size:11.5px;font-weight:600;letter-spacing:.3px;text-transform:uppercase;color:var(--sand-600);border-bottom:1px solid var(--sand-300);white-space:nowrap}
+td{padding:10px 14px;border-bottom:1px solid var(--sand-200);vertical-align:top}
+tr:last-child td{border-bottom:none}
+td.m{font-family:var(--font-num);font-size:12px;white-space:nowrap}
+.ok-t{color:var(--ok);font-weight:600}
+.warn-t{color:var(--warn);font-weight:600}
+.bad-t{color:var(--danger);font-weight:600}
+.note{background:#fff;border:1px solid var(--sand-300);border-radius:var(--r-lg);padding:18px 20px;box-shadow:var(--sh-sm)}
+.note h3{font-size:15px;font-weight:600;margin-bottom:8px}
+.note li{font-size:13.5px;line-height:22px;margin-left:18px}
+</style>
+</head>
+<body>
+<div class="page">
+
+<div class="masthead">
+  <h1>ศรีบริสุทธิ์ ซักแห้ง · Screen Flow</h1>
+  <p>16 หน้าจอ 3 แอป · แผนผังนี้ตอบคำถามเดียวคือ "จากหน้านี้ไปไหนได้" ซึ่งเป็นสิ่งที่ต้องรู้ก่อนเขียน route ใน Next.js · เส้นที่ข้ามแอปกันมีแค่ 3 เส้น และทั้งสามเส้นคือหัวใจของระบบ</p>
+</div>
+
+<div class="legend">
+  <span class="lg"><i style="background:var(--sand-100);border:1px dashed var(--sand-400)"></i>จุดเข้า</span>
+  <span class="lg"><i style="background:#fff;border:1px solid var(--sand-300)"></i>หน้าจอ</span>
+  <span class="lg"><i style="background:var(--sage-100);border:1px solid var(--sage-600)"></i>หน้าหลัก (hub)</span>
+  <span class="lg"><i style="background:var(--ok-bg);border:1px solid var(--ok-border)"></i>ปลายทาง</span>
+  <span class="lg"><i style="background:var(--danger-bg);border:1px solid var(--danger-border)"></i>ยังออกแบบต่อไม่ได้</span>
+  <span class="lg"><span style="color:var(--wheat-500);font-weight:700">↻</span>วนกลับ</span>
+</div>
+
+<!-- =============== LANES =============== -->
+<section>
+  <h2>ผังการไปมาของแต่ละแอป</h2>
+  <p class="lead">D3 มาก่อนเพราะเป็นแอปที่ถูกใช้บ่อยที่สุดในวันทำงาน และเป็นแอปที่ถ้าออกแบบพลาดแล้วทั้งระบบล้ม</p>
+  <div class="lanes">
+
+    <!-- ============ D3 SCAN ============ -->
+    <div class="lane d3">
+      <header><b>D3 · แอปสแกน</b><span>ผู้ช่วย · คนซัก · ช่างรีด — วันละหลายสิบครั้ง</span></header>
+      <div class="flow">
+        <div class="n entry"><div class="t">เปิดแอปจากหน้าจอมือถือ (PWA)</div></div>
+        <div class="a">เลือกบทบาทครั้งแรกครั้งเดียว</div>
+
+        <div class="n hub"><div class="id">S-01</div><div class="t">สแกน</div><div class="u">UC10 · กล้องเปิดทันที</div></div>
+
+        <div class="branch">
+          <div class="stem">↳</div>
+          <div class="bn">
+            <div class="n"><div class="id">S-05</div><div class="t">ออฟไลน์</div><div class="u">UC10 · คิวในเครื่อง</div></div>
+            <div class="bnote">เน็ตหลุด → สแกนต่อได้ปกติ กลับเข้า S-01 เองเมื่อออนไลน์</div>
+          </div>
+        </div>
+
+        <div class="a">สแกนติด</div>
+        <div class="n"><div class="id">S-02</div><div class="t">ยืนยันงาน</div><div class="u">UC10 · UC11</div></div>
+
+        <div class="branch">
+          <div class="stem">↳</div>
+          <div class="bn">
+            <div class="n block"><div class="id">S-04</div><div class="t">แจ้งปัญหา</div><div class="u">UC13 · รอคำตอบ N2</div></div>
+            <div class="bnote">ช่างรีดเจอคราบหรือผ้าขาด · ยังไม่รู้ว่าปลายทางคืออะไร</div>
+          </div>
+        </div>
+
+        <div class="a loop">ยืนยันแล้วกลับไปสแกนชิ้นถัดไป</div>
+
+        <div class="n"><div class="id">S-03</div><div class="t">คิวงานของฉัน</div><div class="u">UC12 · เข้าจาก bottom nav</div></div>
+        <div class="a up">แตะรายการ → เข้า S-02 ได้โดยไม่ต้องสแกน</div>
+      </div>
+    </div>
+
+    <!-- ============ D2 FRONT OFFICE ============ -->
+    <div class="lane d2">
+      <header><b>D2 · หน้าร้าน</b><span>เจ้าของร้าน — 7 จาก 13 use case</span></header>
+      <div class="flow">
+        <div class="n entry"><div class="t">เปิดเว็บหน้าร้าน · ล็อกอิน</div></div>
+        <div class="a"></div>
+
+        <div class="n hub"><div class="id">F-01</div><div class="t">ภาพรวมร้าน</div><div class="u">UC08 · hub ของทุกอย่าง</div></div>
+
+        <div class="branch">
+          <div class="stem">↳</div>
+          <div class="bn">
+            <div class="n"><div class="id">F-02</div><div class="t">รับผ้าเข้า</div><div class="u">UC04 · ต้องเร็วกว่าสมุดบิล</div></div>
+            <div class="a" style="padding:5px 0"></div>
+            <div class="n exit"><div class="id">F-03</div><div class="t">พิมพ์ป้าย</div><div class="u">UC04 · 40×30 มม.</div></div>
+            <div class="bnote">พิมพ์ซ้ำได้ เพราะป้ายหลุดและป้ายเปียกเกิดขึ้นจริง</div>
+          </div>
+        </div>
+
+        <div class="branch">
+          <div class="stem">↳</div>
+          <div class="bn">
+            <div class="n"><div class="id">F-04</div><div class="t">ส่งมอบผ้า</div><div class="u">UC05 · include UC02</div></div>
+            <div class="bnote">รับบางส่วนได้ · ติ๊กเป็นชิ้น · บิลปิดบางส่วนและยังเปิดอยู่</div>
+          </div>
+        </div>
+
+        <div class="branch">
+          <div class="stem">↳</div>
+          <div class="bn">
+            <div class="n"><div class="id">F-05</div><div class="t">ตามของค้างรับ</div><div class="u">UC06 · include UC02</div></div>
+            <div class="bnote">ลูกค้ามารับ → เข้า F-04 ต่อ · บันทึกทุกครั้งที่ติดต่อ</div>
+          </div>
+        </div>
+
+        <div class="branch">
+          <div class="stem">↳</div>
+          <div class="bn">
+            <div class="n block"><div class="id">F-06</div><div class="t">คิดค่าแรง</div><div class="u">UC07 · รอคำตอบ B1 · B3</div></div>
+            <div class="bnote">คิดจากการสแกนจริง · เหตุผลที่พนักงานยอมสแกน</div>
+          </div>
+        </div>
+
+        <div class="branch">
+          <div class="stem">↳</div>
+          <div class="bn">
+            <div class="n block"><div class="id">F-07</div><div class="t">แก้ไขรายการ</div><div class="u">UC09 · รอคำตอบ N1 · N2 · N3</div></div>
+            <div class="bnote">เข้าได้จาก F-01 F-04 F-05 · เพิ่มรายการใหม่ ไม่ทับของเดิม</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ D1 CUSTOMER ============ -->
+    <div class="lane d1">
+      <header><b>D1 · แอปลูกค้า</b><span>ลูกค้า — เปิดนานๆ ครั้ง ไม่มีอะไรให้เรียนรู้</span></header>
+      <div class="flow">
+        <div class="n entry"><div class="t">สแกน QR บนใบเสร็จ · หรือเมนู LINE OA</div></div>
+        <div class="a">ครั้งแรกเท่านั้น</div>
+
+        <div class="n"><div class="id">C-01</div><div class="t">ผูกบัญชี</div><div class="u">UC01 · ไม่ใช่หน้าล็อกอิน</div></div>
+        <div class="a"></div>
+
+        <div class="n hub"><div class="id">C-02</div><div class="t">ผ้าของฉัน</div><div class="u">UC02 · หน้าที่มีค่าที่สุดในระบบ</div></div>
+        <div class="bnote" style="padding-left:0;margin-bottom:4px">ครั้งต่อๆ ไปเข้าตรงนี้เลย ไม่ผ่าน C-01 อีก</div>
+        <div class="a"></div>
+
+        <div class="n"><div class="id">C-03</div><div class="t">รายละเอียดบิล</div><div class="u">UC02 · หนึ่งแถวต่อหนึ่งชิ้น</div></div>
+        <div class="a"></div>
+
+        <div class="n exit"><div class="id">C-04</div><div class="t">ชำระเงิน</div><div class="u">UC03 · PromptPay QR</div></div>
+        <div class="bnote" style="padding-left:0">ระบบ<b>ไม่</b>ตรวจเงินเข้าอัตโนมัติ เจ้าของร้านยังต้องเปิดแอปธนาคารเอง</div>
+
+        <div style="margin-top:26px;padding-top:18px;border-top:1px dashed var(--sand-300)">
+          <div class="n entry"><div class="t">ข้อความแจ้งเตือนจาก LINE</div></div>
+          <div class="a">แตะข้อความ</div>
+          <div class="n hub" style="opacity:.9"><div class="id">C-02</div><div class="t">ผ้าของฉัน</div><div class="u">เส้นทางที่ลูกค้าใช้จริงบ่อยที่สุด</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =============== CROSS APP =============== -->
+<section>
+  <h2>เส้นที่ข้ามแอป · มีแค่ 3 เส้น</h2>
+  <p class="lead">สามเส้นนี้คือสิ่งที่ทำให้มันเป็น "ระบบ" ไม่ใช่สามแอปแยกกัน · ถ้าเส้นไหนพัง คุณค่าทั้งหมดของโครงการหายไปด้วย</p>
+  <div class="cross">
+
+    <div class="xrow">
+      <div class="from"><b>S-02 ยืนยันงาน</b><span>D3 · ช่างรีดกดยืนยัน</span></div>
+      <span class="ar">→</span>
+      <div class="mid">
+        <b>ชิ้นสุดท้ายของบิลเข้าสเตจ READY → ระบบส่ง LINE ให้ลูกค้าเอง</b>
+        <span>นี่คือการเปลี่ยนจาก pull เป็น push และคือเหตุผลที่ workflow W5 (รอบโทรตอนเย็น) หายไป · ลูกค้ารู้ก่อนจะคิดถามเสียอีก</span>
+      </div>
+      <span class="ar">→</span>
+      <div class="to"><b>C-02 ผ้าของฉัน</b><span>D1 · ลูกค้าเห็นว่าพร้อมรับ</span></div>
+    </div>
+
+    <div class="xrow">
+      <div class="from"><b>F-03 พิมพ์ป้าย</b><span>D2 · ตอนรับผ้าเข้า</span></div>
+      <span class="ar">→</span>
+      <div class="mid">
+        <b>ป้ายบาร์โค้ดคือตัวตนดิจิทัลของผ้าแต่ละชิ้น</b>
+        <span>ถ้า F-03 ไม่พิมพ์ป้าย S-01 ก็สแกนอะไรไม่ได้ทั้งแอป · นี่คือเหตุผลที่ "ไม่มีตัวตนดิจิทัลของผ้ารายชิ้น" เป็นสาเหตุรากข้อแรกของปัญหาทั้ง 29 ข้อ</span>
+      </div>
+      <span class="ar">→</span>
+      <div class="to"><b>S-01 สแกน</b><span>D3 · ทุกสเตจตลอดสายการผลิต</span></div>
+    </div>
+
+    <div class="xrow">
+      <div class="from"><b>S-04 แจ้งปัญหา</b><span>D3 · ช่างรีดเจอคราบหรือผ้าขาด</span></div>
+      <span class="ar">→</span>
+      <div class="mid">
+        <b>แจ้งเจ้าของร้านทันที ขึ้นในกล่อง "ต้องทำวันนี้"</b>
+        <span>วันนี้เรื่องแบบนี้เดินไปบอกปากเปล่าและไม่เหลือร่องรอย · ถ้าเจ้าของร้านไม่อยู่ ผ้าก็ค้างอยู่เฉยๆ</span>
+      </div>
+      <span class="ar">→</span>
+      <div class="to"><b>F-01 ภาพรวมร้าน</b><span>D2 · แล้วไปต่อที่ F-07</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- =============== COVERAGE =============== -->
+<section>
+  <h2>ตรวจความครบ · 13 use case ต้องมีหน้าจอครบทุกข้อ</h2>
+  <p class="lead">ตารางนี้คือเหตุผลที่ต้องวาด screen flow ก่อนเขียนโค้ด ถ้ามี use case ไหนไม่มีหน้าจอ แปลว่าลืม ถ้ามีหน้าจอไหนไม่มี use case แปลว่าสร้างเกิน</p>
+  <table>
+    <thead><tr><th>Use case</th><th>แอป</th><th>หน้าจอ</th><th>สถานะ</th><th>ติดอะไร</th></tr></thead>
+    <tbody>
+      <tr><td class="m">UC01</td><td>ลงทะเบียนรับแจ้งเตือน</td><td class="m">C-01</td><td class="ok-t">ครบ</td><td>—</td></tr>
+      <tr><td class="m">UC02</td><td>ดูสถานะผ้า</td><td class="m">C-02 · C-03</td><td class="ok-t">ครบ</td><td>—</td></tr>
+      <tr><td class="m">UC03</td><td>ชำระเงิน</td><td class="m">C-04 · F-04</td><td class="ok-t">ครบ</td><td>เข้าได้ทั้งฝั่งลูกค้าและเคาน์เตอร์</td></tr>
+      <tr><td class="m">UC04</td><td>รับผ้าเข้า</td><td class="m">F-02 · F-03</td><td class="warn-t">เกือบครบ</td><td>B2 — ประเภทผ้าและราคาทั้งหมด</td></tr>
+      <tr><td class="m">UC05</td><td>ส่งมอบผ้า</td><td class="m">F-04</td><td class="warn-t">เกือบครบ</td><td>B5 — กติกาการรับบางส่วน</td></tr>
+      <tr><td class="m">UC06</td><td>ตามของค้างรับ</td><td class="m">F-05</td><td class="ok-t">ครบ</td><td>—</td></tr>
+      <tr><td class="m">UC07</td><td>คิดค่าแรง</td><td class="m">F-06</td><td class="bad-t">ยังไม่ได้</td><td>B1 · B3 — อัตราค่าแรง</td></tr>
+      <tr><td class="m">UC08</td><td>ดูภาพรวมร้าน</td><td class="m">F-01</td><td class="ok-t">ครบ</td><td>ต้องวัด baseline ก่อนติดตั้งระบบ</td></tr>
+      <tr><td class="m">UC09</td><td>แก้ไขรายการ</td><td class="m">F-07</td><td class="bad-t">ยังไม่ได้</td><td>N1 · N2 · N3</td></tr>
+      <tr><td class="m">UC10</td><td>บันทึกงานที่สเตจ</td><td class="m">S-01 · S-02 · S-05</td><td class="ok-t">ครบ</td><td>—</td></tr>
+      <tr><td class="m">UC11</td><td>ค้นหาข้อมูลผ้า</td><td class="m">S-02</td><td class="warn-t">เกือบครบ</td><td>B2 — วิธีดูแลแต่ละประเภท</td></tr>
+      <tr><td class="m">UC12</td><td>ดูคิวงานของฉัน</td><td class="m">S-03</td><td class="ok-t">ครบ</td><td>—</td></tr>
+      <tr><td class="m">UC13</td><td>แจ้งปัญหาคุณภาพ</td><td class="m">S-04</td><td class="bad-t">ยังไม่ได้</td><td>N2 — วิธีจัดการผ้าเสียหาย</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- =============== NOTES =============== -->
+<section>
+  <h2>สิ่งที่ผังนี้บอก</h2>
+  <div class="lanes" style="gap:16px">
+    <div class="note" style="flex:1">
+      <h3>1 · แอปสแกนแทบไม่มีการนำทาง</h3>
+      <p style="font-size:13.5px;line-height:22px;color:var(--sand-700)">S-01 → S-02 → วนกลับ S-01 คือ 90% ของการใช้งานทั้งวัน ไม่มีเมนู ไม่มีหน้าซ้อนลึก นี่เป็นเรื่องตั้งใจ ถ้าวันหนึ่งแอปสแกนมี 6 หน้าจอขึ้นไป แปลว่ามีอะไรผิดทาง</p>
+    </div>
+    <div class="note" style="flex:1">
+      <h3>2 · F-01 เป็น hub ไม่ใช่รายงาน</h3>
+      <p style="font-size:13.5px;line-height:22px;color:var(--sand-700)">ทุกงานของเจ้าของร้านเริ่มจาก F-01 กล่อง "ต้องทำวันนี้" จึงสำคัญกว่าตัวเลข KPI เพราะมันบอกว่าควรกดไปหน้าไหนต่อ ไม่ใช่แค่บอกว่าเกิดอะไรขึ้น</p>
+    </div>
+    <div class="note" style="flex:1">
+      <h3>3 · 4 จาก 13 use case ยังติดคำถาม</h3>
+      <p style="font-size:13.5px;line-height:22px;color:var(--sand-700)">UC07 UC09 UC13 ออกแบบต่อไม่ได้เลย และ UC04 UC05 UC11 ออกแบบได้แต่ยังใช้ข้อมูลสมมติ · <b>การไปร้านครั้งเดียวปลดล็อก 6 use case</b> ถือเป็นงานที่คุ้มที่สุดที่ทำได้ตอนนี้</p>
+    </div>
+  </div>
+</section>
+
+</div>
+</body>
+</html>

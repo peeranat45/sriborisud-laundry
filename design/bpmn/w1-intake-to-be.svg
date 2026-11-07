@@ -1,0 +1,112 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2670 3050" width="2670" height="3050" font-family="IBM Plex Sans Thai, sans-serif">
+<defs><marker id="a" markerWidth="9" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0, 9 3.5, 0 7" fill="#201D18"/></marker><marker id="m" markerWidth="10" markerHeight="8" refX="10" refY="4" orient="auto"><polygon points="0 0, 10 4, 0 8" fill="#fff" stroke="#201D18"/></marker></defs>
+<rect width="2670" height="3050" fill="#F7F2EB"/>
+<text x="24" y="34" font-size="17" font-weight="700" fill="#201D18">W1 · รับผ้าเข้า (Intake) — To-Be</text>
+<rect x="160" y="86" width="2450.0" height="70" fill="#fff" stroke="#9A8A69"/>
+<rect x="160" y="86" width="30" height="70" fill="#EAE2D6" stroke="#9A8A69"/>
+<text x="175" y="121.0" font-size="12" font-weight="600" fill="#201D18" text-anchor="middle" transform="rotate(-90 175 121.0)">ลูกค้า</text>
+<rect x="160" y="186" width="2450.0" height="540" fill="#fff" stroke="#9A8A69"/>
+<rect x="160" y="186" width="30" height="540" fill="#EAE2D6" stroke="#9A8A69"/>
+<text x="175" y="456.0" font-size="12" font-weight="600" fill="#201D18" text-anchor="middle" transform="rotate(-90 175 456.0)">ร้านศรีบริสุทธิ์ ซักแห้ง</text>
+<rect x="190" y="186" width="2420.0" height="300" fill="none" stroke="#D4CAB9"/>
+<rect x="190" y="186" width="26" height="300" fill="#F7F2EB" stroke="#D4CAB9"/>
+<text x="203" y="336.0" font-size="11" fill="#584F41" text-anchor="middle" transform="rotate(-90 203 336.0)">เจ้าของร้าน</text>
+<rect x="190" y="486" width="2420.0" height="240" fill="none" stroke="#D4CAB9"/>
+<rect x="190" y="486" width="26" height="240" fill="#F7F2EB" stroke="#D4CAB9"/>
+<text x="203" y="606.0" font-size="11" fill="#584F41" text-anchor="middle" transform="rotate(-90 203 606.0)">ระบบ</text>
+<path d="M258,408 L355,408" fill="none" stroke="#201D18" stroke-width="1.4"  marker-end="url(#a)"/>
+<path d="M485,408 L575,408" fill="none" stroke="#201D18" stroke-width="1.4"  marker-end="url(#a)"/>
+<path d="M600,383 L600,268 L715,268" fill="none" stroke="#201D18" stroke-width="1.4"  marker-end="url(#a)"/>
+<text x="658" y="261" font-size="10" fill="#584F41" text-anchor="middle">ไม่พบ</text>
+<path d="M845,268 L960,268 L960,383" fill="none" stroke="#201D18" stroke-width="1.4"  marker-end="url(#a)"/>
+<path d="M625,408 L935,408" fill="none" stroke="#201D18" stroke-width="1.4"  marker-end="url(#a)"/>
+<text x="780" y="401" font-size="10" fill="#584F41" text-anchor="middle">พบ</text>
+<path d="M985,408 L1075,408" fill="none" stroke="#201D18" stroke-width="1.4"  marker-end="url(#a)"/>
+<path d="M1205,408 L1255,408" fill="none" stroke="#201D18" stroke-width="1.4"  marker-end="url(#a)"/>
+<path d="M1385,408 L1435,408" fill="none" stroke="#201D18" stroke-width="1.4"  marker-end="url(#a)"/>
+<path d="M1565,408 L1680,408 L1680,508" fill="none" stroke="#201D18" stroke-width="1.4"  marker-end="url(#a)"/>
+<path d="M1745,548 L1765,548" fill="none" stroke="#201D18" stroke-width="1.4"  marker-end="url(#a)"/>
+<path d="M1830,508 L1830,408 L1795,408" fill="none" stroke="#201D18" stroke-width="1.4"  marker-end="url(#a)"/>
+<path d="M1925,408 L2155,408" fill="none" stroke="#201D18" stroke-width="1.4"  marker-end="url(#a)"/>
+<path d="M2285,408 L2382,408" fill="none" stroke="#201D18" stroke-width="1.4"  marker-end="url(#a)"/>
+<path d="M1205,408 L1140,408 L1140,508" fill="none" stroke="#201D18" stroke-width="1.4"  marker-end="url(#a)"/>
+<path d="M1205,548 L1320,548 L1320,448" fill="none" stroke="#201D18" stroke-width="1.4"  marker-end="url(#a)"/>
+<path d="M2285,408 L2220,408 L2220,508" fill="none" stroke="#201D18" stroke-width="1.4"  marker-end="url(#a)"/>
+<path d="M240,156 L240,390" fill="none" stroke="#201D18" stroke-width="1.4" stroke-dasharray="7 4" marker-end="url(#m)"/>
+<text x="240" y="149" font-size="10" fill="#584F41" text-anchor="middle">ส่งมอบเสื้อผ้า</text>
+<path d="M2285,548 L2580,548 L2580,156" fill="none" stroke="#201D18" stroke-width="1.4" stroke-dasharray="7 4" marker-end="url(#m)"/>
+<text x="2432" y="149" font-size="10" fill="#584F41" text-anchor="middle">ใบรับของ + QR</text>
+<path d="M1680,588 L1780,625" fill="none" stroke="#201D18" stroke-width="1.4" stroke-dasharray="3 3" marker-end="url(#a)"/>
+<path d="M1830,588 L2080,619" fill="none" stroke="#201D18" stroke-width="1.4" stroke-dasharray="3 3" marker-end="url(#a)"/>
+<path d="M1140,588 L1070,622" fill="none" stroke="#201D18" stroke-width="1.4" stroke-dasharray="3 3" marker-end="url(#a)"/>
+<path d="M2220,588 L2460,622" fill="none" stroke="#201D18" stroke-width="1.4" stroke-dasharray="3 3" marker-end="url(#a)"/>
+<circle cx="240" cy="408" r="18.0" fill="#fff" stroke="#54633B" stroke-width="1.6"/>
+<text x="240" y="440" font-size="10" fill="#584F41" text-anchor="middle">ลูกค้านำเสื้อผ้ามาส่</text>
+<text x="240" y="453" font-size="10" fill="#584F41" text-anchor="middle">ง</text>
+<rect x="355" y="368" width="130" height="80" rx="9" fill="#fff" stroke="#54633B" stroke-width="1.4"/>
+<text x="363" y="383" font-size="12" fill="#8A4F23">👤</text>
+<text x="420" y="409" font-size="11" fill="#201D18" text-anchor="middle">ค้นหาลูกค้าด้วยเ</text>
+<text x="420" y="423" font-size="11" fill="#201D18" text-anchor="middle">บอร์โทร</text>
+<polygon points="600,383.0 625.0,408 600,433.0 575.0,408" fill="#fff" stroke="#8A4F23" stroke-width="1.5"/>
+<text x="600" y="413" font-size="15" fill="#8A4F23" text-anchor="middle">×</text>
+<text x="600" y="447" font-size="10" fill="#584F41" text-anchor="middle">พบลูกค้าเดิมหรือไม</text>
+<text x="600" y="460" font-size="10" fill="#584F41" text-anchor="middle">่</text>
+<rect x="715" y="228" width="130" height="80" rx="9" fill="#fff" stroke="#54633B" stroke-width="1.4"/>
+<text x="723" y="243" font-size="12" fill="#8A4F23">👤</text>
+<text x="780" y="276" font-size="11" fill="#201D18" text-anchor="middle">สร้างลูกค้าใหม่</text>
+<polygon points="960,383.0 985.0,408 960,433.0 935.0,408" fill="#fff" stroke="#8A4F23" stroke-width="1.5"/>
+<text x="960" y="413" font-size="15" fill="#8A4F23" text-anchor="middle">×</text>
+<rect x="1075" y="368" width="130" height="80" rx="9" fill="#fff" stroke="#54633B" stroke-width="1.4"/>
+<text x="1083" y="383" font-size="12" fill="#8A4F23">👤</text>
+<text x="1140" y="409" font-size="11" fill="#201D18" text-anchor="middle">บันทึกรายการเสื้</text>
+<text x="1140" y="423" font-size="11" fill="#201D18" text-anchor="middle">อผ้ารายชิ้น</text>
+<rect x="1255" y="368" width="130" height="80" rx="9" fill="#fff" stroke="#54633B" stroke-width="1.4"/>
+<text x="1263" y="383" font-size="12" fill="#8A4F23">👤</text>
+<text x="1320" y="409" font-size="11" fill="#201D18" text-anchor="middle">เลือกวันนัดรับแล</text>
+<text x="1320" y="423" font-size="11" fill="#201D18" text-anchor="middle">ะงานด่วน</text>
+<rect x="1435" y="368" width="130" height="80" rx="9" fill="#fff" stroke="#54633B" stroke-width="1.4"/>
+<text x="1443" y="383" font-size="12" fill="#8A4F23">👤</text>
+<text x="1500" y="416" font-size="11" fill="#201D18" text-anchor="middle">บันทึกบิล</text>
+<rect x="1795" y="368" width="130" height="80" rx="9" fill="#fff" stroke="#54633B" stroke-width="1.4"/>
+<text x="1803" y="383" font-size="12" fill="#8A4F23">👤</text>
+<text x="1860" y="409" font-size="11" fill="#201D18" text-anchor="middle">ติดป้ายบาร์โค้ดบ</text>
+<text x="1860" y="423" font-size="11" fill="#201D18" text-anchor="middle">นเสื้อผ้าทุกชิ้น</text>
+<rect x="2155" y="368" width="130" height="80" rx="9" fill="#fff" stroke="#54633B" stroke-width="1.4"/>
+<text x="2163" y="383" font-size="12" fill="#8A4F23">👤</text>
+<text x="2220" y="409" font-size="11" fill="#201D18" text-anchor="middle">นำเสื้อผ้าเข้าตู</text>
+<text x="2220" y="423" font-size="11" fill="#201D18" text-anchor="middle">้รอซัก</text>
+<circle cx="2400" cy="408" r="18.0" fill="#fff" stroke="#54633B" stroke-width="3.4"/>
+<text x="2400" y="440" font-size="10" fill="#584F41" text-anchor="middle">เสื้อผ้าพร้อมถูกสแกน</text>
+<text x="2400" y="453" font-size="10" fill="#584F41" text-anchor="middle">ทุกสเตจ</text>
+<rect x="1075" y="508" width="130" height="80" rx="9" fill="#EEF2E9" stroke="#54633B" stroke-width="1.4"/>
+<text x="1083" y="523" font-size="12" fill="#8A4F23">⚙</text>
+<text x="1140" y="549" font-size="11" fill="#201D18" text-anchor="middle">คำนวณราคาจากตารา</text>
+<text x="1140" y="563" font-size="11" fill="#201D18" text-anchor="middle">งราคา</text>
+<rect x="1615" y="508" width="130" height="80" rx="9" fill="#EEF2E9" stroke="#54633B" stroke-width="1.4"/>
+<text x="1623" y="523" font-size="12" fill="#8A4F23">⚙</text>
+<text x="1680" y="549" font-size="11" fill="#201D18" text-anchor="middle">ออกเลขบิลและรหัส</text>
+<text x="1680" y="563" font-size="11" fill="#201D18" text-anchor="middle">รายชิ้น</text>
+<rect x="1765" y="508" width="130" height="80" rx="9" fill="#EEF2E9" stroke="#54633B" stroke-width="1.4"/>
+<text x="1773" y="523" font-size="12" fill="#8A4F23">⚙</text>
+<text x="1830" y="549" font-size="11" fill="#201D18" text-anchor="middle">สร้างและสั่งพิมพ</text>
+<text x="1830" y="563" font-size="11" fill="#201D18" text-anchor="middle">์ป้ายบาร์โค้ด</text>
+<rect x="2155" y="508" width="130" height="80" rx="9" fill="#EEF2E9" stroke="#54633B" stroke-width="1.4"/>
+<text x="2163" y="523" font-size="12" fill="#8A4F23">⚙</text>
+<text x="2220" y="549" font-size="11" fill="#201D18" text-anchor="middle">ส่งใบรับของพร้อม</text>
+<text x="2220" y="563" font-size="11" fill="#201D18" text-anchor="middle">QR ผูกบัญชี LINE</text>
+<path d="M1755.0,633.0 a25.0,8 0 0 1 50,0 v34 a25.0,8 0 0 1 -50,0 z" fill="#fff" stroke="#2F5366"/>
+<path d="M1755.0,633.0 a25.0,8 0 0 0 50,0" fill="none" stroke="#2F5366"/>
+<text x="1780" y="688" font-size="10" fill="#2F5366" text-anchor="middle">ฐานข้อมูล</text>
+<path d="M2055.0,619.0 h38 l12,12 v50 h-50 z" fill="#fff" stroke="#2F5366"/>
+<text x="2080" y="694" font-size="10" fill="#2F5366" text-anchor="middle">ป้ายบาร์โค้ดรายช</text>
+<text x="2080" y="707" font-size="10" fill="#2F5366" text-anchor="middle">ิ้น</text>
+<path d="M990.0,622.0 h170 v56 h-170" fill="#FDFBF6" stroke="none"/>
+<path d="M990.0,622.0 h-10 v56 h10" fill="none" stroke="#9A8A69" stroke-width="1.3"/>
+<text x="996" y="638" font-size="10" fill="#584F41">ราคามาจากตารางราคาในระบบ</text>
+<text x="996" y="651" font-size="10" fill="#584F41">ไม่ขึ้นกับคนออกบิลอีกต่อไป</text>
+<path d="M2380.0,622.0 h170 v56 h-170" fill="#FDFBF6" stroke="none"/>
+<path d="M2380.0,622.0 h-10 v56 h10" fill="none" stroke="#9A8A69" stroke-width="1.3"/>
+<text x="2386" y="638" font-size="10" fill="#584F41">ลูกค้าที่ไม่ให้เบอร์ยังผูก</text>
+<text x="2386" y="651" font-size="10" fill="#584F41">บัญชีเองได้ภายหลังด้วย</text>
+<text x="2386" y="664" font-size="10" fill="#584F41">QR บนใบรับของ</text>
+</svg>
