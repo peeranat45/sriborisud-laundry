@@ -6,9 +6,11 @@
  * ตอนขึ้น MVP 1 หน้าจริงที่สร้าง QR นี้คือ F-03 "พิมพ์ป้าย"
  * ซึ่งจะพิมพ์ออกมาเป็นใบรับของพร้อม QR · หน้านี้ให้ลบทิ้ง
  *
- * เป็น Server Component โดยตั้งใจ
- *   BILL_TOKEN_SECRET อยู่ฝั่งเซิร์ฟเวอร์เท่านั้น ไม่มีทางหลุดไปเบราว์เซอร์
- *   และ QR ถูกเรนเดอร์เป็น data URL ตั้งแต่บนเซิร์ฟเวอร์ ไม่ต้องใช้ JS เลย
+ * สังเกตว่าหน้านี้ไม่ import db และไม่ import bill-token เลย
+ * มันแค่เรียก action แล้วเอาผลมาวาด QR
+ *   · การเซ็นโทเคนเป็น domain logic → อยู่ใน modules/bill/service.ts
+ *   · eslint บังคับข้อนี้อยู่ (no-restricted-imports)
+ *     ตอนแรกไฟล์นี้ import "@/lib/db" ตรงๆ แล้วโดน rule จับ ซึ่งถูกแล้ว
  *
  * วิธีใช้ · เปิดหน้านี้บนคอม แล้วสแกน QR ด้วยมือถือ
  *          ตรงกับสถานการณ์จริงที่สุด เพราะใบรับของอยู่คนละเครื่องกับลูกค้า
@@ -16,8 +18,7 @@
  */
 import { notFound } from "next/navigation";
 import QRCode from "qrcode";
-import { db } from "@/lib/db";
-import { createBillToken, buildLiffUrl } from "@/lib/bill-token";
+import { listBillLinksAction } from "@/modules/bill";
 import { formatPhone } from "@/lib/phone";
 
 export const dynamic = "force-dynamic";
@@ -50,9 +51,9 @@ export default async function DevQrPage() {
           <code className="font-mono">npm run dev</code>
           <br />
           <br />
-          <b>LINE_LOGIN_CHANNEL_ID</b> อยู่ที่ LINE Developers Console →
-          channel ประเภท <b>LINE Login</b> → Basic settings → Channel ID
-          (ตัวเลขล้วน · คนละตัวกับ LIFF ID และคนละตัวกับ access token)
+          <b>LINE_LOGIN_CHANNEL_ID</b> อยู่ที่ LINE Developers Console → channel
+          ประเภท <b>LINE Login</b> → Basic settings → Channel ID (ตัวเลขล้วน ·
+          คนละตัวกับ LIFF ID และคนละตัวกับ access token)
           <br />
           <br />
           <b>BILL_TOKEN_SECRET</b> สร้างด้วย{" "}
@@ -62,10 +63,7 @@ export default async function DevQrPage() {
     );
   }
 
-  const bills = await db.bill.findMany({
-    orderBy: { billNo: "asc" },
-    include: { customer: true },
-  });
+  const bills = await listBillLinksAction();
 
   if (bills.length === 0) {
     return (
@@ -79,15 +77,11 @@ export default async function DevQrPage() {
   }
 
   const items = await Promise.all(
-    bills.map(async (b) => {
-      const url = buildLiffUrl(createBillToken(b.billNo, b.year));
-      return {
-        bill: b,
-        url,
-        // 600px · ความละเอียดสูงพอสำหรับพิมพ์จริง
-        png: await QRCode.toDataURL(url, { width: 600, margin: 1 }),
-      };
-    }),
+    bills.map(async (b) => ({
+      ...b,
+      // 600px · ความละเอียดสูงพอสำหรับพิมพ์จริง
+      png: await QRCode.toDataURL(b.linkUrl, { width: 600, margin: 1 }),
+    })),
   );
 
   return (
@@ -98,35 +92,33 @@ export default async function DevQrPage() {
       </p>
 
       <div className="mt-5 space-y-4">
-        {items.map(({ bill, url, png }) => (
+        {items.map((b) => (
           <section
-            key={bill.id}
+            key={b.id}
             className="rounded-xl border border-[var(--color-border)] bg-white p-4"
           >
             <div className="flex items-start gap-4">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src={png}
-                alt={`QR บิล ${bill.billNo}`}
+                src={b.png}
+                alt={`QR บิล ${b.billNo}`}
                 className="h-40 w-40 flex-none rounded-md border border-[var(--color-border)]"
               />
               <div className="min-w-0 text-sm">
                 <div className="font-mono text-base font-bold">
-                  {bill.billNo} / {bill.year}
+                  {b.billNo} / {b.year}
                 </div>
-                <div>{bill.customer.name}</div>
+                <div>{b.customerName}</div>
                 <div className="text-[var(--color-text-muted)]">
-                  ฿{(bill.totalSatang / 100).toLocaleString("th-TH")} ·{" "}
-                  {formatPhone(bill.customer.phone)}
+                  ฿{(b.totalSatang / 100).toLocaleString("th-TH")} ·{" "}
+                  {formatPhone(b.customerPhone)}
                 </div>
 
                 <div className="mt-2 text-xs leading-relaxed">
-                  {bill.customer.phone ? (
+                  {b.customerPhone ? (
                     <>
                       ร้านมีเบอร์ไว้ · กรอก{" "}
-                      <b className="font-mono">
-                        {bill.customer.phone.slice(-4)}
-                      </b>{" "}
+                      <b className="font-mono">{b.customerPhone.slice(-4)}</b>{" "}
                       จะผ่าน · เลขอื่นต้องถูกปฏิเสธ
                     </>
                   ) : (
@@ -139,7 +131,7 @@ export default async function DevQrPage() {
                 </div>
 
                 <p className="mt-2 break-all font-mono text-[10px] leading-snug text-[var(--color-text-muted)]">
-                  {url}
+                  {b.linkUrl}
                 </p>
               </div>
             </div>
