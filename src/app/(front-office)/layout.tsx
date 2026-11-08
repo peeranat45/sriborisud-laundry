@@ -18,6 +18,7 @@
  * ══════════════════════════════════════════════════════════════════
  */
 import type { Metadata } from "next";
+import Link from "next/link";
 import "../globals.css";
 
 export const metadata: Metadata = {
@@ -32,9 +33,33 @@ export default function FrontOfficeLayout({
   return (
     <html lang="th">
       <body>
-        <header className="border-b border-[var(--color-border)] bg-[var(--color-primary)] px-4 py-3 text-white">
+        <header className="bg-[var(--color-primary)] px-4 py-3 text-white">
           <h1 className="text-base font-semibold">ศรีบริสุทธิ์ ซักแห้ง · หน้าร้าน</h1>
         </header>
+
+        {/*
+          <Link> ไม่ใช่ <a> · Next.js จะ prefetch หน้าปลายทางไว้ล่วงหน้า
+          แล้วเปลี่ยนหน้าโดยไม่ reload ทั้งหน้า (เฉพาะใน root layout เดียวกัน)
+          ถ้าใช้ <a href> ธรรมดา เบราว์เซอร์จะโหลดใหม่ทั้งหน้าทุกครั้ง
+
+          เมนูนี้ยังมีแค่ 2 รายการ · ตอนครบทั้ง 7 module จะย้ายไปเป็น
+          แถบล่าง 5 ช่องตามที่ออกแบบไว้ใน design/screens.html
+        */}
+        <nav className="flex gap-1 border-b border-[var(--color-border)] bg-white px-2">
+          <Link
+            href="/"
+            className="min-h-11 px-3 py-2.5 text-sm font-semibold"
+          >
+            ลูกค้า
+          </Link>
+          <Link
+            href="/intake"
+            className="min-h-11 px-3 py-2.5 text-sm font-semibold"
+          >
+            รับผ้าเข้า
+          </Link>
+        </nav>
+
         {children}
       </body>
     </html>

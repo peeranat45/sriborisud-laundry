@@ -18,7 +18,33 @@ const db = new PrismaClient();
 
 const YEAR = new Date().getFullYear();
 
+/**
+ * ประเภทผ้าตั้งต้น
+ *
+ * ⚠️ รายการนี้เป็นแค่ "ของให้กดทดสอบได้" ยังไม่ได้ยืนยันกับร้าน (คำถาม B1)
+ *    ราคาเป็น null ทั้งหมดโดยตั้งใจ · พนักงานกรอกราคาเองทุกชิ้น
+ *    ถ้าใส่ราคามั่วไว้ มันจะกลายเป็น "ราคาที่ระบบบอก" ซึ่งอันตรายกว่าว่าง
+ *    และหน้าจอจะดูเหมือนพร้อมใช้ทั้งที่ยังไม่พร้อม
+ */
+const CLOTHES_TYPES = [
+  { name: "เสื้อเชิ้ต", service: "ซักรีด", sortOrder: 10 },
+  { name: "กางเกง", service: "ซักรีด", sortOrder: 20 },
+  { name: "เสื้อสูท", service: "ซักแห้ง", sortOrder: 30 },
+  { name: "กระโปรง", service: "ซักแห้ง", sortOrder: 40 },
+  { name: "ชุดเดรส", service: "ซักแห้ง", sortOrder: 50 },
+  { name: "ผ้าม่าน", service: "ซักแห้ง", sortOrder: 60 },
+];
+
 async function main() {
+  // ── ประเภทผ้า ───────────────────────────────────────
+  for (const t of CLOTHES_TYPES) {
+    await db.clothesType.upsert({
+      where: { name_service: { name: t.name, service: t.service } },
+      update: { sortOrder: t.sortOrder, active: true },
+      create: { ...t, defaultPriceSatang: null },
+    });
+  }
+
   // ── ลูกค้าที่มีเบอร์โทร ──────────────────────────────
   const somchai = await db.customer.upsert({
     where: { phone: "0812345678" },
@@ -69,6 +95,10 @@ async function main() {
   console.log(`
   seed เรียบร้อย · ปี ${YEAR}
 
+    ประเภทผ้า ${CLOTHES_TYPES.length} รายการ · ราคา null ทั้งหมด
+               → หน้า /intake ต้องกรอกราคาเองทุกชิ้น
+               → รายการนี้ยังไม่ได้ยืนยันกับร้าน (คำถาม B1)
+
     บิล 04832  ${somchai.name}  ฿750   เบอร์ 081-234-5678
                → ตอนผูกบัญชีต้องกรอก 4 ตัวท้าย = 5678
                → กรอกเลขอื่นต้องถูกปฏิเสธ
@@ -76,7 +106,8 @@ async function main() {
     บิล 04833  ${noPhone.name}  ฿240   ไม่มีเบอร์
                → ระบบข้ามการตรวจเบอร์ · ผูกได้เลย
 
-  เปิด /dev/qr เพื่อเอา QR ไปสแกน
+  เปิด /dev/qr    เพื่อเอา QR ไปสแกน
+  เปิด /intake    เพื่อรับผ้าเข้าและออกเลขบิลใบใหม่
   `);
 }
 

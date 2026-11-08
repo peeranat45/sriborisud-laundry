@@ -3,12 +3,14 @@
 > ⚠️ **ไฟล์นี้ generate จาก `prisma/schema.prisma` ห้ามแก้ด้วยมือ**
 > สร้างใหม่ด้วย `npm run db:erd`
 
-4 ตาราง · 4 ความสัมพันธ์
+6 ตาราง · 6 ความสัมพันธ์
 
 ```mermaid
 erDiagram
     Customer ||--o{ CustomerLineAccount : "customer"
     Customer ||--o{ Bill : "customer"
+    Bill ||--o{ Piece : "bill"
+    ClothesType ||--o{ Piece : "clothesType"
     Customer ||--o{ CustomerMerge : "MergeSource"
     Customer ||--o{ CustomerMerge : "MergeTarget"
 
@@ -38,6 +40,23 @@ erDiagram
         Int totalSatang
         DateTime createdAt
     }
+    ClothesType {
+        String id PK
+        String name
+        String service
+        Int defaultPriceSatang "nullable"
+        Int sortOrder
+        Boolean active
+    }
+    Piece {
+        String id PK
+        String billId FK
+        String clothesTypeId FK
+        String pieceNo
+        Int priceSatang
+        String note "nullable"
+        DateTime createdAt
+    }
     CustomerMerge {
         String id PK
         String sourceId FK
@@ -54,6 +73,8 @@ erDiagram
 |---|---|
 | `CustomerLineAccount` | `customerId` + `lineUserId` |
 | `Bill` | `billNo` + `year` |
+| `ClothesType` | `name` + `service` |
+| `Piece` | `billId` + `pieceNo` |
 
 ## สิ่งที่ ERD ไม่ได้บอก
 
