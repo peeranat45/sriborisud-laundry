@@ -21,3 +21,6 @@ next-env.d.ts
 
 # ผลการทดสอบ POC ที่มีข้อมูลดิบ เก็บแยก
 poc/**/results/
+
+# generate ได้จาก npm run db:erd:html · ต้นฉบับคือ docs/ERD.md
+docs/ERD.html

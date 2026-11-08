@@ -65,6 +65,11 @@ jobs:
       - name: Unit tests
         run: npm test
 
+      # ERD ที่ไม่ตรงกับ schema คือเอกสารที่หลอกคนอ่าน
+      # ซึ่งแย่กว่าไม่มีเลย · ขั้นนี้บังคับให้ regenerate ก่อน merge
+      - name: ERD up to date
+        run: npm run db:erd:check
+
       # ─── TIER 1 · ช่องโหว่ใน dependency ───────────────────
       #
       # แยกเป็นสองขั้นโดยตั้งใจ · เพราะความเสี่ยงไม่เท่ากันจริงๆ

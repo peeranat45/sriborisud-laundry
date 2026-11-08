@@ -21,7 +21,10 @@
     "db:up": "./scripts/dev.sh up",
     "db:down": "./scripts/dev.sh down",
     "db:reset": "./scripts/dev.sh reset",
-    "db:psql": "./scripts/dev.sh psql"
+    "db:psql": "./scripts/dev.sh psql",
+    "db:erd": "node scripts/erd.mjs",
+    "db:erd:check": "node scripts/erd.mjs --check",
+    "db:erd:html": "node scripts/erd.mjs && node scripts/erd-html.mjs"
   },
   "dependencies": {
     "@line/liff": "^2.24.0",

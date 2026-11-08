@@ -230,6 +230,8 @@ feature/<ชื่อ>
 | **[docs/CODE-WALKTHROUGH.md](docs/CODE-WALKTHROUGH.md)** | อธิบายทุกไฟล์ทีละบรรทัด · **เริ่มอ่านที่นี่** |
 | [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | เปรียบเทียบ 3 แนวทาง · กฎการ import · ทำไมโครงสร้างเป็นแบบนี้ |
 | [docs/CI.md](docs/CI.md) | pipeline · branch protection · Vercel |
+| [docs/ERD.md](docs/ERD.md) | ERD ของตารางที่มีจริง · **generate จาก schema ห้ามแก้มือ** |
+| [docs/ERD-TARGET.md](docs/ERD-TARGET.md) | ERD เป้าหมายปลายทาง · เขียนด้วยมือ · ยังเป็นแบบร่าง |
 | [docs/bpmn/](docs/bpmn/) | BPMN 2.0 ทั้ง 6 workflow · As-Is และ To-Be |
 | [docs/bpmn/PAIN-POINT-MAP.md](docs/bpmn/PAIN-POINT-MAP.md) | เชื่อม As-Is → pain point → To-Be |
 | [design/design-system.html](design/design-system.html) | สี · ตัวอักษร · component · หลักฐาน WCAG |
