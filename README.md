@@ -2,162 +2,263 @@
 
 โครงงาน Independent Study · MSMIS ธรรมศาสตร์
 
-**สถานะปัจจุบัน — ขั้น POC** ยังไม่มีตรรกะทางธุรกิจ ยังไม่มีฐานข้อมูล
-ทุกหน้าในโฟลเดอร์ `/poc` ทำหน้าที่เดียวคือ **ตอบคำถามว่าเทคโนโลยีที่เลือกใช้ได้จริงหรือไม่**
+ร้านซักแห้งเฉพาะทางอายุ 70 ปี ย่านรัตนโกสินทร์ · ปีละประมาณ 20,000 บิล
+ปัจจุบันทุกอย่างอยู่บนกระดาษ · ผ้าหนึ่งชิ้นมีตัวตนเป็นเลขบิลที่เขียนด้วยมือบนป้ายกระดาษ
+
+---
+
+## สถานะปัจจุบัน
+
+| ส่วน | สถานะ |
+|---|---|
+| **ลงทะเบียนลูกค้า** · ค้นหา · เพิ่ม · ผูกบัญชี LINE | ✅ ใช้งานได้ |
+| CI/CD · 5 job บน PR + 2 job หลัง deploy | ✅ ใช้งานได้ |
+| ฐานข้อมูล · `Customer` `CustomerLineAccount` `Bill` `CustomerMerge` | ✅ migrate แล้ว |
+| รับผ้าเข้า (W1) | ⬜ ยังไม่เริ่ม |
+| สแกนตามสเตจ (D3) | ⬜ ยังไม่เริ่ม · POC ผ่านแล้ว |
+| แจ้งเตือน LINE · Messaging API | ⬜ ยังไม่เริ่ม |
+| Webhook · `follow` / `unfollow` | ⬜ **ยังไม่มี และจำเป็น** |
+
+โค้ด POC ทั้งหมดถูกย้ายออกแล้ว กู้คืนได้ด้วย
+
+```bash
+git checkout poc-complete -- src/app/poc
+```
 
 ---
 
 ## เริ่มใช้งาน
 
 ```bash
-npm install
-cp .env.example .env.local
-npm run dev
+./scripts/dev.sh
 ```
 
-เปิด http://localhost:3000
+คำสั่งเดียวจบ · เปิด Postgres ใน Docker → รอ healthcheck → ติดตั้ง dependency
+→ migrate → seed → เปิด dev server
 
----
+เปิด <http://localhost:3000>
 
-## 📱 รันบนมือถือ — อ่านก่อน ไม่งั้นกล้องจะเปิดไม่ได้
+> ต้องมี Docker Desktop เปิดอยู่ · ถ้ายังไม่มี `.env.local` สคริปต์จะคัดลอกจาก `.env.example` ให้
 
-เบราว์เซอร์อนุญาตให้ใช้กล้องเฉพาะใน **secure context** เท่านั้น คือ `https://` หรือ `localhost`
-การเข้าจากมือถือผ่าน `http://192.168.x.x:3000` **จะเปิดกล้องไม่ได้** และนี่เป็นข้อจำกัดของเบราว์เซอร์ ไม่ใช่ bug
+### ก่อนรันครั้งแรก
 
-### วิธีที่แนะนำ — HTTPS ในเครื่อง
+แก้ `.env.local` ให้ชี้มาที่ Postgres ในเครื่อง
 
 ```bash
-npm run dev:mobile
+DATABASE_URL="postgresql://sriborisud:localdev@localhost:5433/sriborisud"
+DIRECT_URL="postgresql://sriborisud:localdev@localhost:5433/sriborisud"
 ```
 
-คำสั่งนี้คือ `next dev --experimental-https -H 0.0.0.0` ซึ่ง Next.js จะสร้างใบรับรองให้เอง
-
-1. ดู IP ของเครื่องตัวเอง — macOS ใช้ `ipconfig getifaddr en0`
-2. บนมือถือเข้า `https://[IP ที่ได้]:3000`
-3. เบราว์เซอร์จะเตือนว่าใบรับรองไม่น่าเชื่อถือ — กด **Advanced → Proceed**
-4. ต้องอยู่ Wi-Fi วงเดียวกับคอมพิวเตอร์
-
-> ครั้งแรก Next.js อาจขอติดตั้ง `mkcert` ให้ตอบตกลง
-> ถ้าไม่อยากเห็นคำเตือนทุกครั้ง ติดตั้ง root CA ลงมือถือ หรือใช้วิธีถัดไป
-
-### ทางเลือก A — Chrome บน Android
-
-เปิด `chrome://flags/#unsafely-treat-insecure-origin-as-secure`
-ใส่ `http://[IP]:3000` แล้วกด Enable และรีสตาร์ท Chrome
-
-เร็วที่สุดถ้าทดสอบบน Android · **ใช้กับ iOS ไม่ได้**
-
-### ทางเลือก B — tunnel ออกอินเทอร์เน็ต
-
-```bash
-npm run dev
-npx ngrok http 3000
-```
-
-ได้ URL `https://` ที่เปิดจากมือถือเครื่องไหนก็ได้ ไม่ต้องอยู่วงเดียวกัน
-เหมาะกับการทดสอบ **S3 LIFF** เพราะ LINE ต้องเข้าถึง endpoint จากภายนอก
-
-### สรุปว่าควรใช้วิธีไหน
-
-| สถานการณ์ | ใช้ |
-|---|---|
-| ทดสอบกล้องบน Android | `dev:mobile` หรือ Chrome flag |
-| ทดสอบกล้องบน iOS | `dev:mobile` |
-| ทดสอบ LIFF | ngrok |
-| ทดสอบ PWA ติดตั้งลงหน้าจอ | `npm run build && npm start` แล้วใช้ ngrok |
-
-> **PWA และ service worker ทำงานเฉพาะบน production build** — ตอน `npm run dev` จะไม่ลงทะเบียน service worker โดยตั้งใจ เพื่อไม่ให้ cache รบกวนการพัฒนา
+**พอร์ต 5433 ไม่ใช่ 5432** เพราะ 5432 มักถูกจองโดยโปรเจกต์อื่นอยู่แล้ว ·
+ในเครื่องไม่ต้องใส่ `?pgbouncer=true` อันนั้นมีไว้สำหรับ Supabase pooler
 
 ---
 
-## รายการ POC
-
-| # | หน้า | คำถามที่ต้องการคำตอบ | เกณฑ์ผ่าน |
-|---|---|---|---|
-| **S1** | `/poc/scan` | สแกนบาร์โค้ดด้วยกล้องมือถือผ่านเบราว์เซอร์ได้จริงไหม | ติดใน 2 วิ · สำเร็จ ≥95% จาก 50 ครั้ง |
-| **S2** | `/poc/labels` | พิมพ์ฉลากขนาดถูกต้องจากเบราว์เซอร์ได้ไหม | วัดด้วยไม้บรรทัดแล้วตรงตามที่กำหนด |
-| **S3** | `/poc/liff` | เปิดจาก LINE แล้วรู้ว่าเป็นลูกค้าคนไหนไหม | ได้ userId โดยไม่ต้องล็อกอินซ้ำ |
-| **S5** | `/poc/promptpay` | สร้าง PromptPay QR เองแล้วธนาคารอ่านได้ไหม | แอปธนาคารเติมยอดอัตโนมัติ และโอนจริงสำเร็จ |
-| **S6** | `/poc/camera` | ถ่ายภาพ บีบอัด อัปโหลด ได้เร็วพอไหม | ≤300 KB และ ≤5 วินาทีบน 4G |
-| **S9** | `/poc/offline` | เน็ตหลุดแล้วยังสแกนได้ไหม | ข้อมูลขึ้นระบบครบ ไม่ซ้ำ ไม่หาย |
-| **PWA** | `/poc/pwa` | ติดตั้งลงหน้าจอแล้วกล้องยังทำงานไหม | ติดตั้งได้ และกล้องใช้ได้ในโหมด standalone |
-
-**S4** คือการตรวจสอบโควตาและราคา LINE OA ซึ่งไม่ต้องเขียนโค้ด แต่เป็น POC
-ที่มีความเสี่ยงด้านต้นทุนสูงที่สุด — ทำก่อนได้เลย
-
-### ลำดับที่แนะนำ
-
-1. **S1** — ความเสี่ยงสูงสุด ถ้าไม่ผ่านต้องออกแบบหน้าจอพนักงานใหม่ทั้งหมด
-2. **S2** — ต้องมีฉลากก่อนจึงจะทดสอบ S1 ได้สมบูรณ์ จริงๆ ทำคู่กัน
-3. **S4** — ใช้เวลาชั่วโมงเดียวแต่กระทบตารางต้นทุนทั้งโครงการ
-4. **S3 · S5** — ขึ้นกับบริการภายนอกที่ควบคุมไม่ได้
-5. **S6 · S9 · PWA** — ความเสี่ยงต่ำ มีแผนสำรองชัดเจน
-
-### กฎของ spike
-
-ทุก POC มี **กรอบเวลา · เกณฑ์ผ่านที่เป็นตัวเลข · และแผนสำรอง** เขียนไว้ในหน้านั้น
-**หมดเวลาแล้วยังไม่ผ่าน ให้ไปแผนสำรองทันที ห้ามไหลต่อ**
-
-บันทึกผลทุกตัวลงฐานข้อมูล **บันทึกการตัดสินใจ (ADR)** ใน Notion
-ผลเหล่านี้คือวัตถุดิบของหัวข้อ *5.2 ผลการทดสอบ POC และการตัดสินใจที่ตามมา* ในเอกสาร IS
-
----
-
-## โครงสร้างโปรเจกต์
-
-> **โครงสร้างของจริงที่จะใช้ตอนขึ้น MVP อยู่ใน [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)**
-> เอกสารนั้นเปรียบเทียบ 3 แนวทาง (type-based · feature-first · Feature-Sliced Design)
-> แล้วสรุปว่าโปรเจกต์นี้ใช้ route groups แบ่ง 3 แอป + feature modules สำหรับ business logic
-> พร้อมกฎการ import 4 ข้อ และตารางบอกว่าโค้ดแต่ละแบบต้องไปอยู่ที่ไหน
->
-> ข้างล่างนี้คือโครงสร้าง **ของขั้น POC ปัจจุบัน** เท่านั้น
+## โครงสร้าง
 
 ```
+prisma/
+├── schema.prisma          4 ตาราง
+├── migrations/            ❗ ต้อง commit ขึ้น git เสมอ
+└── seed.ts                บิล 04832 (มีเบอร์) · 04833 (ไม่มีเบอร์)
+
 src/
-├── app/
-│   ├── page.tsx              หน้ารวม POC
-│   ├── manifest.ts           PWA manifest (Next สร้าง /manifest.webmanifest ให้เอง)
-│   ├── offline/              หน้าสำรองเมื่อเน็ตหลุด
-│   ├── poc/                  หน้าทดสอบทั้งหมด
-│   └── api/poc/upload/       ปลายทางทดสอบการอัปโหลด
-├── components/
-│   ├── ui.tsx                ชิ้นส่วน UI พื้นฐาน
-│   └── pwa-register.tsx
-└── lib/
-    ├── promptpay.ts          สร้าง EMVCo payload — ฟังก์ชันบริสุทธิ์
-    ├── scan-metrics.ts       คำนวณสถิติ — ฟังก์ชันบริสุทธิ์
-    ├── scan-queue.ts         คิว IndexedDB
-    └── scan-types.ts
+├── app/                   ROUTING เท่านั้น · ห้ามมีกฎธุรกิจ
+│   ├── globals.css        design token ทั้งหมด · แหล่งความจริงเดียว
+│   ├── (front-office)/    แอปเจ้าของร้าน · root layout #1
+│   │   ├── page.tsx       "/"         ค้นหา + เพิ่มลูกค้า
+│   │   └── dev/qr/        "/dev/qr"   QR ทดสอบ · ไม่ขึ้น production
+│   └── (customer)/        แอปลูกค้า · root layout #2
+│       └── link/          "/link"     ผูกบัญชี LINE ผ่าน LIFF
+│
+├── lib/                   ไม่รู้เรื่องร้านซักรีด ไม่มี React
+│   ├── db.ts              Prisma client ตัวเดียวของระบบ
+│   ├── phone.ts           แปลงเบอร์ให้เป็นรูปแบบเดียวกัน + เทียบ 4 ตัวท้าย
+│   ├── bill-token.ts      เซ็น/ตรวจ QR บนใบรับของ (HMAC)
+│   └── line-id-token.ts   ยืนยันตัวตน LINE ฝั่งเซิร์ฟเวอร์
+│
+└── modules/               กฎธุรกิจทั้งหมดอยู่ที่นี่
+    ├── customer/          index · schema · repository · service · actions
+    └── bill/              index · service · repository · actions
 
-poc/s1-barcode-scan/          เวอร์ชัน HTML ล้วน เก็บไว้เป็นตัวควบคุม
-                              ใช้เทียบเมื่อสงสัยว่าปัญหาอยู่ที่ Next.js หรือที่ตัวสแกน
-public/sw.js                  service worker เขียนเอง ไม่ใช้ next-pwa
+scripts/dev.sh             ตั้งค่าและรันในเครื่อง
+docker-compose.yml         Postgres 16 · named volume
+design/                    design system · wireframe · BPMN
+docs/                      เอกสารประกอบรายงาน IS
 ```
 
-### หลักการที่วางไว้ตั้งแต่ไฟล์แรก
+### กฎการ import · บังคับด้วย eslint
 
-**ตรรกะอยู่ใน `lib/` เป็นฟังก์ชันบริสุทธิ์ · หน้าจออยู่ใน `app/` และเรียกใช้เท่านั้น**
+```
+app/         →  modules · lib
+modules/     →  lib · module อื่นผ่าน index.ts เท่านั้น
+lib/         →  ไม่ import อะไรของเราเลย
+```
 
-`promptpay.ts` และ `scan-metrics.ts` ไม่แตะ DOM ไม่แตะ React จึงเขียน unit test ได้
-โดยไม่ต้องเปิดเบราว์เซอร์ — แบบแผนนี้จะใช้ต่อกับ `modules/` ตอนเข้าสู่ MVP 1
-
-**ไม่ใช้ `next-pwa`** — สิ่งที่โครงการต้องการจาก PWA มีแค่ ติดตั้งลงหน้าจอได้
-และเปิดได้ตอนเน็ตไม่เสถียร ซึ่งเขียนเองใช้ประมาณ 50 บรรทัด
-การเพิ่ม dependency ที่อาจพังตอนอัปเกรด Next.js ไม่คุ้มกับประโยชน์ที่ได้
-
----
-
-## สิ่งที่ยังไม่มีในขั้นนี้ และตั้งใจไม่ใส่
-
-ฐานข้อมูล · Prisma · ระบบยืนยันตัวตน · ตรรกะทางธุรกิจ · ตาราง 19 ตาราง · การทดสอบอัตโนมัติ
-
-ทั้งหมดนี้เริ่มใน **MVP 0 Walking Skeleton** หลังจาก POC ให้คำตอบครบแล้ว
-เหตุผลคือถ้าสร้างฐานข้อมูลก่อนรู้ว่าสแกนได้จริงไหม อาจต้องรื้อทั้งหมด
+ลูกศรชี้ทางเดียวเสมอ · มี `no-restricted-imports` คอยจับ
+`npm run lint` จะแดงถ้า page เผลอ `import { db }` ตรงๆ
 
 ---
 
-## สิ่งที่ต้องทำเพิ่มก่อนขึ้น production
+## คำสั่ง
 
-- [ ] แปลง `public/icon.svg` เป็น `icon-192.png` และ `icon-512.png` — iOS ต้องใช้ PNG
-- [ ] ตั้งค่า `.env.local` ให้ครบตาม `.env.example`
-- [ ] เพิ่ม `/api/items/scan` ของจริงแทน `/api/poc/upload`
+### พัฒนา
+
+| คำสั่ง | ทำอะไร |
+|---|---|
+| `./scripts/dev.sh` | ตั้งค่า + รันทั้งหมด |
+| `./scripts/dev.sh setup` | ตั้งค่าอย่างเดียว ไม่รัน server |
+| `./scripts/dev.sh check` | ดูสถานะ ไม่แก้อะไร |
+| `npm run dev` | รัน dev server เฉยๆ (ฐานข้อมูลต้องเปิดอยู่แล้ว) |
+| `npm run dev:mobile` | HTTPS บน LAN · ทดสอบหน้าร้านบนมือถือ |
+
+### ฐานข้อมูล
+
+| คำสั่ง | ทำอะไร |
+|---|---|
+| `npm run db:up` | เปิด Postgres |
+| `npm run db:down` | ปิด · **ข้อมูลยังอยู่** |
+| `npm run db:reset` | ลบทิ้งสร้างใหม่ · **ข้อมูลหายหมด** |
+| `npm run db:psql` | เปิด psql |
+| `npm run db:studio` | ดูข้อมูลผ่านเบราว์เซอร์ |
+| `npm run db:seed` | ใส่ข้อมูลตัวอย่าง |
+| `npm run db:migrate -- --name <ชื่อ>` | สร้าง migration ใหม่หลังแก้ schema |
+
+> `docker compose down` ลบแค่ container · ข้อมูลอยู่ใน named volume `sriborisud-pgdata`
+> ที่จะหายก็ต่อเมื่อใช้ `down -v` หรือ `npm run db:reset`
+
+### ตรวจคุณภาพ
+
+| คำสั่ง | ทำอะไร |
+|---|---|
+| `npm test` | 50 เทสต์ · ไม่ต้องมีฐานข้อมูล |
+| `npm run test:watch` | รันใหม่ทุกครั้งที่เซฟ |
+| `npm run typecheck` | `tsc --noEmit` |
+| `npm run lint` | `eslint .` |
+| `npm run lint:fix` | แก้อัตโนมัติเท่าที่ได้ |
+| `python3 design/contrast-check.py` | คู่สีทั้ง 38 คู่ผ่าน WCAG AA ไหม |
+
+**รันทั้งชุดก่อน push เสมอ** · ใช้เวลาประมาณ 30 วินาที เทียบกับรอ CI 5 นาที
+
+```bash
+npm run typecheck && npm run lint && npm test && npm run build
+```
+
+---
+
+## ตัวแปรสภาพแวดล้อม
+
+คัดลอก `.env.example` เป็น `.env.local` แล้วใส่ค่าจริง
+
+| ตัวแปร | ได้มาจากไหน |
+|---|---|
+| `DATABASE_URL` · `DIRECT_URL` | Postgres ในเครื่อง หรือ Supabase pooler |
+| `NEXT_PUBLIC_LIFF_ID` | LINE Login channel → LIFF → LIFF ID |
+| `LINE_LOGIN_CHANNEL_ID` | LINE Login channel → Basic settings → **Channel ID** |
+| `BILL_TOKEN_SECRET` | `openssl rand -base64 48` |
+| `LINE_CHANNEL_ACCESS_TOKEN` · `LINE_CHANNEL_SECRET` | Messaging API channel · ยังไม่ได้ใช้ |
+
+### ❗ สองอย่างที่พลาดกันบ่อยที่สุด
+
+**ทั้งสอง channel ต้องอยู่ใน Provider เดียวกัน** · `userId` ออกให้ต่อ Provider
+ไม่ใช่ต่อ channel · ถ้าอยู่คนละ Provider จะ "ผูกสำเร็จแต่ข้อความไม่เคยถึง"
+โดยไม่มี error ให้เห็นเลย
+
+**`LINE_LOGIN_CHANNEL_ID` คนละตัวกับ access token** · ตัวแรกเป็นตัวเลขล้วน
+ใช้ตรวจ ID token (ค่า `aud`) · ตัวหลังใช้ส่งข้อความ
+
+---
+
+## ทดสอบ LIFF บนมือถือ
+
+LINE ต้องเข้าถึง endpoint ผ่าน HTTPS ที่มีใบรับรองจริง · LAN IP ใช้ไม่ได้
+
+```bash
+npx ngrok http 3000     # ปล่อยให้รันค้างไว้
+```
+
+1. เอา URL จาก ngrok ไปใส่ LIFF app → **Endpoint URL** ต่อท้ายด้วย `/link`
+2. LIFF app ต้องเปิด scope **`openid`** ไม่งั้น `getIDToken()` คืน `null`
+3. LINE Login channel → **Linked LINE Official Account** ต้องตั้งไว้
+   ไม่งั้น `getFriendship()` ทำงานไม่ได้
+4. เปิด `/dev/qr` บนคอม แล้วสแกนด้วยมือถือ
+
+> ngrok ให้ URL ใหม่ทุกครั้งที่รีสตาร์ท · ต้องไปแก้ Endpoint URL ใหม่ด้วยทุกครั้ง
+
+### ต้องลองให้ครบ
+
+| ทดสอบ | ผลที่คาดหวัง |
+|---|---|
+| สแกนจากกล้องในแอป LINE | เปิดใน LINE ไม่ต้องล็อกอิน |
+| สแกนจากกล้องเครื่อง | เบราว์เซอร์ภายนอก · ล็อกอิน 1 ครั้ง |
+| บิล 04832 กรอก `5678` | ผูกสำเร็จ |
+| บิล 04832 กรอก `9999` | ถูกปฏิเสธ |
+| บิล 04833 (ไม่มีเบอร์) เว้นว่าง | ผูกได้ · ข้ามการตรวจ |
+| แก้ตัวอักษรใน URL 1 ตัว | ลายเซ็นไม่ผ่าน |
+| ยังไม่ได้เพิ่มเพื่อน | ขึ้นเตือน "ยังไม่ได้เพิ่มเพื่อน" |
+
+ข้อสุดท้ายสำคัญที่สุด · **ผูกสำเร็จ ≠ ส่งข้อความถึง**
+
+---
+
+## git และ CI
+
+```
+develop  ← branch หลัก · Vercel deploy จากที่นี่ · ถูกป้องกันไว้
+   ↑ pull request (pipeline ต้องผ่าน)
+feature/<ชื่อ>
+```
+
+| Job บน PR | ตรวจอะไร |
+|---|---|
+| Typecheck · Lint · Test · Build | พื้นฐาน + `npm audit` ฝั่ง production |
+| Secret scan | gitleaks ทั้ง history |
+| CodeQL | SAST (ฟรีเฉพาะ repo สาธารณะ) |
+| Database migrations | migration apply ได้ และ schema ไม่ drift |
+| WCAG contrast check | คู่สีผ่าน AA |
+
+หลัง deploy · OWASP ZAP และ Lighthouse (ไม่บล็อกอะไร เป็นรายงาน)
+
+รายละเอียดใน **[docs/CI.md](docs/CI.md)**
+
+---
+
+## เอกสาร
+
+| ไฟล์ | เนื้อหา |
+|---|---|
+| **[docs/CODE-WALKTHROUGH.md](docs/CODE-WALKTHROUGH.md)** | อธิบายทุกไฟล์ทีละบรรทัด · **เริ่มอ่านที่นี่** |
+| [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | เปรียบเทียบ 3 แนวทาง · กฎการ import · ทำไมโครงสร้างเป็นแบบนี้ |
+| [docs/CI.md](docs/CI.md) | pipeline · branch protection · Vercel |
+| [docs/bpmn/](docs/bpmn/) | BPMN 2.0 ทั้ง 6 workflow · As-Is และ To-Be |
+| [docs/bpmn/PAIN-POINT-MAP.md](docs/bpmn/PAIN-POINT-MAP.md) | เชื่อม As-Is → pain point → To-Be |
+| [design/design-system.html](design/design-system.html) | สี · ตัวอักษร · component · หลักฐาน WCAG |
+| [design/screens.html](design/screens.html) | 16 หน้าจอ ครบทั้ง 13 use case |
+| [design/screen-flow.html](design/screen-flow.html) | ผังการไปมาของแต่ละแอป |
+| [design/wireframe-w1-intake.html](design/wireframe-w1-intake.html) | wireframe ขาวดำของหน้ารับผ้าเข้า |
+
+---
+
+## สิ่งที่ยังค้างอยู่
+
+### ติดคำถามที่ต้องไปถามเจ้าของร้าน
+
+| คำถาม | บล็อกอะไร |
+|---|---|
+| **B1 · B3** อัตราค่าแรง | ทั้ง module `payroll` |
+| **B2** ประเภทผ้าและราคาทั้งหมด | หน้ารับผ้าเข้า · ตอนนี้ใช้ 4 ประเภทสมมติ |
+| **B5** กติกาการรับบางส่วน | หน้าส่งมอบ |
+| **N1 N2 N3** บิลยกเลิก · ผ้าเสียหาย · แก้บิล | หน้าแก้ไขรายการ · หน้าแจ้งปัญหา |
+| อุปกรณ์หน้าร้าน | layout ของ D2 · ตอนนี้ตั้งไว้ 860px ชั่วคราว |
+
+**ไปร้านครั้งเดียวปลดล็อก 6 use case** · เป็นงานที่คุ้มที่สุดที่ทำได้ตอนนี้
+
+### งานเทคนิคที่รู้แล้วว่าต้องทำ
+
+- [ ] **วัด baseline ก่อนติดตั้งระบบ** · ทำทีหลังไม่ได้ เพราะ "ก่อน" จะหายไปตลอดกาล
+- [ ] Webhook `follow` / `unfollow` + ตรวจ `x-line-signature` จาก raw body
+- [ ] Rate limit บน `linkLineAction` · 4 หลักมีแค่ 10,000 ความเป็นไปได้
+- [ ] หน้ายกเลิกการผูกบัญชี · PDPA · service เขียนไว้แล้ว เหลือหน้าจอ
+- [ ] เมตริก `% ของบิลที่ผูก LINE ภายใน 7 วัน`
+- [ ] ตรวจโควตาข้อความ LINE OA ของบัญชีไทย (S4) · ความเสี่ยงด้านต้นทุนสูงสุด
+- [ ] `design/bpmn/` กับ `docs/bpmn/` มีไฟล์ซ้ำกัน · เลือกที่เดียว
