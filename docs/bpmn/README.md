@@ -21,7 +21,7 @@
 
 ## ไฟล์ draw.io · รวมทุกอย่างไว้ที่เดียว
 
-`IS-Laundry-Service.drawio` คือไฟล์ draw.io ของโครงงาน มี 4 หน้า
+`IS-Laundry-Service.drawio` คือไฟล์ draw.io ของโครงงาน มี 5 หน้า
 
 | หน้า | เนื้อหา |
 |---|---|
@@ -29,6 +29,7 @@
 | Use case diagram | ของเดิม |
 | Page-4 | context diagram ของเดิม |
 | **BPMN To-Be** | To-Be ครบ W1–W6 และกระบวนการใหม่ W0 (ผูกบัญชี LINE) · W7 (สรุปยอดงานและค่าแรง) |
+| **Conceptual Architecture** | ภาพรวมทั้งระบบ · Client → Next.js บน Vercel → Supabase · LINE Platform |
 
 ใต้แต่ละรูปในหน้า BPMN To-Be มีกล่องสีชมพูบอกว่าอะไรเปลี่ยนจาก As-Is และอะไร**ยังไม่ยืนยันกับร้าน**
 
