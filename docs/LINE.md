@@ -27,6 +27,10 @@
 
 ## 1 · ภาพรวม · ใครคุยกับใคร
 
+> ภาพเดียวกันนี้แบบละเอียดและแก้ไขได้อยู่ที่ [`line-architecture.drawio`](line-architecture.drawio)
+> เปิดด้วย [app.diagrams.net](https://app.diagrams.net) หรือ extension *Draw.io Integration* ใน VS Code
+> แล้ว export เป็น PNG/SVG สำหรับรายงาน IS ได้
+
 ```mermaid
 flowchart TB
   subgraph LINE["LINE Platform"]
