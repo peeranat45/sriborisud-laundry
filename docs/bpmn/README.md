@@ -12,6 +12,8 @@
 | **W5** รอบโทรตอนเย็น | `W5-callround-as-is.bpmn` | `W5-callround-to-be.bpmn` |
 | **W6** ส่งมอบและชำระเงิน | `W6-handover-as-is.bpmn` | `W6-handover-to-be.bpmn` |
 
+**[TO-BE.md](TO-BE.md)** — To-Be ของทุกกระบวนการ (W0–W7) เขียนเป็นรายการขั้นตอน อ่านได้โดยไม่ต้องเปิดโปรแกรมวาดรูป
+
 **[PAIN-POINT-MAP.md](PAIN-POINT-MAP.md)** — ตารางเชื่อมทุก task ใน As-Is กับ pain point และ task ที่มาแทนใน To-Be
 
 > ไฟล์ `W4-enquiry-to-be.bpmn` เป็นไฟล์เดียวในชุดที่ **pool ฝั่งร้านว่างเปล่า**
