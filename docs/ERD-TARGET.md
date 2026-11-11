@@ -5,7 +5,7 @@
 >
 > ไฟล์นี้มีไว้เพื่อไม่ให้ออกแบบตารางทีละ feature แล้วค้นพบตอนสัปดาห์ที่ 12 ว่าต้องรื้อ
 
-ตารางที่มีจริงแล้ว 4 ตาราง · `Customer` `CustomerLineAccount` `Bill` `CustomerMerge`
+ตารางที่มีจริงแล้ว 6 ตาราง · `Customer` `CustomerLineAccount` `Bill` `CustomerMerge` `ClothesType` `Piece`
 ที่เหลือยังเป็นแบบร่าง และหลายตารางยังติดคำถาม B1–B5 ที่ต้องถามร้านก่อน
 
 ```mermaid
@@ -29,6 +29,9 @@ erDiagram
     PayrollPeriod       ||--|{ PayrollLine         : ""
 
     Customer            ||--o{ NotificationLog     : ""
+    Customer            ||--o{ PhoneOtp            : "ลงทะเบียนด้วย OTP"
+    StorageUnit         ||--|{ StorageSlot         : "1 ตู้หรือราวมีหลายช่อง"
+    StorageSlot         ||--o{ StatusEvent         : "วางผ้าที่ช่องนี้"
     Bill                ||--o{ NotificationLog     : ""
 
     Piece {
@@ -48,6 +51,7 @@ erDiagram
         string   staffId   FK "nullable"
         datetime occurredAt
         string   correctsId FK "nullable · การแก้ไขคือ event ใหม่"
+        string   slotId    FK "nullable · ราวหรือช่องที่วาง · เฉพาะขึ้นราวตากและเข้าตู้ผ้าเสร็จ"
         string   reason    "nullable · บังคับเมื่อเป็นการแก้ไข"
     }
 
@@ -125,6 +129,31 @@ erDiagram
         datetime sentAt
         string   result     "ส่งสำเร็จหรือไม่ · ทุกครั้งที่ติดต่อต้องมีร่องรอย"
     }
+
+    StorageUnit {
+        string   id         PK
+        string   kind       "DRYING_RACK หรือ FINISHED_CABINET"
+        int      runningNo  "ระบบออกให้ แยกตามประเภท ไม่ใช้ซ้ำ"
+        string   name       "nullable · ชื่อเรียกในร้าน"
+        boolean  active     "เลิกใช้คือปิด ไม่ลบ"
+    }
+
+    StorageSlot {
+        string   id      PK
+        string   unitId  FK
+        int      slotNo
+        string   code    UK "เช่น C-05-12 · พิมพ์เป็นบาร์โค้ด"
+    }
+
+    PhoneOtp {
+        string   id          PK
+        string   phone       "เบอร์ที่ขอยืนยัน"
+        string   lineUserId  "บัญชี LINE ที่ขอ"
+        string   codeHash    "ไม่เก็บรหัสจริง"
+        datetime expiresAt
+        int      attempts    "จำนวนครั้งที่กรอกผิด"
+        datetime verifiedAt  "nullable"
+    }
 ```
 
 ## จุดที่ยังไม่ชัด
@@ -136,6 +165,8 @@ erDiagram
 | `QualityIssue` | N2 · ของเสียหายตอนนี้จัดการยังไง ใครตัดสิน |
 | `Payment` | B4 · รับเงินตอนรับผ้าหรือตอนคืนผ้า มีค้างชำระไหม |
 | `StatusEvent` | B3 · 6 ขั้นตอนนี้ตรงกับงานจริงไหม มีขั้นที่ข้ามได้ไหม |
+| `StorageUnit` · `StorageSlot` | ตู้และราวที่ร้านมีตอนนี้ การแบ่งช่อง และรูปแบบรหัส |
+| `PhoneOtp` | ผู้ให้บริการ SMS · อายุรหัสและจำนวนครั้ง · ตาราง `Customer` ต้องเพิ่ม `phoneVerifiedAt` ด้วย |
 
 ## หลักที่ใช้ตัดสินใจ
 

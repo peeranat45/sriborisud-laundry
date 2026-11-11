@@ -468,7 +468,7 @@
         <mxCell id="gap-c3_2" value="ไม่รู้ว่าผ้าอยู่ขั้นไหน ยอดงานตรวจย้อนหลังไม่ได้" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;rounded=0;fontSize=14;fontColor=#201D18;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=10;fillColor=#F7E0DB;strokeColor=#FFFFFF;fontColor=#5A1F1B;" vertex="1" parent="1">
           <mxGeometry x="630" y="364" width="440" height="88" as="geometry" />
         </mxCell>
-        <mxCell id="gap-c3_3" value="สแกนป้ายทุกขั้น เห็นสถานะรายชิ้น นับงานต่อคนอัตโนมัติ" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;rounded=0;fontSize=14;fontColor=#201D18;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=10;fillColor=#DBE2D0;strokeColor=#FFFFFF;fontColor=#262E19;" vertex="1" parent="1">
+        <mxCell id="gap-c3_3" value="สแกนป้ายทุกขั้น เห็นสถานะและราวหรือช่องที่วาง นับงานต่อคนอัตโนมัติ" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;rounded=0;fontSize=14;fontColor=#201D18;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=10;fillColor=#DBE2D0;strokeColor=#FFFFFF;fontColor=#262E19;" vertex="1" parent="1">
           <mxGeometry x="1070" y="364" width="500" height="88" as="geometry" />
         </mxCell>
         <mxCell id="gap-c4_0" value="ลูกค้าถามสถานะ" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;rounded=0;fontSize=14;fontColor=#201D18;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=10;fillColor=#EAE2D6;strokeColor=#FFFFFF;fontStyle=1;" vertex="1" parent="1">
@@ -504,7 +504,7 @@
         <mxCell id="gap-c6_2" value="หาผ้าช้า รับบางส่วนไม่มีบันทึก" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;rounded=0;fontSize=14;fontColor=#201D18;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=10;fillColor=#F7E0DB;strokeColor=#FFFFFF;fontColor=#5A1F1B;" vertex="1" parent="1">
           <mxGeometry x="630" y="640" width="440" height="88" as="geometry" />
         </mxCell>
-        <mxCell id="gap-c6_3" value="สแกนแล้วเห็นรายชิ้น ระบบคิดยอดและสร้าง PromptPay QR ยอดค้างชัดเจน" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;rounded=0;fontSize=14;fontColor=#201D18;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=10;fillColor=#DBE2D0;strokeColor=#FFFFFF;fontColor=#262E19;" vertex="1" parent="1">
+        <mxCell id="gap-c6_3" value="สแกนแล้วเห็นรายชิ้นและช่องที่เก็บ ระบบคิดยอดและสร้าง PromptPay QR ยอดค้างชัดเจน" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;rounded=0;fontSize=14;fontColor=#201D18;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=10;fillColor=#DBE2D0;strokeColor=#FFFFFF;fontColor=#262E19;" vertex="1" parent="1">
           <mxGeometry x="1070" y="640" width="500" height="88" as="geometry" />
         </mxCell>
         <mxCell id="gap-c7_0" value="ข้อมูลของร้าน" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;rounded=0;fontSize=14;fontColor=#201D18;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=10;fillColor=#EAE2D6;strokeColor=#FFFFFF;fontStyle=1;" vertex="1" parent="1">
@@ -706,8 +706,8 @@
         <mxCell id="tbv-s2" value="&lt;b&gt;2&lt;/b&gt;&amp;nbsp; เลือกลูกค้า บันทึกรายการผ้า" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;rounded=1;arcSize=12;fillColor=#DDE8EE;strokeColor=#2F5366;fontColor=#24404F;fontSize=15;strokeWidth=1.5;" vertex="1" parent="1"><mxGeometry x="457.5" y="86" width="300" height="56" as="geometry"/></mxCell>
         <mxCell id="tbv-s3" value="&lt;b&gt;3&lt;/b&gt;&amp;nbsp; เสนอวันนัด คิดยอด ออกบิล พิมพ์ป้าย" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;rounded=1;arcSize=12;fillColor=#DBE2D0;strokeColor=#54633B;fontColor=#262E19;fontSize=15;strokeWidth=1.5;strokeWidth=2;" vertex="1" parent="1"><mxGeometry x="1227.5" y="86" width="300" height="56" as="geometry"/></mxCell>
         <mxCell id="tbv-s4" value="&lt;b&gt;4&lt;/b&gt;&amp;nbsp; ยืนยัน ส่งใบรับของ&lt;br&gt;ติดป้าย นำเข้าตู้รอซัก" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;rounded=1;arcSize=12;fillColor=#DDE8EE;strokeColor=#2F5366;fontColor=#24404F;fontSize=15;strokeWidth=1.5;" vertex="1" parent="1"><mxGeometry x="457.5" y="184" width="300" height="56" as="geometry"/></mxCell>
-        <mxCell id="tbv-s5" value="&lt;b&gt;5&lt;/b&gt;&amp;nbsp; สแกน QR ผูกบัญชี LINE&lt;br&gt;&lt;font style=&#x27;font-size:13px&#x27;&gt;ไม่บังคับ · ทำครั้งเดียวต่อลูกค้า&lt;/font&gt;" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;rounded=1;arcSize=12;fillColor=#FFFFFF;strokeColor=#06C755;fontColor=#0B5D2A;fontSize=15;strokeWidth=1.5;dashed=1;dashPattern=6 4;strokeWidth=2;" vertex="1" parent="1"><mxGeometry x="72.5" y="184" width="300" height="56" as="geometry"/></mxCell>
-        <mxCell id="tbv-s6" value="&lt;b&gt;6&lt;/b&gt;&amp;nbsp; ดูคิวตามวันนัด&lt;br&gt;สแกนป้ายทุกขั้น" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;rounded=1;arcSize=12;fillColor=#DDE8EE;strokeColor=#2F5366;fontColor=#24404F;fontSize=15;strokeWidth=1.5;" vertex="1" parent="1"><mxGeometry x="842.5" y="282" width="300" height="56" as="geometry"/></mxCell>
+        <mxCell id="tbv-s5" value="&lt;b&gt;5&lt;/b&gt;&amp;nbsp; สแกน QR ผูกบัญชี LINE&lt;br&gt;&lt;font style=&#x27;font-size:13px&#x27;&gt;ไม่บังคับ · ลงทะเบียนก่อนด้วย OTP ก็ได้&lt;/font&gt;" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;rounded=1;arcSize=12;fillColor=#FFFFFF;strokeColor=#06C755;fontColor=#0B5D2A;fontSize=15;strokeWidth=1.5;dashed=1;dashPattern=6 4;strokeWidth=2;" vertex="1" parent="1"><mxGeometry x="72.5" y="184" width="300" height="56" as="geometry"/></mxCell>
+        <mxCell id="tbv-s6" value="&lt;b&gt;6&lt;/b&gt;&amp;nbsp; ดูคิวตามวันนัด&lt;br&gt;สแกนป้ายผ้าและช่อง" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;rounded=1;arcSize=12;fillColor=#DDE8EE;strokeColor=#2F5366;fontColor=#24404F;fontSize=15;strokeWidth=1.5;" vertex="1" parent="1"><mxGeometry x="842.5" y="282" width="300" height="56" as="geometry"/></mxCell>
         <mxCell id="tbv-s7" value="&lt;b&gt;7&lt;/b&gt;&amp;nbsp; บันทึกสถานะรายชิ้น&lt;br&gt;นับงานต่อคน" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;rounded=1;arcSize=12;fillColor=#DBE2D0;strokeColor=#54633B;fontColor=#262E19;fontSize=15;strokeWidth=1.5;strokeWidth=2;" vertex="1" parent="1"><mxGeometry x="1227.5" y="282" width="300" height="56" as="geometry"/></mxCell>
         <mxCell id="tbv-g1" value="ครบทุกชิ้น&lt;br&gt;ในบิลหรือยัง" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;rhombus;fillColor=#FFFFFF;strokeColor=#54633B;strokeWidth=2;fontColor=#262E19;fontSize=15;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="1247.5" y="373" width="260" height="70" as="geometry"/></mxCell>
         <mxCell id="tbv-g2" value="ลูกค้าผูก LINE&lt;br&gt;แล้วหรือยัง" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;rhombus;fillColor=#FFFFFF;strokeColor=#54633B;strokeWidth=2;fontColor=#262E19;fontSize=15;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="1247.5" y="471" width="260" height="70" as="geometry"/></mxCell>
@@ -742,193 +742,84 @@
   <diagram name="5 Use Case Diagram" id="uc-page">
     <mxGraphModel grid="0" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="1600" pageHeight="900" math="0" shadow="0">
       <root>
-        <mxCell id="0" />
-        <mxCell id="1" parent="0" />
-        <mxCell id="uc-ca" value="Customer App (LINE LIFF)" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;rounded=1;arcSize=3;fillColor=#FCFAF8;strokeColor=#D4CAB9;fontColor=#584F41;fontSize=14;fontStyle=1;verticalAlign=top;align=left;spacingLeft=12;spacingTop=6;" vertex="1" parent="1">
-          <mxGeometry x="190" y="60" width="330" height="760" as="geometry" />
-        </mxCell>
-        <mxCell id="uc-ca0" value="ผูกบัญชี LINE กับร้าน" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;ellipse;fillColor=#DBE2D0;strokeColor=#54633B;strokeWidth=2;fontColor=#262E19;fontSize=13;" vertex="1" parent="1">
-          <mxGeometry x="230" y="190" width="250" height="66" as="geometry" />
-        </mxCell>
-        <mxCell id="uc-ca1" value="ดูสถานะผ้ารายชิ้น" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;ellipse;fillColor=#FFFFFF;strokeColor=#9A8A69;fontColor=#201D18;fontSize=13;" vertex="1" parent="1">
-          <mxGeometry x="230" y="380" width="250" height="66" as="geometry" />
-        </mxCell>
-        <mxCell id="uc-ca2" value="รับแจ้งเตือนผ้าพร้อมรับ" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;ellipse;fillColor=#FFFFFF;strokeColor=#9A8A69;fontColor=#201D18;fontSize=13;" vertex="1" parent="1">
-          <mxGeometry x="230" y="570" width="250" height="66" as="geometry" />
-        </mxCell>
-        <mxCell id="uc-fo" value="Front Office" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;rounded=1;arcSize=3;fillColor=#FCFAF8;strokeColor=#D4CAB9;fontColor=#584F41;fontSize=14;fontStyle=1;verticalAlign=top;align=left;spacingLeft=12;spacingTop=6;" vertex="1" parent="1">
-          <mxGeometry x="640" y="60" width="330" height="760" as="geometry" />
-        </mxCell>
-        <mxCell id="uc-fo0" value="จัดการข้อมูลลูกค้า" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;ellipse;fillColor=#DBE2D0;strokeColor=#54633B;strokeWidth=2;fontColor=#262E19;fontSize=13;" vertex="1" parent="1">
-          <mxGeometry x="680" y="120" width="250" height="66" as="geometry" />
-        </mxCell>
-        <mxCell id="uc-fo1" value="รับผ้าเข้าและออกบิล" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;ellipse;fillColor=#DBE2D0;strokeColor=#54633B;strokeWidth=2;fontColor=#262E19;fontSize=13;" vertex="1" parent="1">
-          <mxGeometry x="680" y="232" width="250" height="66" as="geometry" />
-        </mxCell>
-        <mxCell id="uc-fo2" value="พิมพ์ป้ายและใบรับของ" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;ellipse;fillColor=#FFFFFF;strokeColor=#9A8A69;fontColor=#201D18;fontSize=13;" vertex="1" parent="1">
-          <mxGeometry x="680" y="344" width="250" height="66" as="geometry" />
-        </mxCell>
-        <mxCell id="uc-fo3" value="ส่งมอบผ้าและรับชำระเงิน" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;ellipse;fillColor=#FFFFFF;strokeColor=#9A8A69;fontColor=#201D18;fontSize=13;" vertex="1" parent="1">
-          <mxGeometry x="680" y="456" width="250" height="66" as="geometry" />
-        </mxCell>
-        <mxCell id="uc-fo4" value="ติดตามผ้าค้างรับ" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;ellipse;fillColor=#FFFFFF;strokeColor=#9A8A69;fontColor=#201D18;fontSize=13;" vertex="1" parent="1">
-          <mxGeometry x="680" y="568" width="250" height="66" as="geometry" />
-        </mxCell>
-        <mxCell id="uc-fo5" value="สรุปยอดงานและค่าแรง" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;ellipse;fillColor=#FFFFFF;strokeColor=#9A8A69;fontColor=#201D18;fontSize=13;" vertex="1" parent="1">
-          <mxGeometry x="680" y="680" width="250" height="66" as="geometry" />
-        </mxCell>
-        <mxCell id="uc-bo" value="Back Office" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;rounded=1;arcSize=3;fillColor=#FCFAF8;strokeColor=#D4CAB9;fontColor=#584F41;fontSize=14;fontStyle=1;verticalAlign=top;align=left;spacingLeft=12;spacingTop=6;" vertex="1" parent="1">
-          <mxGeometry x="1140" y="60" width="330" height="760" as="geometry" />
-        </mxCell>
-        <mxCell id="uc-bo0" value="ดูคิวงานตามวันนัดรับ" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;ellipse;fillColor=#FFFFFF;strokeColor=#9A8A69;fontColor=#201D18;fontSize=13;" vertex="1" parent="1">
-          <mxGeometry x="1180" y="190" width="250" height="66" as="geometry" />
-        </mxCell>
-        <mxCell id="uc-bo1" value="สแกนอัปเดตสถานะผ้า" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;ellipse;fillColor=#FFFFFF;strokeColor=#9A8A69;fontColor=#201D18;fontSize=13;" vertex="1" parent="1">
-          <mxGeometry x="1180" y="380" width="250" height="66" as="geometry" />
-        </mxCell>
-        <mxCell id="uc-bo2" value="แจ้งปัญหาคุณภาพ" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;ellipse;fillColor=#FFFFFF;strokeColor=#9A8A69;fontColor=#201D18;fontSize=13;" vertex="1" parent="1">
-          <mxGeometry x="1180" y="570" width="250" height="66" as="geometry" />
-        </mxCell>
-        <mxCell id="uc-acust" value="ลูกค้า" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;outlineConnect=0;fontSize=14;fontStyle=1;strokeColor=#584F41;fillColor=#F7F2EB;fontColor=#201D18;" vertex="1" parent="1">
-          <mxGeometry x="70" y="380" width="40" height="80" as="geometry" />
-        </mxCell>
-        <mxCell id="uc-aline" value="LINE&lt;br&gt;Platform" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;outlineConnect=0;fontSize=14;fontStyle=1;strokeColor=#584F41;fillColor=#F7F2EB;fontColor=#201D18;" vertex="1" parent="1">
-          <mxGeometry x="560" y="400" width="40" height="80" as="geometry" />
-        </mxCell>
-        <mxCell id="uc-aown" value="เจ้าของร้าน" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;outlineConnect=0;fontSize=14;fontStyle=1;strokeColor=#584F41;fillColor=#F7F2EB;fontColor=#201D18;" vertex="1" parent="1">
-          <mxGeometry x="1035" y="400" width="40" height="80" as="geometry" />
-        </mxCell>
-        <mxCell id="uc-astaff" value="ผู้ช่วย · ช่างซัก&lt;br&gt;ช่างรีด" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;outlineConnect=0;fontSize=14;fontStyle=1;strokeColor=#584F41;fillColor=#F7F2EB;fontColor=#201D18;" vertex="1" parent="1">
-          <mxGeometry x="1520" y="380" width="40" height="80" as="geometry" />
-        </mxCell>
-        <mxCell id="uc-e1" value="" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;rounded=0;endArrow=block;endFill=1;fontSize=12;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#6B5E4A;strokeWidth=1.2;endArrow=none;" edge="1" parent="1" source="uc-acust" target="uc-ca0">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="uc-e2" value="" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;rounded=0;endArrow=block;endFill=1;fontSize=12;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#6B5E4A;strokeWidth=1.2;endArrow=none;" edge="1" parent="1" source="uc-acust" target="uc-ca1">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="uc-e3" value="" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;rounded=0;endArrow=block;endFill=1;fontSize=12;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#6B5E4A;strokeWidth=1.2;endArrow=none;" edge="1" parent="1" source="uc-acust" target="uc-ca2">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="uc-e4" value="" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;rounded=0;endArrow=block;endFill=1;fontSize=12;labelBackgroundColor=#FFFFFF;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#6B5E4A;strokeWidth=1.2;endArrow=none;" edge="1" parent="1" source="uc-aline" target="uc-ca0">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="uc-e5" value="" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;rounded=0;endArrow=block;endFill=1;fontSize=12;labelBackgroundColor=#FFFFFF;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#6B5E4A;strokeWidth=1.2;endArrow=none;" edge="1" parent="1" source="uc-aline" target="uc-ca2">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="uc-e6" value="" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;rounded=0;endArrow=block;endFill=1;fontSize=12;labelBackgroundColor=#FFFFFF;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#6B5E4A;strokeWidth=1.2;endArrow=none;" edge="1" parent="1" source="uc-aown" target="uc-fo0">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="uc-e7" value="" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;rounded=0;endArrow=block;endFill=1;fontSize=12;labelBackgroundColor=#FFFFFF;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#6B5E4A;strokeWidth=1.2;endArrow=none;" edge="1" parent="1" source="uc-aown" target="uc-fo1">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="uc-e8" value="" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;rounded=0;endArrow=block;endFill=1;fontSize=12;labelBackgroundColor=#FFFFFF;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#6B5E4A;strokeWidth=1.2;endArrow=none;" edge="1" parent="1" source="uc-aown" target="uc-fo2">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="uc-e9" value="" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;rounded=0;endArrow=block;endFill=1;fontSize=12;labelBackgroundColor=#FFFFFF;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#6B5E4A;strokeWidth=1.2;endArrow=none;" edge="1" parent="1" source="uc-aown" target="uc-fo3">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="uc-e10" value="" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;rounded=0;endArrow=block;endFill=1;fontSize=12;labelBackgroundColor=#FFFFFF;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#6B5E4A;strokeWidth=1.2;endArrow=none;" edge="1" parent="1" source="uc-aown" target="uc-fo4">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="uc-e11" value="" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;rounded=0;endArrow=block;endFill=1;fontSize=12;labelBackgroundColor=#FFFFFF;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#6B5E4A;strokeWidth=1.2;endArrow=none;" edge="1" parent="1" source="uc-aown" target="uc-fo5">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="uc-e12" value="" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;rounded=0;endArrow=block;endFill=1;fontSize=12;labelBackgroundColor=#FFFFFF;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#6B5E4A;strokeWidth=1.2;endArrow=none;" edge="1" parent="1" source="uc-astaff" target="uc-bo0">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="uc-e13" value="" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;rounded=0;endArrow=block;endFill=1;fontSize=12;labelBackgroundColor=#FFFFFF;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#6B5E4A;strokeWidth=1.2;endArrow=none;" edge="1" parent="1" source="uc-astaff" target="uc-bo1">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="uc-e14" value="" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;rounded=0;endArrow=block;endFill=1;fontSize=12;labelBackgroundColor=#FFFFFF;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#6B5E4A;strokeWidth=1.2;endArrow=none;" edge="1" parent="1" source="uc-astaff" target="uc-bo2">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="uc-lg" value="&lt;b&gt;&lt;font color=&#39;#54633B&#39;&gt;วงรีสีเขียว&lt;/font&gt;&lt;/b&gt; = พัฒนาแล้ว &amp;nbsp;&amp;nbsp;|&amp;nbsp;&amp;nbsp; วงรีสีขาว = อยู่ในขอบเขต ยังไม่ได้พัฒนา" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;rounded=1;arcSize=8;fillColor=#FFFFFF;strokeColor=#D4CAB9;align=left;spacingLeft=14;fontSize=13;fontColor=#201D18;" vertex="1" parent="1">
-          <mxGeometry x="190" y="836" width="1280" height="44" as="geometry" />
-        </mxCell>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="uc-ca" value="Customer App (LINE LIFF)" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;rounded=1;arcSize=3;fillColor=#FCFAF8;strokeColor=#D4CAB9;fontColor=#584F41;fontSize=14;fontStyle=1;verticalAlign=top;align=left;spacingLeft=12;spacingTop=6;" vertex="1" parent="1"><mxGeometry x="190" y="60" width="330" height="760" as="geometry"/></mxCell>
+        <mxCell id="uc-ca0" value="ลงทะเบียนเองผ่าน LINE&lt;br&gt;ยืนยันเบอร์ด้วย OTP" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;ellipse;fillColor=#FFFFFF;strokeColor=#9A8A69;fontColor=#201D18;fontSize=13;" vertex="1" parent="1"><mxGeometry x="230" y="150" width="250" height="66" as="geometry"/></mxCell>
+        <mxCell id="uc-ca1" value="ผูกบัญชี LINE&lt;br&gt;ผ่านใบรับของ" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;ellipse;fillColor=#DBE2D0;strokeColor=#54633B;strokeWidth=2;fontColor=#262E19;fontSize=13;" vertex="1" parent="1"><mxGeometry x="230" y="315" width="250" height="66" as="geometry"/></mxCell>
+        <mxCell id="uc-ca2" value="ดูสถานะผ้ารายชิ้น" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;ellipse;fillColor=#FFFFFF;strokeColor=#9A8A69;fontColor=#201D18;fontSize=13;" vertex="1" parent="1"><mxGeometry x="230" y="480" width="250" height="66" as="geometry"/></mxCell>
+        <mxCell id="uc-ca3" value="รับแจ้งเตือนผ้าพร้อมรับ" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;ellipse;fillColor=#FFFFFF;strokeColor=#9A8A69;fontColor=#201D18;fontSize=13;" vertex="1" parent="1"><mxGeometry x="230" y="645" width="250" height="66" as="geometry"/></mxCell>
+        <mxCell id="uc-fo" value="Front Office" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;rounded=1;arcSize=3;fillColor=#FCFAF8;strokeColor=#D4CAB9;fontColor=#584F41;fontSize=14;fontStyle=1;verticalAlign=top;align=left;spacingLeft=12;spacingTop=6;" vertex="1" parent="1"><mxGeometry x="640" y="60" width="330" height="760" as="geometry"/></mxCell>
+        <mxCell id="uc-fo0" value="จัดการข้อมูลลูกค้า" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;ellipse;fillColor=#DBE2D0;strokeColor=#54633B;strokeWidth=2;fontColor=#262E19;fontSize=13;" vertex="1" parent="1"><mxGeometry x="680" y="105" width="250" height="66" as="geometry"/></mxCell>
+        <mxCell id="uc-fo1" value="รับผ้าเข้าและออกบิล" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;ellipse;fillColor=#DBE2D0;strokeColor=#54633B;strokeWidth=2;fontColor=#262E19;fontSize=13;" vertex="1" parent="1"><mxGeometry x="680" y="206" width="250" height="66" as="geometry"/></mxCell>
+        <mxCell id="uc-fo2" value="พิมพ์ป้ายและใบรับของ" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;ellipse;fillColor=#FFFFFF;strokeColor=#9A8A69;fontColor=#201D18;fontSize=13;" vertex="1" parent="1"><mxGeometry x="680" y="307" width="250" height="66" as="geometry"/></mxCell>
+        <mxCell id="uc-fo3" value="ส่งมอบผ้าและรับชำระเงิน" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;ellipse;fillColor=#FFFFFF;strokeColor=#9A8A69;fontColor=#201D18;fontSize=13;" vertex="1" parent="1"><mxGeometry x="680" y="408" width="250" height="66" as="geometry"/></mxCell>
+        <mxCell id="uc-fo4" value="ติดตามผ้าค้างรับ" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;ellipse;fillColor=#FFFFFF;strokeColor=#9A8A69;fontColor=#201D18;fontSize=13;" vertex="1" parent="1"><mxGeometry x="680" y="509" width="250" height="66" as="geometry"/></mxCell>
+        <mxCell id="uc-fo5" value="สรุปยอดงานและค่าแรง" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;ellipse;fillColor=#FFFFFF;strokeColor=#9A8A69;fontColor=#201D18;fontSize=13;" vertex="1" parent="1"><mxGeometry x="680" y="610" width="250" height="66" as="geometry"/></mxCell>
+        <mxCell id="uc-fo6" value="จัดการตู้และราว" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;ellipse;fillColor=#FFFFFF;strokeColor=#9A8A69;fontColor=#201D18;fontSize=13;" vertex="1" parent="1"><mxGeometry x="680" y="711" width="250" height="66" as="geometry"/></mxCell>
+        <mxCell id="uc-bo" value="Back Office" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;rounded=1;arcSize=3;fillColor=#FCFAF8;strokeColor=#D4CAB9;fontColor=#584F41;fontSize=14;fontStyle=1;verticalAlign=top;align=left;spacingLeft=12;spacingTop=6;" vertex="1" parent="1"><mxGeometry x="1140" y="60" width="330" height="760" as="geometry"/></mxCell>
+        <mxCell id="uc-bo0" value="ดูคิวงานตามวันนัดรับ" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;ellipse;fillColor=#FFFFFF;strokeColor=#9A8A69;fontColor=#201D18;fontSize=13;" vertex="1" parent="1"><mxGeometry x="1180" y="190" width="250" height="66" as="geometry"/></mxCell>
+        <mxCell id="uc-bo1" value="สแกนอัปเดตสถานะ&lt;br&gt;และตำแหน่งผ้า" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;ellipse;fillColor=#FFFFFF;strokeColor=#9A8A69;fontColor=#201D18;fontSize=13;" vertex="1" parent="1"><mxGeometry x="1180" y="380" width="250" height="66" as="geometry"/></mxCell>
+        <mxCell id="uc-bo2" value="แจ้งปัญหาคุณภาพ" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;ellipse;fillColor=#FFFFFF;strokeColor=#9A8A69;fontColor=#201D18;fontSize=13;" vertex="1" parent="1"><mxGeometry x="1180" y="570" width="250" height="66" as="geometry"/></mxCell>
+        <mxCell id="uc-asms" value="ผู้ให้บริการ&lt;br&gt;SMS" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;outlineConnect=0;fontSize=14;fontStyle=1;strokeColor=#584F41;fillColor=#F7F2EB;fontColor=#201D18;" vertex="1" parent="1"><mxGeometry x="70" y="120" width="40" height="80" as="geometry"/></mxCell>
+        <mxCell id="uc-acust" value="ลูกค้า" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;outlineConnect=0;fontSize=14;fontStyle=1;strokeColor=#584F41;fillColor=#F7F2EB;fontColor=#201D18;" vertex="1" parent="1"><mxGeometry x="70" y="420" width="40" height="80" as="geometry"/></mxCell>
+        <mxCell id="uc-aline" value="LINE&lt;br&gt;Platform" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;outlineConnect=0;fontSize=14;fontStyle=1;strokeColor=#584F41;fillColor=#F7F2EB;fontColor=#201D18;" vertex="1" parent="1"><mxGeometry x="560" y="400" width="40" height="80" as="geometry"/></mxCell>
+        <mxCell id="uc-aown" value="เจ้าของร้าน" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;outlineConnect=0;fontSize=14;fontStyle=1;strokeColor=#584F41;fillColor=#F7F2EB;fontColor=#201D18;" vertex="1" parent="1"><mxGeometry x="1035" y="400" width="40" height="80" as="geometry"/></mxCell>
+        <mxCell id="uc-astaff" value="ผู้ช่วย · ช่างซัก&lt;br&gt;ช่างรีด" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;outlineConnect=0;fontSize=14;fontStyle=1;strokeColor=#584F41;fillColor=#F7F2EB;fontColor=#201D18;" vertex="1" parent="1"><mxGeometry x="1520" y="380" width="40" height="80" as="geometry"/></mxCell>
+        <mxCell id="uc-e1" value="" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;rounded=0;endArrow=block;endFill=1;fontSize=12;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#6B5E4A;strokeWidth=1.2;endArrow=none;" edge="1" parent="1" source="uc-acust" target="uc-ca0"><mxGeometry relative="1" as="geometry"></mxGeometry></mxCell>
+        <mxCell id="uc-e2" value="" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;rounded=0;endArrow=block;endFill=1;fontSize=12;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#6B5E4A;strokeWidth=1.2;endArrow=none;" edge="1" parent="1" source="uc-acust" target="uc-ca1"><mxGeometry relative="1" as="geometry"></mxGeometry></mxCell>
+        <mxCell id="uc-e3" value="" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;rounded=0;endArrow=block;endFill=1;fontSize=12;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#6B5E4A;strokeWidth=1.2;endArrow=none;" edge="1" parent="1" source="uc-acust" target="uc-ca2"><mxGeometry relative="1" as="geometry"></mxGeometry></mxCell>
+        <mxCell id="uc-e4" value="" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;rounded=0;endArrow=block;endFill=1;fontSize=12;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#6B5E4A;strokeWidth=1.2;endArrow=none;" edge="1" parent="1" source="uc-acust" target="uc-ca3"><mxGeometry relative="1" as="geometry"></mxGeometry></mxCell>
+        <mxCell id="uc-e5" value="" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;rounded=0;endArrow=block;endFill=1;fontSize=12;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#6B5E4A;strokeWidth=1.2;endArrow=none;" edge="1" parent="1" source="uc-asms" target="uc-ca0"><mxGeometry relative="1" as="geometry"></mxGeometry></mxCell>
+        <mxCell id="uc-e6" value="" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;rounded=0;endArrow=block;endFill=1;fontSize=12;labelBackgroundColor=#FFFFFF;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#6B5E4A;strokeWidth=1.2;endArrow=none;" edge="1" parent="1" source="uc-aline" target="uc-ca0"><mxGeometry relative="1" as="geometry"></mxGeometry></mxCell>
+        <mxCell id="uc-e7" value="" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;rounded=0;endArrow=block;endFill=1;fontSize=12;labelBackgroundColor=#FFFFFF;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#6B5E4A;strokeWidth=1.2;endArrow=none;" edge="1" parent="1" source="uc-aline" target="uc-ca1"><mxGeometry relative="1" as="geometry"></mxGeometry></mxCell>
+        <mxCell id="uc-e8" value="" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;rounded=0;endArrow=block;endFill=1;fontSize=12;labelBackgroundColor=#FFFFFF;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#6B5E4A;strokeWidth=1.2;endArrow=none;" edge="1" parent="1" source="uc-aline" target="uc-ca3"><mxGeometry relative="1" as="geometry"></mxGeometry></mxCell>
+        <mxCell id="uc-e9" value="" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;rounded=0;endArrow=block;endFill=1;fontSize=12;labelBackgroundColor=#FFFFFF;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#6B5E4A;strokeWidth=1.2;endArrow=none;" edge="1" parent="1" source="uc-aown" target="uc-fo0"><mxGeometry relative="1" as="geometry"></mxGeometry></mxCell>
+        <mxCell id="uc-e10" value="" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;rounded=0;endArrow=block;endFill=1;fontSize=12;labelBackgroundColor=#FFFFFF;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#6B5E4A;strokeWidth=1.2;endArrow=none;" edge="1" parent="1" source="uc-aown" target="uc-fo1"><mxGeometry relative="1" as="geometry"></mxGeometry></mxCell>
+        <mxCell id="uc-e11" value="" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;rounded=0;endArrow=block;endFill=1;fontSize=12;labelBackgroundColor=#FFFFFF;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#6B5E4A;strokeWidth=1.2;endArrow=none;" edge="1" parent="1" source="uc-aown" target="uc-fo2"><mxGeometry relative="1" as="geometry"></mxGeometry></mxCell>
+        <mxCell id="uc-e12" value="" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;rounded=0;endArrow=block;endFill=1;fontSize=12;labelBackgroundColor=#FFFFFF;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#6B5E4A;strokeWidth=1.2;endArrow=none;" edge="1" parent="1" source="uc-aown" target="uc-fo3"><mxGeometry relative="1" as="geometry"></mxGeometry></mxCell>
+        <mxCell id="uc-e13" value="" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;rounded=0;endArrow=block;endFill=1;fontSize=12;labelBackgroundColor=#FFFFFF;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#6B5E4A;strokeWidth=1.2;endArrow=none;" edge="1" parent="1" source="uc-aown" target="uc-fo4"><mxGeometry relative="1" as="geometry"></mxGeometry></mxCell>
+        <mxCell id="uc-e14" value="" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;rounded=0;endArrow=block;endFill=1;fontSize=12;labelBackgroundColor=#FFFFFF;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#6B5E4A;strokeWidth=1.2;endArrow=none;" edge="1" parent="1" source="uc-aown" target="uc-fo5"><mxGeometry relative="1" as="geometry"></mxGeometry></mxCell>
+        <mxCell id="uc-e15" value="" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;rounded=0;endArrow=block;endFill=1;fontSize=12;labelBackgroundColor=#FFFFFF;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#6B5E4A;strokeWidth=1.2;endArrow=none;" edge="1" parent="1" source="uc-aown" target="uc-fo6"><mxGeometry relative="1" as="geometry"></mxGeometry></mxCell>
+        <mxCell id="uc-e16" value="" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;rounded=0;endArrow=block;endFill=1;fontSize=12;labelBackgroundColor=#FFFFFF;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#6B5E4A;strokeWidth=1.2;endArrow=none;" edge="1" parent="1" source="uc-astaff" target="uc-bo0"><mxGeometry relative="1" as="geometry"></mxGeometry></mxCell>
+        <mxCell id="uc-e17" value="" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;rounded=0;endArrow=block;endFill=1;fontSize=12;labelBackgroundColor=#FFFFFF;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#6B5E4A;strokeWidth=1.2;endArrow=none;" edge="1" parent="1" source="uc-astaff" target="uc-bo1"><mxGeometry relative="1" as="geometry"></mxGeometry></mxCell>
+        <mxCell id="uc-e18" value="" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;rounded=0;endArrow=block;endFill=1;fontSize=12;labelBackgroundColor=#FFFFFF;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#6B5E4A;strokeWidth=1.2;endArrow=none;" edge="1" parent="1" source="uc-astaff" target="uc-bo2"><mxGeometry relative="1" as="geometry"></mxGeometry></mxCell>
+        <mxCell id="uc-lg" value="&lt;b&gt;&lt;font color=&#x27;#54633B&#x27;&gt;วงรีสีเขียว&lt;/font&gt;&lt;/b&gt; = พัฒนาแล้ว &amp;nbsp;&amp;nbsp;|&amp;nbsp;&amp;nbsp; วงรีสีขาว = อยู่ในขอบเขต ยังไม่ได้พัฒนา" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;rounded=1;arcSize=8;fillColor=#FFFFFF;strokeColor=#D4CAB9;align=left;spacingLeft=14;fontSize=13;fontColor=#201D18;" vertex="1" parent="1"><mxGeometry x="190" y="836" width="1280" height="44" as="geometry"/></mxCell>
       </root>
     </mxGraphModel>
   </diagram>
   <diagram name="6 System Architecture" id="arch-page">
     <mxGraphModel grid="0" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="1600" pageHeight="900" math="0" shadow="0">
       <root>
-        <mxCell id="0" />
-        <mxCell id="1" parent="0" />
-        <mxCell id="arch-c1" value="&lt;b&gt;Front Office&lt;/b&gt;&lt;br&gt;เจ้าของร้าน · เว็บเบราว์เซอร์" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;rounded=1;arcSize=10;fillColor=#FFFFFF;strokeColor=#9A8A69;fontColor=#201D18;fontSize=13;" vertex="1" parent="1">
-          <mxGeometry x="60" y="40" width="340" height="120" as="geometry" />
-        </mxCell>
-        <mxCell id="arch-c2" value="&lt;b&gt;Back Office&lt;/b&gt;&lt;br&gt;ผู้ช่วย · ช่าง · เว็บบนมือถือ&lt;br&gt;ยังไม่สร้าง" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;rounded=1;arcSize=10;fillColor=#F6E6D3;strokeColor=#8A4F23;fontColor=#6E3E1B;fontSize=13;dashed=1;dashPattern=6 4;" vertex="1" parent="1">
-          <mxGeometry x="430" y="40" width="340" height="120" as="geometry" />
-        </mxCell>
-        <mxCell id="arch-c3" value="&lt;b&gt;Customer App&lt;/b&gt;&lt;br&gt;ลูกค้า · LINE LIFF" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;rounded=1;arcSize=10;fillColor=#F1FBF4;strokeColor=#06C755;fontColor=#0B5D2A;fontSize=13;" vertex="1" parent="1">
-          <mxGeometry x="800" y="40" width="340" height="120" as="geometry" />
-        </mxCell>
-        <mxCell id="arch-ver" value="Vercel · Next.js (App Router) · TypeScript" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;rounded=1;arcSize=3;fillColor=#F8FAF5;strokeColor=#262E19;strokeWidth=2;fontColor=#262E19;fontSize=15;fontStyle=1;verticalAlign=top;align=left;spacingLeft=12;spacingTop=6;" vertex="1" parent="1">
-          <mxGeometry x="40" y="220" width="1120" height="390" as="geometry" />
-        </mxCell>
-        <mxCell id="arch-ui" value="&lt;b&gt;หน้าจอ&lt;/b&gt; · React Server Components + Client Components · Tailwind CSS" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;rounded=1;arcSize=10;fillColor=#FFFFFF;strokeColor=#9A8A69;fontColor=#201D18;fontSize=13;" vertex="1" parent="1">
-          <mxGeometry x="70" y="268" width="1060" height="66" as="geometry" />
-        </mxCell>
-        <mxCell id="arch-act" value="&lt;b&gt;Server Actions&lt;/b&gt; · ประตูเดียวที่ข้อมูลเข้าระบบ ตรวจทุกครั้งด้วย zod" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;rounded=1;arcSize=10;fillColor=#FFFFFF;strokeColor=#9A8A69;fontColor=#201D18;fontSize=13;" vertex="1" parent="1">
-          <mxGeometry x="70" y="350" width="1060" height="66" as="geometry" />
-        </mxCell>
-        <mxCell id="arch-mod" value="&lt;b&gt;Business modules&lt;/b&gt; · customer · bill · intake &amp;nbsp;|&amp;nbsp; ยังไม่สร้าง: tracking · notification · payment · payroll" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;rounded=1;arcSize=10;fillColor=#FFFFFF;strokeColor=#9A8A69;fontColor=#201D18;fontSize=13;" vertex="1" parent="1">
-          <mxGeometry x="70" y="432" width="1060" height="66" as="geometry" />
-        </mxCell>
-        <mxCell id="arch-orm" value="&lt;b&gt;Prisma ORM&lt;/b&gt; · ทางเดียวที่โค้ดคุยกับฐานข้อมูล" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;rounded=1;arcSize=10;fillColor=#FFFFFF;strokeColor=#9A8A69;fontColor=#201D18;fontSize=13;" vertex="1" parent="1">
-          <mxGeometry x="70" y="514" width="1060" height="66" as="geometry" />
-        </mxCell>
-        <mxCell id="arch-supa" value="Supabase" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;rounded=1;arcSize=3;fillColor=#EEF2E9;strokeColor=#54633B;strokeWidth=2;fontColor=#262E19;fontSize=15;fontStyle=1;verticalAlign=top;align=left;spacingLeft=12;spacingTop=6;" vertex="1" parent="1">
-          <mxGeometry x="40" y="670" width="1120" height="130" as="geometry" />
-        </mxCell>
-        <mxCell id="arch-pg" value="PostgreSQL" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;shape=cylinder3;boundedLbl=1;size=12;fontSize=14;fontStyle=1;fillColor=#FFFFFF;strokeColor=#54633B;fontColor=#201D18;" vertex="1" parent="1">
-          <mxGeometry x="80" y="705" width="170" height="84" as="geometry" />
-        </mxCell>
-        <mxCell id="arch-tb" value="มีแล้ว: Customer · CustomerLineAccount · Bill · Piece · ClothesType &amp;nbsp;|&amp;nbsp; ยังไม่สร้าง: StatusEvent · Payment · NotificationLog" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;rounded=1;arcSize=10;fillColor=#FFFFFF;strokeColor=#9A8A69;fontColor=#201D18;fontSize=13;" vertex="1" parent="1">
-          <mxGeometry x="290" y="708" width="840" height="78" as="geometry" />
-        </mxCell>
-        <mxCell id="arch-ln" value="LINE Platform" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;rounded=1;arcSize=3;fillColor=#F1FBF4;strokeColor=#06C755;strokeWidth=2;fontColor=#0B5D2A;fontSize=15;fontStyle=1;verticalAlign=top;align=left;spacingLeft=12;spacingTop=6;" vertex="1" parent="1">
-          <mxGeometry x="1220" y="20" width="340" height="590" as="geometry" />
-        </mxCell>
-        <mxCell id="arch-liff" value="&lt;b&gt;LIFF&lt;/b&gt;&lt;br&gt;เปิดหน้าเว็บในแอป LINE" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;rounded=1;arcSize=10;fillColor=#F1FBF4;strokeColor=#06C755;fontColor=#0B5D2A;fontSize=13;" vertex="1" parent="1">
-          <mxGeometry x="1245" y="66" width="290" height="68" as="geometry" />
-        </mxCell>
-        <mxCell id="arch-login" value="&lt;b&gt;LINE Login&lt;/b&gt;&lt;br&gt;ออกและตรวจ ID token" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;rounded=1;arcSize=10;fillColor=#F1FBF4;strokeColor=#06C755;fontColor=#0B5D2A;fontSize=13;" vertex="1" parent="1">
-          <mxGeometry x="1245" y="350" width="290" height="66" as="geometry" />
-        </mxCell>
-        <mxCell id="arch-msg" value="&lt;b&gt;Messaging API&lt;/b&gt;&lt;br&gt;LINE Official Account&lt;br&gt;แจ้งเตือนลูกค้า · webhook&lt;br&gt;ยังไม่เชื่อม" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;rounded=1;arcSize=10;fillColor=#F6E6D3;strokeColor=#8A4F23;fontColor=#6E3E1B;fontSize=13;dashed=1;dashPattern=6 4;" vertex="1" parent="1">
-          <mxGeometry x="1245" y="432" width="290" height="150" as="geometry" />
-        </mxCell>
-        <mxCell id="arch-pp" value="&lt;b&gt;PromptPay QR&lt;/b&gt;&lt;br&gt;สร้าง QR ตามยอดในระบบเอง&lt;br&gt;ไม่ได้เชื่อม API ธนาคาร&lt;br&gt;ยังไม่สร้าง" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;rounded=1;arcSize=10;fillColor=#F6E6D3;strokeColor=#8A4F23;fontColor=#6E3E1B;fontSize=13;dashed=1;dashPattern=6 4;" vertex="1" parent="1">
-          <mxGeometry x="1220" y="670" width="340" height="130" as="geometry" />
-        </mxCell>
-        <mxCell id="arch-e1" value="HTTPS" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;edgeStyle=orthogonalEdgeStyle;rounded=0;endArrow=block;endFill=1;fontSize=12;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.1509433962264151;entryY=0;entryDx=0;entryDy=0;strokeColor=#3C4729;strokeWidth=2;fontColor=#201D18;" edge="1" parent="1" source="arch-c1" target="arch-ui">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="arch-e2" value="HTTPS" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;edgeStyle=orthogonalEdgeStyle;rounded=0;endArrow=block;endFill=1;fontSize=12;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=#8A4F23;strokeWidth=2;dashed=1;dashPattern=8 6;fontColor=#6E3E1B;" edge="1" parent="1" source="arch-c2" target="arch-ui">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="arch-e3" value="HTTPS" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;edgeStyle=orthogonalEdgeStyle;rounded=0;endArrow=block;endFill=1;fontSize=12;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.8490566037735849;entryY=0;entryDx=0;entryDy=0;strokeColor=#3C4729;strokeWidth=2;fontColor=#201D18;" edge="1" parent="1" source="arch-c3" target="arch-ui">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="arch-e4" value="LIFF SDK" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;edgeStyle=orthogonalEdgeStyle;rounded=0;endArrow=block;endFill=1;fontSize=12;labelBackgroundColor=#FFFFFF;startArrow=block;startFill=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#3C4729;strokeWidth=2;fontColor=#201D18;" edge="1" parent="1" source="arch-c3" target="arch-liff">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="arch-e5" value="ตรวจ ID token" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;edgeStyle=orthogonalEdgeStyle;rounded=0;endArrow=block;endFill=1;fontSize=12;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#3C4729;strokeWidth=2;fontColor=#201D18;" edge="1" parent="1" source="arch-act" target="arch-login">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="arch-e6" value="push" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;edgeStyle=orthogonalEdgeStyle;rounded=0;endArrow=block;endFill=1;fontSize=12;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.3;exitDx=0;exitDy=0;entryX=0;entryY=0.1320000000000001;entryDx=0;entryDy=0;strokeColor=#8A4F23;strokeWidth=2;dashed=1;dashPattern=8 6;fontColor=#6E3E1B;" edge="1" parent="1" source="arch-mod" target="arch-msg">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="arch-e7" value="webhook" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;edgeStyle=orthogonalEdgeStyle;rounded=0;endArrow=block;endFill=1;fontSize=12;labelBackgroundColor=#FFFFFF;exitX=0;exitY=0.30799999999999994;exitDx=0;exitDy=0;entryX=1;entryY=0.7;entryDx=0;entryDy=0;strokeColor=#8A4F23;strokeWidth=2;dashed=1;dashPattern=8 6;fontColor=#6E3E1B;" edge="1" parent="1" source="arch-msg" target="arch-mod">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="arch-e8" value="SQL ผ่าน connection pooler" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;edgeStyle=orthogonalEdgeStyle;rounded=0;endArrow=block;endFill=1;fontSize=12;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=#3C4729;strokeWidth=2;fontColor=#201D18;" edge="1" parent="1" source="arch-orm" target="arch-supa">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="arch-lg" value="&lt;b&gt;GitHub Actions&lt;/b&gt; ตรวจก่อน merge: typecheck · lint · test · build · secret scan · CodeQL &amp;nbsp;→&amp;nbsp; &lt;b&gt;Vercel&lt;/b&gt; deploy อัตโนมัติ &amp;nbsp;&amp;nbsp;|&amp;nbsp;&amp;nbsp; &lt;b&gt;&lt;font color=&#39;#8A4F23&#39;&gt;กล่องเส้นประสีส้ม&lt;/font&gt;&lt;/b&gt; = อยู่ในแผน ยังไม่สร้าง" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;rounded=1;arcSize=8;fillColor=#FFFFFF;strokeColor=#D4CAB9;align=left;spacingLeft=14;fontSize=13;fontColor=#201D18;" vertex="1" parent="1">
-          <mxGeometry x="40" y="826" width="1520" height="50" as="geometry" />
-        </mxCell>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="arch-c1" value="&lt;b&gt;Front Office&lt;/b&gt;&lt;br&gt;เจ้าของร้าน · เว็บเบราว์เซอร์" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;rounded=1;arcSize=10;fillColor=#FFFFFF;strokeColor=#9A8A69;fontColor=#201D18;fontSize=13;" vertex="1" parent="1"><mxGeometry x="60" y="40" width="340" height="120" as="geometry"/></mxCell>
+        <mxCell id="arch-c2" value="&lt;b&gt;Back Office&lt;/b&gt;&lt;br&gt;ผู้ช่วย · ช่าง · เว็บบนมือถือ&lt;br&gt;ยังไม่สร้าง" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;rounded=1;arcSize=10;fillColor=#F6E6D3;strokeColor=#8A4F23;fontColor=#6E3E1B;fontSize=13;dashed=1;dashPattern=6 4;" vertex="1" parent="1"><mxGeometry x="430" y="40" width="340" height="120" as="geometry"/></mxCell>
+        <mxCell id="arch-c3" value="&lt;b&gt;Customer App&lt;/b&gt;&lt;br&gt;ลูกค้า · LINE LIFF" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;rounded=1;arcSize=10;fillColor=#F1FBF4;strokeColor=#06C755;fontColor=#0B5D2A;fontSize=13;" vertex="1" parent="1"><mxGeometry x="800" y="40" width="340" height="120" as="geometry"/></mxCell>
+        <mxCell id="arch-ver" value="Vercel · Next.js (App Router) · TypeScript" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;rounded=1;arcSize=3;fillColor=#F8FAF5;strokeColor=#262E19;strokeWidth=2;fontColor=#262E19;fontSize=15;fontStyle=1;verticalAlign=top;align=left;spacingLeft=12;spacingTop=6;" vertex="1" parent="1"><mxGeometry x="40" y="220" width="1120" height="390" as="geometry"/></mxCell>
+        <mxCell id="arch-ui" value="&lt;b&gt;หน้าจอ&lt;/b&gt; · React Server Components + Client Components · Tailwind CSS" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;rounded=1;arcSize=10;fillColor=#FFFFFF;strokeColor=#9A8A69;fontColor=#201D18;fontSize=13;" vertex="1" parent="1"><mxGeometry x="70" y="268" width="1060" height="66" as="geometry"/></mxCell>
+        <mxCell id="arch-act" value="&lt;b&gt;Server Actions&lt;/b&gt; · ประตูเดียวที่ข้อมูลเข้าระบบ ตรวจทุกครั้งด้วย zod" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;rounded=1;arcSize=10;fillColor=#FFFFFF;strokeColor=#9A8A69;fontColor=#201D18;fontSize=13;" vertex="1" parent="1"><mxGeometry x="70" y="350" width="1060" height="66" as="geometry"/></mxCell>
+        <mxCell id="arch-mod" value="&lt;b&gt;Business modules&lt;/b&gt; · customer · bill · intake &amp;nbsp;|&amp;nbsp; ยังไม่สร้าง: registration · tracking · storage · notification · payment · payroll" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;rounded=1;arcSize=10;fillColor=#FFFFFF;strokeColor=#9A8A69;fontColor=#201D18;fontSize=13;" vertex="1" parent="1"><mxGeometry x="70" y="432" width="1060" height="66" as="geometry"/></mxCell>
+        <mxCell id="arch-orm" value="&lt;b&gt;Prisma ORM&lt;/b&gt; · ทางเดียวที่โค้ดคุยกับฐานข้อมูล" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;rounded=1;arcSize=10;fillColor=#FFFFFF;strokeColor=#9A8A69;fontColor=#201D18;fontSize=13;" vertex="1" parent="1"><mxGeometry x="70" y="514" width="1060" height="66" as="geometry"/></mxCell>
+        <mxCell id="arch-supa" value="Supabase" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;rounded=1;arcSize=3;fillColor=#EEF2E9;strokeColor=#54633B;strokeWidth=2;fontColor=#262E19;fontSize=15;fontStyle=1;verticalAlign=top;align=left;spacingLeft=12;spacingTop=6;" vertex="1" parent="1"><mxGeometry x="40" y="670" width="1120" height="130" as="geometry"/></mxCell>
+        <mxCell id="arch-pg" value="PostgreSQL" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;shape=cylinder3;boundedLbl=1;size=12;fontSize=14;fontStyle=1;fillColor=#FFFFFF;strokeColor=#54633B;fontColor=#201D18;" vertex="1" parent="1"><mxGeometry x="80" y="705" width="170" height="84" as="geometry"/></mxCell>
+        <mxCell id="arch-tb" value="มีแล้ว: Customer · CustomerLineAccount · Bill · Piece · ClothesType&lt;br&gt;ยังไม่สร้าง: StatusEvent · StorageSlot · PhoneOtp · Payment · NotificationLog" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;rounded=1;arcSize=10;fillColor=#FFFFFF;strokeColor=#9A8A69;fontColor=#201D18;fontSize=13;" vertex="1" parent="1"><mxGeometry x="290" y="708" width="840" height="78" as="geometry"/></mxCell>
+        <mxCell id="arch-ln" value="LINE Platform" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;rounded=1;arcSize=3;fillColor=#F1FBF4;strokeColor=#06C755;strokeWidth=2;fontColor=#0B5D2A;fontSize=15;fontStyle=1;verticalAlign=top;align=left;spacingLeft=12;spacingTop=6;" vertex="1" parent="1"><mxGeometry x="1220" y="20" width="340" height="590" as="geometry"/></mxCell>
+        <mxCell id="arch-liff" value="&lt;b&gt;LIFF&lt;/b&gt;&lt;br&gt;เปิดหน้าเว็บในแอป LINE" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;rounded=1;arcSize=10;fillColor=#F1FBF4;strokeColor=#06C755;fontColor=#0B5D2A;fontSize=13;" vertex="1" parent="1"><mxGeometry x="1245" y="66" width="290" height="68" as="geometry"/></mxCell>
+        <mxCell id="arch-login" value="&lt;b&gt;LINE Login&lt;/b&gt;&lt;br&gt;ออกและตรวจ ID token" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;rounded=1;arcSize=10;fillColor=#F1FBF4;strokeColor=#06C755;fontColor=#0B5D2A;fontSize=13;" vertex="1" parent="1"><mxGeometry x="1245" y="350" width="290" height="66" as="geometry"/></mxCell>
+        <mxCell id="arch-msg" value="&lt;b&gt;Messaging API&lt;/b&gt;&lt;br&gt;LINE Official Account&lt;br&gt;แจ้งเตือนลูกค้า · webhook&lt;br&gt;ยังไม่เชื่อม" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;rounded=1;arcSize=10;fillColor=#F6E6D3;strokeColor=#8A4F23;fontColor=#6E3E1B;fontSize=13;dashed=1;dashPattern=6 4;" vertex="1" parent="1"><mxGeometry x="1245" y="432" width="290" height="150" as="geometry"/></mxCell>
+        <mxCell id="arch-pp" value="&lt;b&gt;PromptPay QR&lt;/b&gt; · สร้างตามยอดในระบบ&lt;br&gt;ไม่เชื่อม API ธนาคาร · ยังไม่สร้าง" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;rounded=1;arcSize=10;fillColor=#F6E6D3;strokeColor=#8A4F23;fontColor=#6E3E1B;fontSize=13;dashed=1;dashPattern=6 4;" vertex="1" parent="1"><mxGeometry x="1220" y="664" width="340" height="62" as="geometry"/></mxCell>
+        <mxCell id="arch-sms" value="&lt;b&gt;ผู้ให้บริการ SMS&lt;/b&gt; · ส่งรหัส OTP&lt;br&gt;ยืนยันเบอร์ลูกค้า · ยังไม่เลือก" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;rounded=1;arcSize=10;fillColor=#F6E6D3;strokeColor=#8A4F23;fontColor=#6E3E1B;fontSize=13;dashed=1;dashPattern=6 4;" vertex="1" parent="1"><mxGeometry x="1220" y="740" width="340" height="62" as="geometry"/></mxCell>
+        <mxCell id="arch-e1" value="HTTPS" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;edgeStyle=orthogonalEdgeStyle;rounded=0;endArrow=block;endFill=1;fontSize=12;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.1509433962264151;entryY=0;entryDx=0;entryDy=0;strokeColor=#3C4729;strokeWidth=2;fontColor=#201D18;" edge="1" parent="1" source="arch-c1" target="arch-ui"><mxGeometry relative="1" as="geometry"></mxGeometry></mxCell>
+        <mxCell id="arch-e2" value="HTTPS" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;edgeStyle=orthogonalEdgeStyle;rounded=0;endArrow=block;endFill=1;fontSize=12;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=#8A4F23;strokeWidth=2;dashed=1;dashPattern=8 6;fontColor=#6E3E1B;" edge="1" parent="1" source="arch-c2" target="arch-ui"><mxGeometry relative="1" as="geometry"></mxGeometry></mxCell>
+        <mxCell id="arch-e3" value="HTTPS" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;edgeStyle=orthogonalEdgeStyle;rounded=0;endArrow=block;endFill=1;fontSize=12;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.8490566037735849;entryY=0;entryDx=0;entryDy=0;strokeColor=#3C4729;strokeWidth=2;fontColor=#201D18;" edge="1" parent="1" source="arch-c3" target="arch-ui"><mxGeometry relative="1" as="geometry"></mxGeometry></mxCell>
+        <mxCell id="arch-e4" value="LIFF SDK" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;edgeStyle=orthogonalEdgeStyle;rounded=0;endArrow=block;endFill=1;fontSize=12;labelBackgroundColor=#FFFFFF;startArrow=block;startFill=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#3C4729;strokeWidth=2;fontColor=#201D18;" edge="1" parent="1" source="arch-c3" target="arch-liff"><mxGeometry relative="1" as="geometry"></mxGeometry></mxCell>
+        <mxCell id="arch-e5" value="ตรวจ ID token" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;edgeStyle=orthogonalEdgeStyle;rounded=0;endArrow=block;endFill=1;fontSize=12;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#3C4729;strokeWidth=2;fontColor=#201D18;" edge="1" parent="1" source="arch-act" target="arch-login"><mxGeometry relative="1" as="geometry"></mxGeometry></mxCell>
+        <mxCell id="arch-e6" value="push" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;edgeStyle=orthogonalEdgeStyle;rounded=0;endArrow=block;endFill=1;fontSize=12;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.3;exitDx=0;exitDy=0;entryX=0;entryY=0.1320000000000001;entryDx=0;entryDy=0;strokeColor=#8A4F23;strokeWidth=2;dashed=1;dashPattern=8 6;fontColor=#6E3E1B;" edge="1" parent="1" source="arch-mod" target="arch-msg"><mxGeometry relative="1" as="geometry"></mxGeometry></mxCell>
+        <mxCell id="arch-e7" value="webhook" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;edgeStyle=orthogonalEdgeStyle;rounded=0;endArrow=block;endFill=1;fontSize=12;labelBackgroundColor=#FFFFFF;exitX=0;exitY=0.30799999999999994;exitDx=0;exitDy=0;entryX=1;entryY=0.7;entryDx=0;entryDy=0;strokeColor=#8A4F23;strokeWidth=2;dashed=1;dashPattern=8 6;fontColor=#6E3E1B;" edge="1" parent="1" source="arch-msg" target="arch-mod"><mxGeometry relative="1" as="geometry"></mxGeometry></mxCell>
+        <mxCell id="arch-e8" value="ส่ง OTP" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;edgeStyle=orthogonalEdgeStyle;rounded=0;endArrow=block;endFill=1;fontSize=12;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.85;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#8A4F23;strokeWidth=2;dashed=1;dashPattern=8 6;fontColor=#6E3E1B;" edge="1" parent="1" source="arch-mod" target="arch-sms"><mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="1190" y="488.1"/><mxPoint x="1190" y="771"/></Array></mxGeometry></mxCell>
+        <mxCell id="arch-e9" value="SQL ผ่าน connection pooler" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;edgeStyle=orthogonalEdgeStyle;rounded=0;endArrow=block;endFill=1;fontSize=12;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=#3C4729;strokeWidth=2;fontColor=#201D18;" edge="1" parent="1" source="arch-orm" target="arch-supa"><mxGeometry relative="1" as="geometry"></mxGeometry></mxCell>
+        <mxCell id="arch-lg" value="&lt;b&gt;GitHub Actions&lt;/b&gt; ตรวจก่อน merge: typecheck · lint · test · build · secret scan · CodeQL &amp;nbsp;→&amp;nbsp; &lt;b&gt;Vercel&lt;/b&gt; deploy อัตโนมัติ &amp;nbsp;&amp;nbsp;|&amp;nbsp;&amp;nbsp; &lt;b&gt;&lt;font color=&#x27;#8A4F23&#x27;&gt;กล่องเส้นประสีส้ม&lt;/font&gt;&lt;/b&gt; = อยู่ในแผน ยังไม่สร้าง" style="fontFamily=Tahoma;html=1;whiteSpace=wrap;rounded=1;arcSize=8;fillColor=#FFFFFF;strokeColor=#D4CAB9;align=left;spacingLeft=14;fontSize=13;fontColor=#201D18;" vertex="1" parent="1"><mxGeometry x="40" y="826" width="1520" height="50" as="geometry"/></mxCell>
       </root>
     </mxGraphModel>
   </diagram>
