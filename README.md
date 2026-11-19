@@ -232,13 +232,14 @@ feature/<ชื่อ>
 
 | ไฟล์                                                          | เนื้อหา                                                                                               |
 | ----------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| **[docs/spec/SYSTEM-SPEC.md](docs/spec/SYSTEM-SPEC.md)**     | **แบบระบบทั้งหมดสำหรับพัฒนา** · ฟีเจอร์ ตาราง API หน้าจอ · ยึดไฟล์นี้เมื่อขัดกับเอกสารอื่น · agent อ่าน [AGENTS.md](AGENTS.md) |
 | **[docs/CODE-WALKTHROUGH.md](docs/CODE-WALKTHROUGH.md)**     | อธิบายทุกไฟล์ทีละบรรทัด · **เริ่มอ่านที่นี่**                   |
 | **[docs/NEXTJS.md](docs/NEXTJS.md)**                               | Next.js ทำงานยังไง · อธิบายคู่กับไฟล์จริง · เดินตาม 1 คำสั่งจากปุ่มถึงฐานข้อมูล |
 | **[docs/LINE.md](docs/LINE.md)**                                   | LINE คุยกับเว็บเราทางไหนบ้าง · 7 แผนภาพ · อ้างไฟล์จริง · บอกว่าอะไรสร้างแล้วอะไรยัง |
 | [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)                       | เปรียบเทียบ 3 แนวทาง · กฎการ import · ทำไมโครงสร้างเป็นแบบนี้ |
 | [docs/CI.md](docs/CI.md)                                           | pipeline · branch protection · Vercel                                                                      |
 | [docs/ERD.md](docs/ERD.md)                                         | ERD ของตารางที่มีจริง · **generate จาก schema ห้ามแก้มือ**              |
-| [docs/ERD-TARGET.md](docs/ERD-TARGET.md)                           | ERD เป้าหมายปลายทาง · เขียนด้วยมือ · ยังเป็นแบบร่าง               |
+| [docs/ERD-TARGET.md](docs/ERD-TARGET.md)                           | ERD เป้าหมายรุ่นเก่า · ถูกแทนด้วย docs/spec/SYSTEM-SPEC.md ข้อ 6 |
 | [docs/bpmn/](docs/bpmn/)                                           | BPMN 2.0 ทั้ง 6 workflow · As-Is และ To-Be                                                           |
 | [docs/bpmn/PAIN-POINT-MAP.md](docs/bpmn/PAIN-POINT-MAP.md)         | เชื่อม As-Is → pain point → To-Be                                                                    |
 | [design/design-system.html](design/design-system.html)             | สี · ตัวอักษร · component · หลักฐาน WCAG                                                 |
