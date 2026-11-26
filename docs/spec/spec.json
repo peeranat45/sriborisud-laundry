@@ -88,7 +88,7 @@
   ],
   [
    "งานหลังร้าน",
-   "F02 พนักงานและเครื่อง · F10 ตู้และราว · F11 แอปสแกน · F12 รายการน่าจะแห้ง · F13 ปัญหา"
+   "F02 พนักงานและเครื่อง · F10 ตู้และราว · F11 แอปสแกน · F12 รายการน่าจะแห้ง"
   ],
   [
    "ส่งมอบและติดต่อลูกค้า",
@@ -568,8 +568,8 @@
    "id": "F13",
    "name": "แจ้งปัญหาคุณภาพ",
    "app": "Back Office + Front Office",
-   "status": "design",
-   "why": "ปัญหาที่พบมีบันทึกและรูป เจ้าของร้านเห็นทันที แทนการบอกด้วยวาจา",
+   "status": "out_of_scope",
+   "why": "ตัดออกจากขอบเขต (26 พ.ย. 2026) · ไม่ต้องสร้าง · ปัญหาที่พบมีบันทึกและรูป เจ้าของร้านเห็นทันที แทนการบอกด้วยวาจา",
    "flow": [
     "พนักงานกด แจ้งปัญหา สแกนผ้า เลือกประเภท พิมพ์ข้อความ ถ่ายรูปได้",
     "ระบบตั้งผ้าเป็น พักไว้ ผ้าหายจากคิวทุกสถานี",
@@ -1797,7 +1797,7 @@
   },
   {
    "name": "QualityIssue",
-   "status": "new",
+   "status": "out_of_scope",
    "group": "งานในร้าน",
    "purpose": "ปัญหาที่พนักงานแจ้ง",
    "cols": [
@@ -3187,7 +3187,7 @@
    "guard": "staff (device+PIN)",
    "input": "{ pieceCode, type, note, photo? }",
    "output": "QualityIssue · ผ้า → ON_HOLD",
-   "status": "design"
+   "status": "out_of_scope"
   },
   {
    "module": "issue",
@@ -3195,7 +3195,7 @@
    "guard": "owner",
    "input": "—",
    "output": "QualityIssue[] ที่ยังเปิด",
-   "status": "design"
+   "status": "out_of_scope"
   },
   {
    "module": "issue",
@@ -3203,7 +3203,7 @@
    "guard": "owner",
    "input": "{ id, resolution, returnToStatus }",
    "output": "ปิดเรื่อง · ผ้ากลับเข้าขั้นที่เลือก",
-   "status": "design"
+   "status": "out_of_scope"
   },
   {
    "module": "notify",
@@ -3549,7 +3549,7 @@
   {
    "app": "Front Office",
    "path": "/issues",
-   "status": "design",
+   "status": "out_of_scope",
    "features": [
     "F13"
    ],
@@ -3690,7 +3690,7 @@
   {
    "app": "Back Office",
    "path": "/scan/issue",
-   "status": "design",
+   "status": "out_of_scope",
    "features": [
     "F13"
    ],
